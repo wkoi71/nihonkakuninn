@@ -34,7 +34,7 @@ function bgCityscape() {
 
 /* --- header --- */
 const NAV = [
-  ["サービス", "index.html#services"],
+  ["サービス", "/#services"],
   ["手数料", "fees.html"],
   ["申請の流れ", "flow.html"],
   ["会社概要", "company.html"],
@@ -48,12 +48,12 @@ function siteHeader() {
   return `
   <header class="site-header">
     <div class="wrap">
-      <a class="brand" href="index.html" aria-label="日本確認センター ホーム">
+      <a class="brand" href="/" aria-label="日本確認センター ホーム">
         ${LOGO}
       </a>
       <nav class="main-nav">${links}</nav>
       <div class="header-actions">
-        <a class="btn btn--navy btn--header" href="index.html#docs">${IC.fileDl}<span class="lbl-long">申請書類ダウンロード</span></a>
+        <a class="btn btn--navy btn--header" href="/#docs">${IC.fileDl}<span class="lbl-long">申請書類ダウンロード</span></a>
         <a class="btn btn--teal btn--header" href="contact.html">${IC.mail}<span>お問い合わせ</span></a>
       </div>
       <button class="mnav-btn" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-nav">
@@ -67,7 +67,7 @@ function siteHeader() {
       <div class="mnav__inner">
         <div class="mnav__links">${mobileLinks}</div>
         <div class="mnav__actions">
-          <a class="btn btn--navy mnav__cta" href="index.html#docs">${IC.fileDl}<span>申請書類ダウンロード</span></a>
+          <a class="btn btn--navy mnav__cta" href="/#docs">${IC.fileDl}<span>申請書類ダウンロード</span></a>
           <a class="btn btn--teal mnav__cta" href="contact.html">${IC.mail}<span>お問い合わせ</span></a>
         </div>
       </div>
@@ -134,7 +134,7 @@ function siteFooter() {
           <div class="footer-col">
             <div class="footer-col__head">${IC.mail}お問合せ</div>
             <ul class="footer-links">
-              <li><a href="index.html#docs">資料ダウンロード${IC.chevR}</a></li>
+              <li><a href="/#docs">資料ダウンロード${IC.chevR}</a></li>
               <li><a href="privacy.html">プライバシーポリシー${IC.chevR}</a></li>
             </ul>
           </div>
