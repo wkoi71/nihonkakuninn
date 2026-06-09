@@ -35,11 +35,11 @@ function bgCityscape() {
 /* --- header --- */
 const NAV = [
   ["サービス", "/#services"],
-  ["手数料", "fees.html"],
-  ["申請の流れ", "flow.html"],
-  ["会社概要", "company.html"],
-  ["アクセス", "company.html#access"],
-  ["お知らせ", "news.html"],
+  ["手数料", "/fees"],
+  ["申請の流れ", "/flow"],
+  ["会社概要", "/company"],
+  ["アクセス", "/company#access"],
+  ["お知らせ", "/news"],
 ];
 function siteHeader() {
   const links = NAV.map(([t, h]) => `<a href="${h}">${t}</a>`).join("");
@@ -54,7 +54,7 @@ function siteHeader() {
       <nav class="main-nav">${links}</nav>
       <div class="header-actions">
         <a class="btn btn--navy btn--header" href="/#docs">${IC.fileDl}<span class="lbl-long">申請書類ダウンロード</span></a>
-        <a class="btn btn--teal btn--header" href="contact.html">${IC.mail}<span>お問い合わせ</span></a>
+        <a class="btn btn--teal btn--header" href="/contact">${IC.mail}<span>お問い合わせ</span></a>
       </div>
       <button class="mnav-btn" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-nav">
         <span class="mnav-btn__bar"></span>
@@ -68,7 +68,7 @@ function siteHeader() {
         <div class="mnav__links">${mobileLinks}</div>
         <div class="mnav__actions">
           <a class="btn btn--navy mnav__cta" href="/#docs">${IC.fileDl}<span>申請書類ダウンロード</span></a>
-          <a class="btn btn--teal mnav__cta" href="contact.html">${IC.mail}<span>お問い合わせ</span></a>
+          <a class="btn btn--teal mnav__cta" href="/contact">${IC.mail}<span>お問い合わせ</span></a>
         </div>
       </div>
     </nav>
@@ -96,7 +96,7 @@ function mountMobileNav() {
 }
 
 /* --- footer --- */
-const SERVICE_LINKS = { "建築確認申請": "flow.html", "住宅性能評価": "evaluation.html", "省エネ適合判定": "energy.html", "BELS": "bels.html", "フラット35": "flat35.html" };
+const SERVICE_LINKS = { "建築確認申請": "/flow", "住宅性能評価": "/evaluation", "省エネ適合判定": "/energy", "BELS": "/bels", "フラット35": "/flat35" };
 const FOOT_SERVICES = ["建築確認申請", "住宅性能評価", "省エネ適合判定", "BELS", "フラット35"];
 function footLinks(items) {
   return items.map(t => `<li><a href="${SERVICE_LINKS[t] || "#"}">${t}${IC.chevR}</a></li>`).join("");
@@ -127,15 +127,15 @@ function siteFooter() {
           <div class="footer-col">
             <div class="footer-col__head">${IC.building}会社情報</div>
             <ul class="footer-links">
-              <li><a href="company.html">会社概要${IC.chevR}</a></li>
-              <li><a href="company.html#access">アクセス${IC.chevR}</a></li>
+              <li><a href="/company">会社概要${IC.chevR}</a></li>
+              <li><a href="/company#access">アクセス${IC.chevR}</a></li>
             </ul>
           </div>
           <div class="footer-col">
             <div class="footer-col__head">${IC.mail}お問合せ</div>
             <ul class="footer-links">
               <li><a href="/#docs">資料ダウンロード${IC.chevR}</a></li>
-              <li><a href="privacy.html">プライバシーポリシー${IC.chevR}</a></li>
+              <li><a href="/privacy">プライバシーポリシー${IC.chevR}</a></li>
             </ul>
           </div>
         </div>

@@ -174,7 +174,7 @@ function render() {
   if (!items.length) { list.innerHTML = `<li class="nw-empty">該当するお知らせはありません。</li>`; return; }
   list.innerHTML = items.map(n => `
     <li class="nw-item">
-      <a class="nw-item-link" href="news-detail.html?id=${encodeURIComponent(n.id)}">
+      <a class="nw-item-link" href="/news-detail?id=${encodeURIComponent(n.id)}">
         <span class="nw-date">${fmtDate(n.date)}</span>
         <span class="nw-badge ${esc(n.cat)}">${esc(n.cat)}</span>
         <span class="nw-title">${esc(n.title)}</span>

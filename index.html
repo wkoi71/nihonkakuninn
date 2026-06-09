@@ -412,7 +412,7 @@
           <span>申請書類ダウンロード</span>
           <span class="cta-card__trail" data-ic="download"></span>
         </a>
-        <a class="cta-card cta-card--fee" href="fees.html">
+        <a class="cta-card cta-card--fee" href="/fees">
           <span class="cta-card__icon" data-ic="calc"></span>
           <span>手数料</span>
           <span class="cta-card__trail" data-ic="chevR"></span>
@@ -428,7 +428,7 @@
         <span class="sec-head__line r"></span>
       </div>
       <div class="services">
-        <a class="svc-card reveal" href="flow.html">
+        <a class="svc-card reveal" href="/flow">
           <span class="svc-icon" data-svc="building"></span>
           <span class="svc-body">
             <h3>建築確認申請</h3>
@@ -436,7 +436,7 @@
           </span>
           <span class="svc-arrow" data-ic="chevR"></span>
         </a>
-        <a class="svc-card reveal" href="evaluation.html">
+        <a class="svc-card reveal" href="/evaluation">
           <span class="svc-icon" data-svc="house"></span>
           <span class="svc-body">
             <h3>住宅性能評価</h3>
@@ -444,7 +444,7 @@
           </span>
           <span class="svc-arrow" data-ic="chevR"></span>
         </a>
-        <a class="svc-card reveal" href="energy.html">
+        <a class="svc-card reveal" href="/energy">
           <span class="svc-icon" data-svc="leaf"></span>
           <span class="svc-body">
             <h3>省エネ適合判定</h3>
@@ -452,7 +452,7 @@
           </span>
           <span class="svc-arrow" data-ic="chevR"></span>
         </a>
-        <a class="svc-card row2 reveal" href="bels.html">
+        <a class="svc-card row2 reveal" href="/bels">
           <span class="svc-icon" data-svc="bels"></span>
           <span class="svc-body">
             <h3>BELS</h3>
@@ -460,7 +460,7 @@
           </span>
           <span class="svc-arrow" data-ic="chevR"></span>
         </a>
-        <a class="svc-card row2 reveal" href="flat35.html">
+        <a class="svc-card row2 reveal" href="/flat35">
           <span class="svc-icon" data-svc="flat35"></span>
           <span class="svc-body">
             <h3>フラット35</h3>
@@ -484,7 +484,7 @@
         <div class="recruit__body">
           <h2 class="recruit__title">人材募集中<span class="spark">！！✦</span></h2>
           <p>現在、私たちは現場検査員と確認検査補助員を募集しています。<br>ご興味ある方はお問合せからご連絡ください。</p>
-          <a class="btn btn--ghost" href="contact.html">お問い合わせはこちら <span data-ic="chevR" style="display:inline-flex"></span></a>
+          <a class="btn btn--ghost" href="/contact">お問い合わせはこちら <span data-ic="chevR" style="display:inline-flex"></span></a>
         </div>
         <div class="recruit__art">
           <img src="assets/people.png" alt="作業着の男女イラスト">
@@ -502,7 +502,7 @@
         <div class="news-prev__rule"></div>
         <ul class="news-prev__list" id="news-prev-list"></ul>
         <div class="news-prev__cta">
-          <a class="btn btn--teal" href="news.html">お知らせ一覧を見る <span data-ic="chevR" style="display:inline-flex"></span></a>
+          <a class="btn btn--teal" href="/news">お知らせ一覧を見る <span data-ic="chevR" style="display:inline-flex"></span></a>
         </div>
       </div>
     </section>
@@ -538,7 +538,7 @@
         <div class="acc" id="acc"></div>
 
         <div class="doc-cta">
-          <a class="btn btn--teal" href="fees.html" id="fee-cta"></a>
+          <a class="btn btn--teal" href="/fees" id="fee-cta"></a>
         </div>
       </div>
     </section>
@@ -772,7 +772,7 @@ renderDocs();
   }
   list.innerHTML = items.map(n => `
     <li class="news-prev__item">
-      <a class="news-prev__link" href="news-detail.html?id=${encodeURIComponent(n.id)}">
+      <a class="news-prev__link" href="/news-detail?id=${encodeURIComponent(n.id)}">
         <span class="news-prev__date">${fmt(n.date)}</span>
         <span class="news-prev__badge ${escHtml(n.cat)}">${escHtml(n.cat)}</span>
         <span class="news-prev__title-text">${escHtml(n.title)}</span>
