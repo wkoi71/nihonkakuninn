@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>住宅性能評価｜日本確認センター</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ===================== 住宅性能評価 page ===================== */
+.ev-main { padding: 58px 0 0; }
+.ev-wrap { width: min(1040px, 100% - 48px); margin-inline: auto; }
+
+.ev-hero { text-align: center; margin-bottom: 34px; }
+.ev-hero h1 { font-size: clamp(32px, 4.4vw, 50px); font-weight: 900; color: var(--navy-800); letter-spacing: 0.06em; }
+.ev-hero__rule { width: 70px; height: 4px; background: var(--blue-500); border-radius: 4px; margin: 16px auto 18px; }
+.ev-hero p { font-size: 17px; color: var(--ink-700); font-weight: 500; }
+
+/* print buttons */
+.ev-prints { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; margin-bottom: 40px; }
+.ev-print {
+  display: inline-flex; align-items: center; gap: 14px;
+  padding: 15px 30px; background: #fff;
+  border: 1.6px solid var(--blue-200, #bcd6f7); border-radius: 999px;
+  box-shadow: var(--shadow-sm); font-size: 16px; font-weight: 800; color: var(--navy-800);
+  transition: transform 0.16s ease, box-shadow 0.18s ease, border-color 0.16s ease;
+}
+.ev-print:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--blue-500); }
+.ev-print svg { width: 20px; height: 20px; color: var(--blue-600); }
+
+/* info table */
+.ev-card {
+  background: #fff; border: 1px solid var(--line);
+  border-radius: var(--r-xl); box-shadow: var(--shadow-md);
+  padding: 16px; overflow: hidden; margin-bottom: 60px;
+}
+table.ev-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 15px; }
+.ev-table th {
+  width: 320px; text-align: left; vertical-align: top;
+  background: #f3f8ff; color: var(--navy-800); font-weight: 800;
+  padding: 18px 22px; border-bottom: 1px solid var(--line); line-height: 1.55;
+}
+.ev-table td {
+  padding: 18px 24px; border-bottom: 1px solid var(--line);
+  color: var(--ink-900); line-height: 1.8; white-space: pre-line; vertical-align: top;
+}
+.ev-table tr:last-child th, .ev-table tr:last-child td { border-bottom: none; }
+.ev-table .band td {
+  background: var(--grad-navy); color: #fff; text-align: center;
+  font-size: 17px; font-weight: 800; letter-spacing: 0.04em; padding: 15px;
+}
+.ev-table a { color: var(--blue-600); font-weight: 700; }
+.ev-table a:hover { text-decoration: underline; }
+
+/* documents */
+.ev-docs {
+  background: rgba(255,255,255,0.6); border: 1px solid var(--line);
+  border-radius: var(--r-xl); box-shadow: var(--shadow-md);
+  padding: 44px 48px 50px; margin-bottom: 30px;
+}
+.ev-docs__title { text-align: center; font-size: clamp(24px, 3vw, 34px); font-weight: 900; color: var(--navy-800); letter-spacing: 0.04em; }
+.ev-docs__rule { width: 70px; height: 4px; background: var(--blue-500); border-radius: 4px; margin: 14px auto 40px; }
+.ev-group { margin-bottom: 34px; }
+.ev-group:last-child { margin-bottom: 0; }
+.ev-group__label { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 20px; }
+.ev-group__label span { font-size: 19px; font-weight: 800; color: var(--navy-800); letter-spacing: 0.03em; white-space: nowrap; }
+.ev-group__label::before, .ev-group__label::after { content: ""; width: 36px; height: 2px; background: var(--blue-300, #9cc0f5); }
+.ev-dl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.ev-dl {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 24px; background: #fff;
+  border: 1.6px solid var(--blue-200, #bcd6f7); border-radius: 999px;
+  box-shadow: var(--shadow-sm); font-size: 15.5px; font-weight: 700; color: var(--navy-800);
+  transition: transform 0.16s ease, box-shadow 0.18s ease, border-color 0.16s ease;
+}
+.ev-dl:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--blue-500); }
+.ev-dl .lbl { flex: 1; line-height: 1.4; }
+.ev-dl svg { width: 20px; height: 20px; flex-shrink: 0; color: var(--blue-600); }
+
+@media (max-width: 720px) {
+  .ev-card { padding: 10px; }
+  .ev-table, .ev-table tbody, .ev-table tr, .ev-table th, .ev-table td { display: block; width: auto; }
+  .ev-table th { border-bottom: none; padding-bottom: 6px; }
+  .ev-table td { padding-top: 4px; }
+  .ev-table .band td { display: block; }
+  .ev-docs { padding: 32px 20px 36px; }
+  .ev-dl-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div id="bg-slot"></div>
+<div class="page">
+  <div id="header-slot"></div>
+
+  <main class="ev-main" data-screen-label="住宅性能評価">
+    <div class="ev-wrap">
+
+      <div class="ev-hero">
+        <h1>住宅性能評価</h1>
+        <div class="ev-hero__rule"></div>
+        <p>当機関の住宅性能評価業務実施概要</p>
+      </div>
+
+      <div class="ev-prints" id="prints"></div>
+
+      <section class="ev-card">
+        <table class="ev-table"><tbody id="info-body"></tbody></table>
+      </section>
+
+      <section class="ev-docs" data-screen-label="住宅性能評価 書類ダウンロード">
+        <h2 class="ev-docs__title">書類ダウンロードはこちら ↓</h2>
+        <div class="ev-docs__rule"></div>
+        <div id="doc-groups"></div>
+      </section>
+
+    </div>
+  </main>
+
+  <div id="footer-slot"></div>
+</div>
+
+<script src="site.js"></script>
+<script>
+const EIC = {
+  print: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8V4h10v4"/><rect x="4" y="8" width="16" height="9" rx="2"/><path d="M7 14h10v6H7z"/><path d="M16.5 11.5h0"/></svg>',
+  dl: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>',
+};
+
+const PRINTS = ["住宅性能評価業務規程", "住宅性能評価　約款", "料金表印刷用"];
+document.getElementById("prints").innerHTML = PRINTS.map(p =>
+  `<a class="ev-print" href="#">${p} ${EIC.print}</a>`).join("");
+
+const INFO = [
+  { th: "これまでの評価実績", td: '<a href="#">ここをクリックしてください</a>' },
+  { th: "登録をおこなっている評価員の人数", td: "11名" },
+  { th: "評価の業務を行う部門専任の管理者の氏名", td: "市原　浩樹" },
+  { th: "登録をおこなった年月日", td: "令和7年1月20日（更新）" },
+  { band: "規則第17条で定める掲示の記載事項" },
+  { th: "登録区分", td: "法第7条第2項第1号から第3号までに掲げる住宅に係る施行規則第9条第1号から第25号までに掲げる区分" },
+  { th: "登録番号", td: "関東地方整備局長第22号" },
+  { th: "登録有効期限", td: "令和7年1月20日から\n令和12年1月19日まで" },
+  { th: "機関名称及び代表者名", td: "日本確認センター株式会社\n代表取締役 市原　浩樹" },
+  { th: "主たる事務所所在地", td: "千葉県船橋市山野町161番地1\nTEL　047(410)1266" },
+  { th: "実施する住宅性能評価の種類", td: "設計住宅性能評価\n建設住宅性能評価（新築住宅）" },
+  { th: "住宅性能評価を行う住宅の種類", td: "50,000㎡以内の住宅" },
+  { th: "住宅性能評価を行う区域", td: "茨城県、栃木県、群馬県、埼玉県、千葉県\n東京都（島しょ部を除く）、神奈川県、山梨県、長野県の全域" },
+  { th: "確認を行う住宅の種類", td: "50,000㎡以内の住宅" },
+  { th: "確認を行う区域", td: "茨城県、栃木県、群馬県、埼玉県、千葉県\n東京都（島しょ部を除く）、神奈川県、山梨県、長野県の全域" },
+];
+document.getElementById("info-body").innerHTML = INFO.map(r =>
+  r.band ? `<tr class="band"><td colspan="2">${r.band}</td></tr>`
+         : `<tr><th>${r.th}</th><td>${r.td}</td></tr>`).join("");
+
+const DOC_GROUPS = [
+  { label: "共同住宅申請書", items: [
+    { name: "天井高さ計算書",                                 url: "https://drive.google.com/file/d/1ZmM7Ws5ftI8G-zo45SVuvYEqBHBRWdZ7/view" },
+    { name: "設計内容変更申請書（共同住宅）",                 url: "https://drive.google.com/file/d/1_-AS2tE9Ky22JkcTTtlzlwEYacV2CoY5/view" },
+    { name: "完了通知書",                                     url: "https://drive.google.com/file/d/1AW-3rzUwUy1ennmREg4ygMR3JBJSbN43/view" },
+    { name: "共同住宅 申請書一式（令和7年4月10日版・ZIP）",   url: "https://drive.google.com/file/d/1VmQrTLUyM5QXPFLGmRysY_-gqoxPlHg5/view" },
+    { name: "共同住宅 申請書一式（令和8年4月1日版・ZIP）",    url: "https://drive.google.com/file/d/1gWQuIt8LVD0xK9cduB7HEemmmI82Ubxt/view" },
+  ]},
+  { label: "戸建て住宅申請書", items: [
+    { name: "戸建住宅 申請書一式（令和7年4月10日版・ZIP）",   url: "https://drive.google.com/file/d/1cQ81sgWnZnvHTylDUJ2PCQs9mLXFWYAE/view" },
+    { name: "戸建住宅 申請書一式（令和8年4月1日版・ZIP）",    url: "https://drive.google.com/file/d/1P1PkYGltY0XCyi0BECa87HPd6UIAZOZj/view" },
+    { name: "申出書・検査関係書類",                           url: "https://drive.google.com/file/d/13heYcP2jjWgz3A58rFErF8MiCLcDPpgr/view" },
+    { name: "設計内容変更申請書（戸建住宅）令和4年10月1日〜", url: "https://drive.google.com/file/d/1saq6CPbmfwvKqIUdSFGhTOAt3m6-fMp9/view" },
+  ]},
+  { label: "変更届", items: [
+    { name: "取下届 令和3年4月1日〜", url: "https://drive.google.com/file/d/19MVg4YTR0ispr52_jleB2S_5k_YaSDrK/view" },
+    { name: "名義変更届",            url: "https://drive.google.com/file/d/1_WwgkIoJnBrwEHnPn_eqb7hPWeSkTits/view" },
+    { name: "変更申告書",            url: "https://drive.google.com/file/d/16gBT9yQYuBt-ELlSYOyqI3Y4b5SWX2uf/view" },
+  ]},
+  { label: "長期確認申請書", items: [
+    { name: "軽微変更関係書類",            url: "https://drive.google.com/file/d/1fWUioFqbyzuYbojvcuvVLaGdVzCdwg2L/view" },
+    { name: "長期変更（計画変更）申請書",  url: "https://drive.google.com/file/d/1UvYiyYil40m2ZK1-isqonKeK0LLXl7mP/view" },
+    { name: "長期優良住宅 確認申請書",     url: "https://drive.google.com/file/d/1Pqi3YnPeKkE80Dn1TPatpAMOdsocAZZv/view" },
+  ]},
+];
+document.getElementById("doc-groups").innerHTML = DOC_GROUPS.map(g => `
+  <div class="ev-group">
+    <div class="ev-group__label"><span>${g.label}</span></div>
+    <div class="ev-dl-grid">
+      ${g.items.map(it => `<a class="ev-dl" href="${it.url}" target="_blank" rel="noopener"><span class="lbl">${it.name}</span>${EIC.dl}</a>`).join("")}
+    </div>
+  </div>`).join("");
+</script>
+</body>
+</html>

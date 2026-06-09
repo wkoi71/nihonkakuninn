@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>会社概要｜日本確認センター</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ===================== 会社概要 page ===================== */
+/* full-bleed hero band */
+.co-hero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(120deg, #1b3a86 0%, #2b56b8 52%, #3f74e6 100%);
+  color: #fff;
+  padding: 72px 24px 64px;
+  text-align: center;
+}
+.co-hero::before {
+  /* blueprint iso grid */
+  content: ""; position: absolute; inset: 0; opacity: 0.16;
+  background-image:
+    repeating-linear-gradient(30deg, rgba(255,255,255,0.5) 0 1px, transparent 1px 46px),
+    repeating-linear-gradient(-30deg, rgba(255,255,255,0.5) 0 1px, transparent 1px 46px);
+  pointer-events: none;
+}
+.co-hero::after {
+  content: ""; position: absolute; right: -60px; top: -40px; width: 320px; height: 320px;
+  background: radial-gradient(circle, rgba(255,255,255,0.18), transparent 70%);
+  pointer-events: none;
+}
+.co-hero__inner { position: relative; z-index: 1; }
+.co-hero h1 {
+  color: #fff; font-size: clamp(44px, 7vw, 78px); font-weight: 900;
+  letter-spacing: 0.06em; line-height: 1;
+}
+.co-hero p { margin-top: 14px; font-size: clamp(16px, 2vw, 21px); font-weight: 700; letter-spacing: 0.22em; color: rgba(255,255,255,0.95); }
+.co-hero__rule { width: 64px; height: 3px; background: rgba(255,255,255,0.85); border-radius: 3px; margin: 18px auto 0; }
+
+.co-main { padding: 54px 0 0; }
+.co-wrap { width: min(1000px, 100% - 48px); margin-inline: auto; }
+
+/* card */
+.co-card {
+  background: #fff; border: 1px solid var(--line);
+  border-radius: var(--r-xl); box-shadow: var(--shadow-md);
+  padding: 36px 42px;
+  margin-bottom: 30px;
+}
+.co-card__head { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+.co-card__head .ic {
+  width: 50px; height: 50px; flex-shrink: 0; border-radius: 14px;
+  background: var(--tint-blue); color: var(--blue-600);
+  display: grid; place-items: center;
+}
+.co-card__head .ic svg { width: 27px; height: 27px; }
+.co-card__head h2 { font-size: 23px; font-weight: 900; color: var(--navy-800); letter-spacing: 0.03em; }
+
+/* 基本情報 definition rows */
+.co-deflist { display: grid; }
+.co-row {
+  display: grid; grid-template-columns: 200px 1fr;
+  border-top: 1px solid var(--line);
+}
+.co-row:last-child { border-bottom: 1px solid var(--line); }
+.co-row dt {
+  padding: 18px 20px 18px 6px; font-weight: 800; color: var(--blue-700);
+  font-size: 15.5px;
+}
+.co-row dd {
+  margin: 0; padding: 18px 8px 18px 28px; color: var(--ink-900); font-size: 15.5px; line-height: 1.7;
+  border-left: 1px solid var(--line);
+}
+
+/* 業務許可 list */
+.co-perms { margin: 0; padding: 0; display: grid; gap: 18px; }
+.co-perms li {
+  list-style: none; display: flex; align-items: flex-start; gap: 13px;
+  font-size: 15.5px; line-height: 1.7; color: var(--ink-900); font-weight: 600;
+}
+.co-perms .ck { flex-shrink: 0; width: 22px; height: 22px; color: var(--blue-600); margin-top: 2px; }
+.co-perms .ck svg { width: 22px; height: 22px; display: block; }
+.co-perms li > span:not(.ck) { flex: 1 1 auto; min-width: 0; }
+
+/* 業務内容 two-col */
+.co-biz { display: grid; grid-template-columns: 1.15fr 1fr; gap: 0; }
+.co-biz__left { padding-right: 40px; border-right: 1px solid var(--line); }
+.co-biz__left ul { margin: 0; padding: 0; display: grid; gap: 13px; }
+.co-biz__left li {
+  list-style: none; display: flex; gap: 12px; align-items: flex-start;
+  font-size: 15px; line-height: 1.7; color: var(--ink-700);
+}
+.co-biz__left li::before { content: ""; flex-shrink: 0; margin-top: 8px; width: 8px; height: 8px; border-radius: 50%; background: var(--blue-400); }
+.co-biz__right { padding-left: 40px; display: grid; gap: 22px; align-content: start; }
+.co-obj { display: flex; gap: 15px; align-items: flex-start; }
+.co-obj__ic {
+  width: 50px; height: 50px; flex-shrink: 0; border-radius: 50%;
+  background: var(--tint-blue); color: var(--blue-600);
+  display: grid; place-items: center;
+}
+.co-obj__ic svg { width: 27px; height: 27px; }
+.co-obj h3 { font-size: 17px; font-weight: 800; color: var(--navy-800); margin-bottom: 3px; }
+.co-obj p { font-size: 14px; color: var(--ink-600, #54647d); line-height: 1.6; }
+
+/* 業務エリア */
+.co-area { display: grid; }
+.co-area__row { display: grid; grid-template-columns: 320px 1fr; gap: 18px; padding: 12px 0; }
+.co-area__row + .co-area__row { border-top: 1px dashed var(--line); }
+.co-area__label {
+  background: var(--blue-50); border: 1px solid var(--blue-100);
+  border-radius: 12px; padding: 16px 18px;
+  font-size: 14.5px; font-weight: 800; color: var(--navy-800); line-height: 1.55;
+  display: flex; align-items: center;
+}
+.co-area__val { display: flex; align-items: center; padding: 8px 6px; font-size: 15.5px; line-height: 1.8; color: var(--ink-900); }
+
+@media (max-width: 760px) {
+  .co-card { padding: 28px 22px; }
+  .co-row { grid-template-columns: 130px 1fr; }
+  .co-row dd { padding-left: 18px; }
+  .co-biz { grid-template-columns: 1fr; }
+  .co-biz__left { padding-right: 0; border-right: none; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+  .co-biz__right { padding-left: 0; padding-top: 24px; }
+  .co-area__row { grid-template-columns: 1fr; gap: 10px; }
+}
+
+/* アクセス */
+.co-access { margin-top: 10px; margin-bottom: 30px; scroll-margin-top: 110px; }
+.access-head { text-align: center; margin-bottom: 36px; }
+.access-head h2 { font-size: clamp(26px, 3vw, 36px); font-weight: 900; color: var(--navy-800); letter-spacing: 0.05em; }
+.access-rule { width: 64px; height: 4px; background: var(--blue-500); border-radius: 4px; margin: 16px auto 0; }
+.access-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 26px; align-items: stretch; }
+.access-map { border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow-md); border: 1px solid var(--line); }
+.access-map iframe { width: 100%; height: 100%; min-height: 470px; border: 0; display: block; }
+.access-info { background: #fff; border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow-md); padding: 34px 34px; display: flex; flex-direction: column; gap: 24px; }
+.access-block__head { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+.access-block__head .ic { width: 50px; height: 50px; flex-shrink: 0; border-radius: 14px; background: var(--tint-blue); color: var(--blue-600); display: grid; place-items: center; }
+.access-block__head .ic svg { width: 27px; height: 27px; }
+.access-block__head h3 { font-size: 21px; font-weight: 900; color: var(--navy-800); white-space: nowrap; }
+.access-block__head .u { display: block; width: 40px; height: 3px; background: var(--blue-500); border-radius: 3px; margin-top: 7px; }
+.access-list { margin: 0; padding: 0; display: grid; gap: 14px; }
+.access-list li { list-style: none; display: flex; gap: 12px; align-items: flex-start; font-size: 15.5px; line-height: 1.7; color: var(--ink-900); }
+.access-list li::before { content: ""; flex-shrink: 0; margin-top: 8px; width: 8px; height: 8px; border-radius: 50%; background: var(--blue-400); }
+.access-divider { height: 1px; background: var(--line); }
+.access-addr p { font-size: 16px; line-height: 1.9; color: var(--ink-900); }
+.access-cta { display: flex; justify-content: flex-end; margin-top: 24px; }
+.access-cta .btn { padding: 16px 32px; font-size: 16px; }
+@media (max-width: 820px) {
+  .access-grid { grid-template-columns: 1fr; }
+  .access-map iframe { min-height: 320px; }
+  .access-cta { justify-content: stretch; }
+  .access-cta .btn { width: 100%; }
+}
+</style>
+</head>
+<body>
+<div id="bg-slot"></div>
+<div class="page">
+  <div id="header-slot"></div>
+
+  <main data-screen-label="会社概要">
+    <!-- HERO BAND -->
+    <section class="co-hero">
+      <div class="co-hero__inner">
+        <h1>Company</h1>
+        <p>会社概要</p>
+        <div class="co-hero__rule"></div>
+      </div>
+    </section>
+
+    <div class="co-main">
+      <div class="co-wrap">
+
+        <!-- 基本情報 -->
+        <section class="co-card">
+          <div class="co-card__head"><span class="ic" id="ic-basic"></span><h2>基本情報</h2></div>
+          <dl class="co-deflist" id="basic-list"></dl>
+        </section>
+
+        <!-- 業務許可 -->
+        <section class="co-card">
+          <div class="co-card__head"><span class="ic" id="ic-perm"></span><h2>業務許可</h2></div>
+          <ul class="co-perms" id="perm-list"></ul>
+        </section>
+
+        <!-- 業務内容 -->
+        <section class="co-card">
+          <div class="co-card__head"><span class="ic" id="ic-biz"></span><h2>業務内容</h2></div>
+          <div class="co-biz">
+            <div class="co-biz__left"><ul id="biz-list"></ul></div>
+            <div class="co-biz__right" id="biz-objects"></div>
+          </div>
+        </section>
+
+        <!-- 業務エリア -->
+        <section class="co-card">
+          <div class="co-card__head"><span class="ic" id="ic-area"></span><h2>業務エリア</h2></div>
+          <div class="co-area" id="area-list"></div>
+        </section>
+
+        <!-- アクセス -->
+        <section class="co-access" id="access" data-screen-label="アクセス">
+          <div class="access-head">
+            <h2>アクセス</h2>
+            <div class="access-rule"></div>
+          </div>
+          <div class="access-grid">
+            <div class="access-map">
+              <iframe
+                src="https://maps.google.com/maps?q=%E5%8D%83%E8%91%89%E7%9C%8C%E8%88%B9%E6%A9%8B%E5%B8%82%E5%B1%B1%E9%87%8E%E7%94%BA161-1&z=16&hl=ja&output=embed"
+                loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                title="日本確認センター 所在地マップ"></iframe>
+            </div>
+            <div class="access-info">
+              <div class="access-block">
+                <div class="access-block__head">
+                  <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="3.5" width="12" height="13" rx="2.5"/><path d="M6 9.5h12"/><path d="M9.5 13h0M14.5 13h0"/><path d="M8 16.5 6 20M16 16.5 18 20"/></svg></span>
+                  <div><h3>交通アクセス</h3><span class="u"></span></div>
+                </div>
+                <ul class="access-list">
+                  <li>JR西船橋駅南口から船橋方面へ徒歩10分</li>
+                  <li>お車でお越しのお客様は駐車場をご利用ください（2台分）</li>
+                </ul>
+              </div>
+              <div class="access-divider"></div>
+              <div class="access-block access-addr">
+                <div class="access-block__head">
+                  <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5.5-8 12-8 12s-8-6.5-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="2.8"/></svg></span>
+                  <div><h3>住所</h3><span class="u"></span></div>
+                </div>
+                <p>〒273-0026<br>千葉県船橋市山野町161番地1</p>
+              </div>
+            </div>
+          </div>
+          <div class="access-cta">
+            <a class="btn btn--navy" href="https://www.google.com/maps/search/?api=1&query=%E5%8D%83%E8%91%89%E7%9C%8C%E8%88%B9%E6%A9%8B%E5%B8%82%E5%B1%B1%E9%87%8E%E7%94%BA161-1" target="_blank" rel="noopener">Google Map をみる&nbsp;&nbsp;→</a>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <div id="footer-slot"></div>
+</div>
+
+<script src="site.js"></script>
+<script>
+const COI = {
+  basic: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="3.5" width="12" height="17" rx="1.5"/><path d="M9.5 7h0M14.5 7h0M9.5 10.5h0M14.5 10.5h0M9.5 14h0M14.5 14h0M10.5 20.5v-3h3v3"/></svg>',
+  shield: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 19 6v6c0 4.4-3 7.4-7 9-4-1.6-7-4.6-7-9V6l7-3Z"/><path d="m9 12 2 2 4-4"/></svg>',
+  clip: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 4v1H9V4Z"/><path d="M9 11h6M9 15h4"/></svg>',
+  globe: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.5 4 5.7 4 9s-1.4 6.5-4 9c-2.6-2.5-4-5.7-4-9s1.4-6.5 4-9Z"/></svg>',
+  check: '<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/><path d="m8 12 2.6 2.6L16 9.4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  building: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3.5" width="9" height="17" rx="1"/><path d="M14 9h5v11.5H5"/><path d="M8 7h0M11 7h0M8 11h0M11 11h0M8 15h0M11 15h0M16.5 12h0M16.5 16h0"/></svg>',
+  elevator: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M12 3v18"/><path d="M8.5 9 7 11h3l-1.5-2ZM15.5 15 14 13h3l-1.5 2Z" fill="currentColor"/></svg>',
+  structure: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 6v4M20 6v4M4 10h16"/><path d="M6 10v10M10 10v10M14 10v10M18 10v10"/></svg>',
+};
+
+document.getElementById("ic-basic").innerHTML = COI.basic;
+document.getElementById("ic-perm").innerHTML = COI.shield;
+document.getElementById("ic-biz").innerHTML = COI.clip;
+document.getElementById("ic-area").innerHTML = COI.globe;
+
+const BASIC = [
+  ["会社名", "日本確認センター"],
+  ["代表取締役社長", "市原　浩樹"],
+  ["設立", "平成18年3月6日"],
+  ["窓口営業時間", "AM 10:00〜PM 17:00　（12:00から13:00を除く）"],
+  ["休日", "土曜・日曜・祝日・お盆・年末年始"],
+];
+document.getElementById("basic-list").innerHTML = BASIC.map(([k, v]) =>
+  `<div class="co-row"><dt>${k}</dt><dd>${v}</dd></div>`).join("");
+
+const PERMS = [
+  "指定確認検査機関　令和4年12月26日　国土交通大臣第29号",
+  "登録住宅性能評価機関　令和7年1月20日　国土交通省関東地方整備局長第22号",
+  "登録建築物エネルギー消費性能判定機関　令和4年4月1日　国土交通大臣第28号",
+];
+document.getElementById("perm-list").innerHTML = PERMS.map(p =>
+  `<li><span class="ck">${COI.check}</span><span>${p}</span></li>`).join("");
+
+const BIZ = [
+  "建築確認・中間検査・完了検査・仮使用認定",
+  "フラット35適合証明業務（住宅金融支援機構関係）",
+  "住宅性能評価業務",
+  "特定住宅瑕疵担保保険会社の保険の取次ぎ、現場検査業務",
+  "省エネ適合判定業務",
+  "低炭素建築物新築等の計画に係る技術的審査",
+];
+document.getElementById("biz-list").innerHTML = BIZ.map(b => `<li>${b}</li>`).join("");
+
+const OBJECTS = [
+  { ic: "building", title: "建築物", desc: "全ての建築物" },
+  { ic: "elevator", title: "建築設備", desc: "エレベーター・エスカレーター・小荷物専用昇降機" },
+  { ic: "structure", title: "工作物", desc: "擁壁・広告塔など" },
+];
+document.getElementById("biz-objects").innerHTML = OBJECTS.map(o => `
+  <div class="co-obj">
+    <span class="co-obj__ic">${COI[o.ic]}</span>
+    <div><h3>${o.title}</h3><p>${o.desc}</p></div>
+  </div>`).join("");
+
+const AREAS = [
+  { label: "【建築基準法に基づく建築物の確認、検査業務及び省エネ適合判定業務】", val: "日本全域" },
+  { label: "【その他の業務】", val: "茨城県、栃木県、群馬県、埼玉県、千葉県、東京都（島しょ部を除く）、神奈川県、山梨県、長野県の全域" },
+];
+document.getElementById("area-list").innerHTML = AREAS.map(a => `
+  <div class="co-area__row">
+    <div class="co-area__label">${a.label}</div>
+    <div class="co-area__val">${a.val}</div>
+  </div>`).join("");
+</script>
+</body>
+</html>

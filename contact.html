@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>お問い合わせ｜日本確認センター</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ===================== お問い合わせ page ===================== */
+.ct-main { padding: 58px 0 0; }
+.ct-wrap { width: min(1000px, 100% - 48px); margin-inline: auto; }
+
+.ct-hero { text-align: center; margin-bottom: 26px; }
+.ct-hero h1 { font-size: clamp(30px, 4.2vw, 46px); font-weight: 900; color: var(--navy-800); letter-spacing: 0.05em; }
+.ct-hero__rule { width: 64px; height: 4px; background: var(--blue-500); border-radius: 4px; margin: 16px auto 22px; }
+.ct-hero p { font-size: 16px; color: var(--ink-700); }
+
+.ct-direct { display: flex; flex-direction: column; align-items: center; gap: 16px; margin: 26px 0 18px; }
+.ct-direct-btn {
+  display: flex; align-items: center; gap: 16px;
+  width: min(480px, 100%); padding: 18px 26px;
+  background: #fff; border: 1.5px solid var(--blue-100);
+  border-radius: var(--r-md); box-shadow: var(--shadow-sm);
+  font-size: 17px; font-weight: 800; color: var(--navy-800);
+  transition: transform 0.16s ease, box-shadow 0.18s ease, border-color 0.16s ease;
+}
+.ct-direct-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--blue-400); }
+.ct-direct-btn__ic { width: 42px; height: 42px; flex-shrink: 0; border-radius: 11px; background: var(--tint-blue); color: var(--blue-600); display: grid; place-items: center; }
+.ct-direct-btn .lbl { flex: 1; }
+.ct-direct-btn .mail { color: var(--blue-500); display: grid; place-items: center; }
+.ct-direct-btn .chev { color: var(--blue-400); display: grid; place-items: center; }
+.ct-sub { text-align: center; font-size: 15.5px; color: var(--ink-700); margin: 26px 0 32px; }
+
+/* form card */
+.ct-form-card {
+  background: #fff; border: 1px solid var(--line);
+  border-radius: var(--r-xl); box-shadow: var(--shadow-md);
+  padding: 44px 48px 0; overflow: hidden;
+}
+.ct-form-title { display: flex; align-items: center; gap: 14px; font-size: 22px; font-weight: 900; color: var(--navy-800); margin-bottom: 30px; }
+.ct-form-title::before { content: ""; width: 5px; height: 26px; background: var(--blue-500); border-radius: 3px; }
+
+.ct-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 28px; }
+.ct-field { display: flex; flex-direction: column; }
+.ct-field.full { grid-column: 1 / -1; }
+.ct-label { display: flex; align-items: center; gap: 10px; font-size: 15.5px; font-weight: 800; color: var(--ink-900); margin-bottom: 10px; }
+.tag { font-size: 11.5px; font-weight: 800; padding: 3px 10px; border-radius: 6px; letter-spacing: 0.04em; }
+.tag.req { background: var(--teal-500); color: #fff; }
+.tag.opt { background: #eef1f6; color: var(--ink-500); }
+
+.ct-input-wrap { position: relative; display: flex; align-items: center; }
+.ct-input-wrap .lead { position: absolute; left: 16px; color: var(--ink-300); display: grid; place-items: center; pointer-events: none; }
+.ct-input, .ct-textarea {
+  width: 100%; font-family: var(--font); font-size: 15px; color: var(--ink-900);
+  background: #fff; border: 1.6px solid var(--line); border-radius: 12px;
+  padding: 14px 16px 14px 46px; transition: border-color 0.16s ease, box-shadow 0.16s ease;
+}
+.ct-textarea { padding-left: 16px; min-height: 150px; resize: vertical; line-height: 1.7; }
+.ct-input::placeholder, .ct-textarea::placeholder { color: var(--ink-300); }
+.ct-input:focus, .ct-textarea:focus { outline: none; border-color: var(--blue-500); box-shadow: 0 0 0 4px rgba(59,130,246,0.12); }
+.ct-field.err .ct-input, .ct-field.err .ct-textarea, .ct-field.err .radio-row { border-color: #e0533d; }
+.ct-field.err .ct-input:focus { box-shadow: 0 0 0 4px rgba(224,83,61,0.12); }
+.ct-error { display: none; color: #d9482f; font-size: 13px; font-weight: 700; margin-top: 7px; }
+.ct-field.err .ct-error { display: block; }
+
+.radio-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.radio-opt {
+  display: flex; align-items: center; gap: 12px; cursor: pointer;
+  border: 1.6px solid var(--line); border-radius: 12px; padding: 15px 18px;
+  font-size: 15px; font-weight: 700; color: var(--ink-700);
+  transition: border-color 0.16s ease;
+}
+.radio-opt:hover { border-color: var(--blue-400); }
+.radio-opt input { position: absolute; opacity: 0; }
+.radio-dot { width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--ink-300); flex-shrink: 0; position: relative; }
+.radio-opt input:checked ~ .radio-dot { border-color: var(--blue-600); }
+.radio-opt input:checked ~ .radio-dot::after { content: ""; position: absolute; inset: 3px; border-radius: 50%; background: var(--blue-600); }
+.radio-opt:has(input:checked) { border-color: var(--blue-500); background: var(--blue-50); color: var(--navy-800); }
+
+.ct-submit-bar { margin: 36px -48px 0; padding: 30px 48px 36px; background: linear-gradient(180deg, #f5f9ff, #eef5ff); text-align: center; }
+.ct-submit {
+  display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+  min-width: 320px; padding: 18px 36px; border: none; cursor: pointer;
+  font-family: var(--font); font-size: 17px; font-weight: 800; color: #fff;
+  background: var(--grad-teal); border-radius: 999px; box-shadow: 0 12px 26px rgba(16,185,129,0.30);
+  transition: transform 0.16s ease, filter 0.18s ease;
+}
+.ct-submit:hover { transform: translateY(-2px); filter: saturate(1.05); }
+.ct-privacy { margin-top: 18px; font-size: 13px; color: var(--ink-500); }
+
+/* confirm + done panels */
+.ct-confirm, .ct-done { display: none; }
+.ct-dl { display: grid; }
+.ct-dl__row { display: grid; grid-template-columns: 220px 1fr; border-top: 1px solid var(--line); }
+.ct-dl__row:last-child { border-bottom: 1px solid var(--line); }
+.ct-dl__row dt { padding: 18px 8px; font-weight: 800; color: var(--blue-700); font-size: 15px; }
+.ct-dl__row dd { margin: 0; padding: 18px 8px 18px 24px; border-left: 1px solid var(--line); color: var(--ink-900); font-size: 15px; line-height: 1.7; white-space: pre-wrap; }
+.ct-confirm-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.ct-back {
+  display: inline-flex; align-items: center; gap: 10px; min-width: 200px; justify-content: center;
+  padding: 17px 30px; border: 1.6px solid var(--blue-200, #bcd6f7); cursor: pointer;
+  background: #fff; color: var(--navy-800); border-radius: 999px; font-family: var(--font); font-size: 16px; font-weight: 800;
+  transition: background 0.16s ease;
+}
+.ct-back:hover { background: var(--blue-50); }
+.ct-done { text-align: center; padding: 30px 20px 50px; }
+.ct-done__check { width: 84px; height: 84px; margin: 0 auto 24px; border-radius: 50%; background: var(--teal-100); color: var(--teal-600); display: grid; place-items: center; }
+.ct-done__check svg { width: 44px; height: 44px; }
+.ct-done h2 { font-size: 28px; font-weight: 900; color: var(--navy-800); margin-bottom: 14px; }
+.ct-done p { font-size: 15.5px; color: var(--ink-700); line-height: 1.9; }
+.ct-done a.btn { margin-top: 28px; padding: 15px 32px; }
+
+@media (max-width: 720px) {
+  .ct-form-card { padding: 32px 22px 0; }
+  .ct-grid { grid-template-columns: 1fr; }
+  .radio-row { grid-template-columns: 1fr; }
+  .ct-submit-bar { margin: 30px -22px 0; padding: 26px 22px 30px; }
+  .ct-submit { min-width: 0; width: 100%; }
+  .ct-dl__row { grid-template-columns: 1fr; }
+  .ct-dl__row dd { border-left: none; padding-left: 8px; padding-top: 0; }
+}
+</style>
+</head>
+<body>
+<div id="bg-slot"></div>
+<div class="page">
+  <div id="header-slot"></div>
+
+  <main class="ct-main" data-screen-label="お問い合わせ">
+    <div class="ct-wrap">
+
+      <div class="ct-hero">
+        <h1>お問い合わせ</h1>
+        <div class="ct-hero__rule"></div>
+        <p>こちらの内容でお問合せの方は、以下に直接ご連絡お願いいたします。</p>
+      </div>
+
+      <div class="ct-direct">
+        <a class="ct-direct-btn" href="mailto:kensa@example.co.jp">
+          <span class="ct-direct-btn__ic" data-ic="clip"></span>
+          <span class="lbl">検査関係のご連絡</span>
+          <span class="mail" data-ic="mail"></span>
+          <span class="chev" data-ic="chev"></span>
+        </a>
+        <a class="ct-direct-btn" href="mailto:shinsei@example.co.jp">
+          <span class="ct-direct-btn__ic" data-ic="doc"></span>
+          <span class="lbl">申請プロ受付</span>
+          <span class="mail" data-ic="mail"></span>
+          <span class="chev" data-ic="chev"></span>
+        </a>
+      </div>
+      <p class="ct-sub">その他、ご相談やご質問など、下記フォームよりお気軽にご相談ください。</p>
+
+      <!-- FORM -->
+      <section class="ct-form-card">
+        <!-- input view -->
+        <div class="ct-input-view">
+          <h2 class="ct-form-title">お問い合わせフォーム</h2>
+          <form id="ct-form" novalidate>
+            <div class="ct-grid">
+              <div class="ct-field" data-field="name">
+                <span class="ct-label">お名前 <span class="tag req">必須</span></span>
+                <span class="ct-input-wrap"><span class="lead" data-ic="user"></span>
+                  <input class="ct-input" type="text" name="name" placeholder="例）田中 太郎"></span>
+                <span class="ct-error">お名前を入力してください。</span>
+              </div>
+              <div class="ct-field" data-field="email">
+                <span class="ct-label">メールアドレス <span class="tag req">必須</span></span>
+                <span class="ct-input-wrap"><span class="lead" data-ic="mail"></span>
+                  <input class="ct-input" type="email" name="email" placeholder="例）example@abc.com"></span>
+                <span class="ct-error">正しいメールアドレスを入力してください。</span>
+              </div>
+              <div class="ct-field full" data-field="tel">
+                <span class="ct-label">電話番号 <span class="tag opt">任意</span></span>
+                <span class="ct-input-wrap"><span class="lead" data-ic="phone"></span>
+                  <input class="ct-input" type="tel" name="tel" placeholder="例）000-123-4567"></span>
+              </div>
+              <div class="ct-field full" data-field="type">
+                <span class="ct-label">お問い合わせの種類 <span class="tag req">必須</span></span>
+                <div class="radio-row">
+                  <label class="radio-opt"><input type="radio" name="type" value="メディア取材について"><span class="radio-dot"></span>メディア取材について</label>
+                  <label class="radio-opt"><input type="radio" name="type" value="採用について"><span class="radio-dot"></span>採用について</label>
+                  <label class="radio-opt"><input type="radio" name="type" value="その他"><span class="radio-dot"></span>その他</label>
+                </div>
+                <span class="ct-error">お問い合わせの種類を選択してください。</span>
+              </div>
+              <div class="ct-field full" data-field="message">
+                <span class="ct-label">お問い合わせ内容 <span class="tag opt">任意</span></span>
+                <textarea class="ct-textarea" name="message" placeholder="お問い合わせ内容は、こちらにご記載ください。"></textarea>
+              </div>
+            </div>
+            <div class="ct-submit-bar">
+              <button class="ct-submit" type="submit">確認画面へ進む <span data-ic="chev"></span></button>
+              <p class="ct-privacy">※ ご入力いただいた個人情報は、お問い合わせへの対応のみに利用いたします。</p>
+            </div>
+          </form>
+        </div>
+
+        <!-- confirm view -->
+        <div class="ct-confirm">
+          <h2 class="ct-form-title">入力内容のご確認</h2>
+          <dl class="ct-dl" id="confirm-dl"></dl>
+          <div class="ct-submit-bar">
+            <div class="ct-confirm-actions">
+              <button class="ct-back" type="button" id="btn-back"><span data-ic="chevL"></span>修正する</button>
+              <button class="ct-submit" type="button" id="btn-send">この内容で送信する <span data-ic="send"></span></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- done view -->
+        <div class="ct-done">
+          <div class="ct-done__check" data-ic="check"></div>
+          <h2>送信が完了しました</h2>
+          <p>お問い合わせいただき、ありがとうございます。<br>内容を確認のうえ、担当者より3営業日以内にご連絡いたします。</p>
+          <a class="btn btn--navy" href="index.html"><span data-ic="home"></span>トップへ戻る</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <div id="footer-slot"></div>
+</div>
+
+<script src="site.js"></script>
+<script>
+const CIC = {
+  clip: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 4v1H9V4Z"/><path d="M9 11h6M9 15h4"/></svg>',
+  doc: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M5 21V5a2 2 0 0 1 2-2h7l5 5v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2Z"/><path d="M8 13h8M8 17h5"/></svg>',
+  mail: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 6.5 9 6 9-6"/></svg>',
+  chev: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>',
+  chevL: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg>',
+  user: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M5 21c0-3.9 3.1-7 7-7s7 3.1 7 7"/></svg>',
+  phone: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3.5h3.2l1.6 4-2 1.4a12 12 0 0 0 5.3 5.3l1.4-2 4 1.6V20a1.5 1.5 0 0 1-1.6 1.5A16.5 16.5 0 0 1 3.5 5.1 1.5 1.5 0 0 1 5 3.5Z"/></svg>',
+  send: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3 10.5 13.5"/><path d="M21 3 14.5 21l-4-7.5L3 9.5 21 3Z"/></svg>',
+  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg>',
+  home: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11 12 4l8 7"/><path d="M6 10v10h12V10"/></svg>',
+};
+document.querySelectorAll("[data-ic]").forEach(el => { el.innerHTML = CIC[el.dataset.ic] || ""; });
+
+const form = document.getElementById("ct-form");
+const inputView = document.querySelector(".ct-input-view");
+const confirmView = document.querySelector(".ct-confirm");
+const doneView = document.querySelector(".ct-done");
+const FIELDS = ["name", "email", "tel", "type", "message"];
+const LABELS = { name: "お名前", email: "メールアドレス", tel: "電話番号", type: "お問い合わせの種類", message: "お問い合わせ内容" };
+
+function getData() {
+  const fd = new FormData(form);
+  return { name: fd.get("name")?.trim() || "", email: fd.get("email")?.trim() || "", tel: fd.get("tel")?.trim() || "", type: fd.get("type") || "", message: fd.get("message")?.trim() || "" };
+}
+function setErr(field, on) { form.querySelector(`[data-field="${field}"]`).classList.toggle("err", on); }
+function validate(d) {
+  let ok = true;
+  const nameBad = !d.name; setErr("name", nameBad); if (nameBad) ok = false;
+  const emailBad = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email); setErr("email", emailBad); if (emailBad) ok = false;
+  const typeBad = !d.type; setErr("type", typeBad); if (typeBad) ok = false;
+  return ok;
+}
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const d = getData();
+  if (!validate(d)) {
+    const firstErr = form.querySelector(".ct-field.err");
+    if (firstErr) window.scrollTo({ top: firstErr.getBoundingClientRect().top + window.scrollY - 130, behavior: "smooth" });
+    return;
+  }
+  document.getElementById("confirm-dl").innerHTML = FIELDS.map(f =>
+    `<div class="ct-dl__row"><dt>${LABELS[f]}</dt><dd>${d[f] ? d[f].replace(/</g, "&lt;") : "（未入力）"}</dd></div>`).join("");
+  inputView.style.display = "none";
+  confirmView.style.display = "block";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+document.getElementById("btn-back").addEventListener("click", () => {
+  confirmView.style.display = "none";
+  inputView.style.display = "block";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+document.getElementById("btn-send").addEventListener("click", () => {
+  confirmView.style.display = "none";
+  doneView.style.display = "block";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+</script>
+</body>
+</html>

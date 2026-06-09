@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>お知らせ管理｜日本確認センター</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ===================== 管理画面（高齢者向け：大きく、はっきり） ===================== */
+:root {
+  --ad-radius: 14px;
+  --ad-input-bg: #fff;
+  --ad-border: #c9d4e6;
+  --ad-border-strong: #6c87b3;
+}
+body { background: #f3f7fc; font-size: 18px; line-height: 1.7; }
+.ad-app { width: min(1080px, 100% - 36px); margin: 38px auto 80px; }
+
+.ad-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 18px; flex-wrap: wrap;
+  background: #fff; border: 1px solid var(--ad-border);
+  border-radius: var(--ad-radius); padding: 18px 26px;
+  box-shadow: 0 4px 14px rgba(30,58,138,0.06);
+  margin-bottom: 28px;
+}
+.ad-bar h1 { font-size: 24px; font-weight: 900; color: var(--navy-800); margin: 0; }
+.ad-bar h1 small { display:block; font-size: 13px; font-weight: 700; color: var(--ink-500); letter-spacing: 0.2em; margin-bottom: 4px; }
+.ad-bar__user { font-size: 16px; color: var(--ink-700); }
+.ad-bar__user b { color: var(--navy-800); }
+
+/* 大きいボタン共通 */
+.ad-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 60px;
+  padding: 0 28px;
+  font-family: var(--font); font-size: 18px; font-weight: 800;
+  border-radius: 12px; border: 2px solid transparent; cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.16s ease, background 0.16s ease;
+  white-space: nowrap;
+}
+.ad-btn:hover { transform: translateY(-1px); }
+.ad-btn:active { transform: translateY(1px); }
+.ad-btn--primary { background: var(--blue-600); color: #fff; box-shadow: 0 8px 20px rgba(37,99,235,0.28); }
+.ad-btn--primary:hover { background: #1d4ed8; }
+.ad-btn--success { background: var(--teal-500); color: #fff; box-shadow: 0 8px 20px rgba(16,185,129,0.28); }
+.ad-btn--success:hover { background: var(--teal-600); }
+.ad-btn--danger { background: #d9482f; color: #fff; box-shadow: 0 8px 20px rgba(217,72,47,0.25); }
+.ad-btn--danger:hover { background: #b73a25; }
+.ad-btn--ghost {
+  background: #fff; color: var(--navy-800); border-color: var(--ad-border-strong);
+}
+.ad-btn--ghost:hover { background: #f1f6ff; }
+.ad-btn--lg { min-height: 72px; padding: 0 42px; font-size: 20px; }
+.ad-btn--block { width: 100%; }
+.ad-btn[disabled] { opacity: 0.55; cursor: not-allowed; transform: none; }
+
+/* ----------------- ログイン画面 ----------------- */
+.ad-login {
+  max-width: 480px; margin: 12vh auto 0;
+  background: #fff; border: 1px solid var(--ad-border);
+  border-radius: 18px; padding: 44px 40px;
+  box-shadow: 0 14px 40px rgba(30,58,138,0.12);
+}
+.ad-login h1 {
+  text-align: center; font-size: 26px; font-weight: 900;
+  color: var(--navy-800); margin: 0 0 8px;
+}
+.ad-login__lead { text-align: center; font-size: 16px; color: var(--ink-500); margin-bottom: 32px; }
+.ad-field { margin-bottom: 22px; }
+.ad-field label {
+  display: block; font-size: 17px; font-weight: 800;
+  color: var(--navy-800); margin-bottom: 8px;
+}
+.ad-field input, .ad-field select, .ad-field textarea {
+  width: 100%; font-family: var(--font); font-size: 19px;
+  padding: 16px 18px; border: 2px solid var(--ad-border);
+  border-radius: 12px; background: var(--ad-input-bg); color: var(--ink-900);
+  transition: border-color 0.16s ease, box-shadow 0.16s ease;
+}
+.ad-field input:focus, .ad-field select:focus, .ad-field textarea:focus {
+  outline: none; border-color: var(--blue-500);
+  box-shadow: 0 0 0 4px rgba(96,165,250,0.22);
+}
+.ad-field textarea { min-height: 220px; line-height: 1.7; resize: vertical; }
+.ad-field__hint { font-size: 14px; color: var(--ink-500); margin-top: 6px; }
+.ad-error {
+  background: #fdeef0; color: #b73a25; border: 1.5px solid #f3c9c2;
+  border-radius: 10px; padding: 12px 16px; font-size: 15.5px; font-weight: 700;
+  margin-bottom: 18px;
+}
+.ad-warn {
+  background: #fff7e0; color: #8a5a00; border: 1.5px solid #f5d98a;
+  border-radius: 10px; padding: 14px 18px; font-size: 15.5px; font-weight: 700;
+  margin-bottom: 22px; line-height: 1.7;
+}
+.ad-info {
+  background: #e8f3ff; color: #1d4ed8; border: 1.5px solid #b9d4f7;
+  border-radius: 10px; padding: 14px 18px; font-size: 15px; font-weight: 600;
+  margin-bottom: 18px; line-height: 1.7;
+}
+
+/* ----------------- 一覧 ----------------- */
+.ad-toolbar {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 14px; flex-wrap: wrap; margin-bottom: 18px;
+}
+.ad-toolbar h2 { font-size: 22px; font-weight: 900; color: var(--navy-800); margin: 0; }
+.ad-list { display: flex; flex-direction: column; gap: 14px; }
+.ad-card {
+  background: #fff; border: 1.5px solid var(--ad-border);
+  border-radius: var(--ad-radius); padding: 22px 26px;
+  display: grid; grid-template-columns: 130px 110px 1fr auto; gap: 18px;
+  align-items: center;
+}
+.ad-card__date { font-size: 17px; font-weight: 800; color: var(--ink-700); font-variant-numeric: tabular-nums; }
+.ad-card__status {
+  justify-self: start; font-size: 14px; font-weight: 800;
+  padding: 6px 14px; border-radius: 999px; white-space: nowrap;
+}
+.ad-card__status.draft     { background: #eef1f6; color: #475569; }
+.ad-card__status.scheduled { background: #fff2dd; color: #8a5a00; }
+.ad-card__status.published { background: #e3f6ee; color: var(--teal-600); }
+.ad-card__title { font-size: 18px; font-weight: 700; color: var(--ink-900); line-height: 1.55; }
+.ad-card__title .ad-card__cat {
+  display: inline-block; margin-right: 10px; font-size: 13.5px; font-weight: 800;
+  padding: 3px 11px; border-radius: 999px; vertical-align: middle;
+  background: #eaf0fa; color: var(--blue-600);
+}
+.ad-card__title .ad-card__sched { display: block; font-size: 14px; color: var(--ink-500); font-weight: 600; margin-top: 4px; }
+.ad-card__actions { display: flex; gap: 10px; }
+.ad-card__actions .ad-btn { min-height: 52px; padding: 0 20px; font-size: 16px; }
+.ad-empty {
+  text-align: center; padding: 60px 20px; color: var(--ink-500);
+  background: #fff; border: 1.5px dashed var(--ad-border); border-radius: var(--ad-radius);
+  font-size: 17px;
+}
+
+/* ----------------- フォーム ----------------- */
+.ad-form {
+  background: #fff; border: 1px solid var(--ad-border);
+  border-radius: var(--ad-radius); padding: 32px 36px 36px;
+  box-shadow: 0 4px 14px rgba(30,58,138,0.06);
+}
+.ad-form h2 { font-size: 22px; font-weight: 900; color: var(--navy-800); margin: 0 0 20px; }
+.ad-form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.ad-form__actions {
+  display: flex; gap: 14px; flex-wrap: wrap;
+  margin-top: 28px; padding-top: 24px; border-top: 1.5px solid var(--ad-border);
+}
+.ad-form__actions .ad-btn { flex: 1 1 200px; }
+
+/* ----------------- 公開設定ラジオ（大きく） ----------------- */
+.ad-radio-group { display: grid; gap: 10px; }
+.ad-radio {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 18px; border: 2px solid var(--ad-border);
+  border-radius: 12px; cursor: pointer; font-size: 17px; font-weight: 700;
+  background: #fff; transition: border-color 0.14s ease, background 0.14s ease;
+}
+.ad-radio:hover { border-color: var(--ad-border-strong); }
+.ad-radio input { width: 22px; height: 22px; accent-color: var(--blue-600); flex-shrink: 0; margin: 0; }
+.ad-radio b { color: var(--navy-800); }
+.ad-radio span.hint { font-size: 14px; color: var(--ink-500); font-weight: 500; margin-left: auto; }
+.ad-radio.active { border-color: var(--blue-600); background: #eff5ff; }
+
+/* ----------------- 確認ダイアログ ----------------- */
+.ad-modal-bg {
+  position: fixed; inset: 0; background: rgba(15, 30, 60, 0.55);
+  display: none; align-items: center; justify-content: center; z-index: 100;
+  padding: 20px;
+}
+.ad-modal-bg.show { display: flex; }
+.ad-modal {
+  background: #fff; border-radius: 16px; padding: 32px 36px;
+  max-width: 440px; width: 100%;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+.ad-modal h3 { font-size: 22px; font-weight: 900; color: var(--navy-800); margin: 0 0 12px; }
+.ad-modal p { font-size: 17px; color: var(--ink-700); margin: 0 0 24px; line-height: 1.7; }
+.ad-modal__actions { display: flex; gap: 12px; }
+.ad-modal__actions .ad-btn { flex: 1; }
+
+/* ----------------- レスポンシブ ----------------- */
+@media (max-width: 720px) {
+  .ad-card { grid-template-columns: 1fr; gap: 10px; padding: 20px; }
+  .ad-card__date { font-size: 16px; }
+  .ad-card__actions { justify-self: stretch; }
+  .ad-card__actions .ad-btn { flex: 1; }
+  .ad-form { padding: 24px 20px 28px; }
+  .ad-form__row { grid-template-columns: 1fr; gap: 18px; }
+  .ad-bar { padding: 16px 18px; }
+  .ad-bar h1 { font-size: 20px; }
+}
+</style>
+</head>
+<body>
+<div class="ad-app">
+
+  <!-- ========= ログイン画面 ========= -->
+  <section class="ad-login" id="screen-login" style="display:none;">
+    <h1>お知らせ管理</h1>
+    <p class="ad-login__lead">ID（メールアドレス）とパスワードを入力してください</p>
+
+    <div id="login-config-warn" class="ad-warn" style="display:none;">
+      ⚠ Supabase が未設定です。<br>
+      <code style="font-size:14px">supabase-config.js</code> を開いて、URL と KEY を入力してください。
+    </div>
+
+    <div id="login-error" class="ad-error" style="display:none;"></div>
+
+    <form id="login-form">
+      <div class="ad-field">
+        <label for="login-email">メールアドレス</label>
+        <input type="email" id="login-email" autocomplete="username" required>
+      </div>
+      <div class="ad-field">
+        <label for="login-password">パスワード</label>
+        <input type="password" id="login-password" autocomplete="current-password" required>
+      </div>
+      <button type="submit" class="ad-btn ad-btn--primary ad-btn--lg ad-btn--block" id="login-btn">
+        ログイン
+      </button>
+    </form>
+  </section>
+
+  <!-- ========= 管理メイン ========= -->
+  <section id="screen-main" style="display:none;">
+    <div class="ad-bar">
+      <h1><small>NEWS ADMIN</small>お知らせ管理</h1>
+      <div style="display:flex;align-items:center;gap:18px;">
+        <span class="ad-bar__user">ログイン中：<b id="user-email"></b></span>
+        <button class="ad-btn ad-btn--ghost" id="logout-btn">ログアウト</button>
+      </div>
+    </div>
+
+    <!-- 一覧画面 -->
+    <div id="view-list">
+      <div class="ad-toolbar">
+        <h2>お知らせ一覧</h2>
+        <button class="ad-btn ad-btn--success ad-btn--lg" id="new-btn">
+          ＋ 新しいお知らせを追加
+        </button>
+      </div>
+      <div id="op-msg"></div>
+      <div class="ad-list" id="news-list"></div>
+    </div>
+
+    <!-- 編集フォーム -->
+    <div id="view-form" style="display:none;">
+      <form class="ad-form" id="news-form">
+        <h2 id="form-title">新しいお知らせを追加</h2>
+
+        <div class="ad-field">
+          <label for="f-title">タイトル <span style="color:#d9482f">*</span></label>
+          <input type="text" id="f-title" required maxlength="200">
+        </div>
+
+        <div class="ad-form__row">
+          <div class="ad-field">
+            <label for="f-cat">タグ（カテゴリ） <span style="color:#d9482f">*</span></label>
+            <select id="f-cat" required>
+              <option value="お知らせ">お知らせ</option>
+              <option value="重要">重要</option>
+              <option value="更新情報">更新情報</option>
+              <option value="採用">採用</option>
+            </select>
+          </div>
+          <div class="ad-field">
+            <label for="f-date">表示日付 <span style="color:#d9482f">*</span></label>
+            <input type="date" id="f-date" required>
+          </div>
+        </div>
+
+        <div class="ad-field">
+          <label for="f-body">内容</label>
+          <textarea id="f-body" placeholder="お知らせの本文を入力してください（任意）"></textarea>
+          <div class="ad-field__hint">改行はそのまま反映されます。</div>
+        </div>
+
+        <div class="ad-field">
+          <label>公開設定 <span style="color:#d9482f">*</span></label>
+          <div class="ad-radio-group" id="status-group">
+            <label class="ad-radio" data-status="published">
+              <input type="radio" name="f-status" value="published">
+              <b>すぐに公開する</b>
+              <span class="hint">保存と同時にホームページに表示</span>
+            </label>
+            <label class="ad-radio" data-status="scheduled">
+              <input type="radio" name="f-status" value="scheduled">
+              <b>予約公開</b>
+              <span class="hint">指定した日時に自動公開</span>
+            </label>
+            <label class="ad-radio" data-status="draft">
+              <input type="radio" name="f-status" value="draft">
+              <b>下書きとして保存</b>
+              <span class="hint">公開しない（あとで編集）</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="ad-field" id="schedule-field" style="display:none;">
+          <label for="f-publish-at">公開日時</label>
+          <input type="datetime-local" id="f-publish-at">
+          <div class="ad-field__hint">この日時を過ぎるとホームページに自動で表示されます。</div>
+        </div>
+
+        <div id="form-error" class="ad-error" style="display:none;"></div>
+
+        <div class="ad-form__actions">
+          <button type="button" class="ad-btn ad-btn--ghost" id="cancel-btn">キャンセル</button>
+          <button type="submit" class="ad-btn ad-btn--primary" id="save-btn">保存する</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>
+
+<!-- 確認ダイアログ -->
+<div class="ad-modal-bg" id="confirm-modal">
+  <div class="ad-modal">
+    <h3 id="confirm-title">確認</h3>
+    <p id="confirm-text"></p>
+    <div class="ad-modal__actions">
+      <button class="ad-btn ad-btn--ghost" id="confirm-cancel">キャンセル</button>
+      <button class="ad-btn ad-btn--danger" id="confirm-ok">削除する</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script src="news-data.js"></script>
+<script src="news-client.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+/* ============== 画面切り替え ============== */
+function showScreen(name) {
+  $("screen-login").style.display = name === "login" ? "block" : "none";
+  $("screen-main").style.display  = name === "main"  ? "block" : "none";
+}
+function showView(name) {
+  $("view-list").style.display = name === "list" ? "block" : "none";
+  $("view-form").style.display = name === "form" ? "block" : "none";
+  if (name === "list") loadList();
+}
+
+/* ============== 起動時：ログイン状態判定 ============== */
+async function boot() {
+  if (!NewsClient.isConfigured) {
+    $("login-config-warn").style.display = "block";
+    showScreen("login");
+    return;
+  }
+  const session = await NewsClient.getSession();
+  if (session) enterMain(session); else showScreen("login");
+  NewsClient.onAuthChange((s) => { if (s) enterMain(s); else showScreen("login"); });
+}
+function enterMain(session) {
+  $("user-email").textContent = session?.user?.email || "";
+  showScreen("main");
+  showView("list");
+}
+
+/* ============== ログイン ============== */
+$("login-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const email = $("login-email").value.trim();
+  const password = $("login-password").value;
+  const btn = $("login-btn");
+  const err = $("login-error");
+  err.style.display = "none";
+  btn.disabled = true; btn.textContent = "ログイン中...";
+  try {
+    await NewsClient.signIn(email, password);
+  } catch (e) {
+    err.textContent = e.message?.includes("Invalid login")
+      ? "メールアドレスまたはパスワードが間違っています。"
+      : ("ログインに失敗しました：" + (e.message || e));
+    err.style.display = "block";
+  } finally {
+    btn.disabled = false; btn.textContent = "ログイン";
+  }
+});
+
+/* ============== ログアウト ============== */
+$("logout-btn").addEventListener("click", async () => {
+  await NewsClient.signOut();
+});
+
+/* ============== 一覧表示 ============== */
+function fmtDate(s)     { return String(s ?? "").replaceAll("-", ".").slice(0, 10); }
+function fmtDateTime(s) {
+  if (!s) return "";
+  const d = new Date(s);
+  if (isNaN(d.getTime())) return "";
+  const z = n => String(n).padStart(2, "0");
+  return `${d.getFullYear()}.${z(d.getMonth()+1)}.${z(d.getDate())} ${z(d.getHours())}:${z(d.getMinutes())}`;
+}
+const STATUS_LABEL = { draft: "下書き", scheduled: "予約公開", published: "公開中" };
+
+async function loadList() {
+  const list = $("news-list");
+  list.innerHTML = `<div class="ad-empty">読み込み中...</div>`;
+  let items = [];
+  try { items = await NewsClient.fetchAllNews(); }
+  catch (e) { console.error(e); }
+  if (!items.length) {
+    list.innerHTML = `<div class="ad-empty">まだお知らせがありません。<br>右上の「＋ 新しいお知らせを追加」から作成してください。</div>`;
+    return;
+  }
+  list.innerHTML = items.map(n => {
+    const sched = n.status === "scheduled" && n.publish_at
+      ? `<span class="ad-card__sched">公開予定：${fmtDateTime(n.publish_at)}</span>` : "";
+    return `
+      <div class="ad-card" data-id="${esc(n.id)}">
+        <div class="ad-card__date">${fmtDate(n.date)}</div>
+        <span class="ad-card__status ${esc(n.status)}">${STATUS_LABEL[n.status] || n.status}</span>
+        <div class="ad-card__title">
+          <span class="ad-card__cat">${esc(n.cat)}</span>${esc(n.title)}
+          ${sched}
+        </div>
+        <div class="ad-card__actions">
+          <button class="ad-btn ad-btn--ghost" data-action="edit">編集</button>
+          <button class="ad-btn ad-btn--danger" data-action="delete">削除</button>
+        </div>
+      </div>`;
+  }).join("");
+}
+
+$("news-list").addEventListener("click", (e) => {
+  const btn = e.target.closest("[data-action]");
+  if (!btn) return;
+  const card = btn.closest(".ad-card");
+  const id = card?.dataset.id;
+  if (!id) return;
+  if (btn.dataset.action === "edit") openForm(id);
+  if (btn.dataset.action === "delete") askDelete(id, card.querySelector(".ad-card__title").textContent.trim());
+});
+
+/* ============== 新規 / 編集フォーム ============== */
+let editingId = null;
+let cache = [];   // 編集時に使う
+
+$("new-btn").addEventListener("click", () => openForm(null));
+$("cancel-btn").addEventListener("click", () => showView("list"));
+
+async function openForm(id) {
+  editingId = id;
+  $("form-error").style.display = "none";
+  $("form-title").textContent = id ? "お知らせを編集" : "新しいお知らせを追加";
+
+  let cur = null;
+  if (id) {
+    if (!cache.length) cache = await NewsClient.fetchAllNews();
+    cur = cache.find(n => n.id === id);
+  }
+  $("f-title").value = cur?.title || "";
+  $("f-cat").value   = cur?.cat   || "お知らせ";
+  $("f-date").value  = (cur?.date || new Date().toISOString().slice(0,10));
+  $("f-body").value  = cur?.body  || "";
+  const status = cur?.status || "published";
+  document.querySelectorAll('input[name="f-status"]').forEach(r => r.checked = (r.value === status));
+  syncStatusUI();
+  $("f-publish-at").value = cur?.publish_at ? toLocalInput(cur.publish_at) : defaultScheduleValue();
+
+  showView("form");
+  $("f-title").focus();
+}
+function toLocalInput(iso) {
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return "";
+  const z = n => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${z(d.getMonth()+1)}-${z(d.getDate())}T${z(d.getHours())}:${z(d.getMinutes())}`;
+}
+function defaultScheduleValue() {
+  const d = new Date(); d.setHours(d.getHours() + 1); d.setMinutes(0, 0, 0);
+  return toLocalInput(d.toISOString());
+}
+function syncStatusUI() {
+  const status = document.querySelector('input[name="f-status"]:checked')?.value;
+  document.querySelectorAll('.ad-radio').forEach(r => r.classList.toggle('active', r.dataset.status === status));
+  $("schedule-field").style.display = (status === "scheduled") ? "block" : "none";
+}
+document.querySelectorAll('input[name="f-status"]').forEach(r => r.addEventListener("change", syncStatusUI));
+
+$("news-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const status = document.querySelector('input[name="f-status"]:checked')?.value || "published";
+  const payload = {
+    title: $("f-title").value.trim(),
+    cat:   $("f-cat").value,
+    date:  $("f-date").value,
+    body:  $("f-body").value,
+    status,
+    publish_at: status === "scheduled" ? new Date($("f-publish-at").value).toISOString() : null,
+  };
+  if (!payload.title || !payload.date) {
+    showFormError("タイトルと表示日付を入力してください。");
+    return;
+  }
+  if (status === "scheduled" && !$("f-publish-at").value) {
+    showFormError("予約公開を選んだ場合、公開日時を入力してください。");
+    return;
+  }
+  const btn = $("save-btn");
+  btn.disabled = true; btn.textContent = "保存中...";
+  try {
+    if (editingId) await NewsClient.updateNews(editingId, payload);
+    else           await NewsClient.createNews(payload);
+    cache = [];
+    showOpMsg(editingId ? "お知らせを更新しました。" : "お知らせを保存しました。", "success");
+    showView("list");
+  } catch (err) {
+    showFormError("保存に失敗しました：" + (err.message || err));
+  } finally {
+    btn.disabled = false; btn.textContent = "保存する";
+  }
+});
+function showFormError(msg) {
+  const e = $("form-error");
+  e.textContent = msg; e.style.display = "block";
+  e.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+/* ============== 削除（確認ダイアログ） ============== */
+let pendingDeleteId = null;
+function askDelete(id, title) {
+  pendingDeleteId = id;
+  $("confirm-title").textContent = "本当に削除しますか？";
+  $("confirm-text").innerHTML = `下記のお知らせを完全に削除します。<br>この操作は元に戻せません。<br><br><b>${esc(title)}</b>`;
+  $("confirm-modal").classList.add("show");
+}
+$("confirm-cancel").addEventListener("click", () => $("confirm-modal").classList.remove("show"));
+$("confirm-ok").addEventListener("click", async () => {
+  if (!pendingDeleteId) return;
+  const btn = $("confirm-ok");
+  btn.disabled = true; btn.textContent = "削除中...";
+  try {
+    await NewsClient.deleteNews(pendingDeleteId);
+    cache = [];
+    $("confirm-modal").classList.remove("show");
+    showOpMsg("お知らせを削除しました。", "success");
+    loadList();
+  } catch (err) {
+    alert("削除に失敗しました：" + (err.message || err));
+  } finally {
+    btn.disabled = false; btn.textContent = "削除する";
+    pendingDeleteId = null;
+  }
+});
+
+/* ============== 操作メッセージ ============== */
+let msgTimer = null;
+function showOpMsg(text, type = "success") {
+  const el = $("op-msg");
+  el.innerHTML = `<div class="ad-info" style="margin-bottom:18px;">${esc(text)}</div>`;
+  clearTimeout(msgTimer);
+  msgTimer = setTimeout(() => { el.innerHTML = ""; }, 4000);
+}
+
+/* ============== 起動 ============== */
+boot();
+</script>
+</body>
+</html>

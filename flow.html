@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>申請の流れ｜日本確認センター</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ===================== 申請の流れ page ===================== */
+.flow-main { padding: 58px 0 0; }
+.flow-wrap { width: min(1180px, 100% - 48px); margin-inline: auto; }
+
+/* page hero */
+.flow-hero { text-align: center; margin-bottom: 18px; }
+.flow-pill {
+  display: inline-block;
+  font-size: 13px; font-weight: 800; letter-spacing: 0.12em;
+  color: #fff; background: var(--blue-600);
+  padding: 6px 18px; border-radius: 999px; margin-bottom: 18px;
+}
+.flow-hero h1 {
+  font-size: clamp(32px, 4.4vw, 50px); font-weight: 900;
+  color: var(--navy-800); letter-spacing: 0.06em;
+}
+
+/* section block */
+.flow-block { margin-bottom: 80px; }
+.flow-sechead { text-align: center; margin-bottom: 44px; }
+.flow-sechead h2 {
+  font-size: clamp(24px, 3vw, 34px); font-weight: 900; color: var(--navy-800);
+  letter-spacing: 0.04em; display: inline-flex; align-items: baseline; gap: 14px; flex-wrap: wrap; justify-content: center;
+}
+.flow-sechead h2 .accent { color: var(--navy-900); }
+.flow-sechead h2 .sep { color: var(--blue-300, #9cc0f5); font-weight: 400; }
+.flow-sechead__rule { width: 88px; height: 4px; background: var(--teal-500); border-radius: 4px; margin: 16px auto 0; }
+
+/* download pills */
+.flow-dls { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-bottom: 44px; }
+.flow-dl {
+  display: flex; align-items: center; gap: 14px;
+  width: min(560px, 100%);
+  padding: 16px 26px;
+  background: #fff; border: 1.5px solid var(--blue-200, #bcd6f7);
+  border-radius: 999px; box-shadow: var(--shadow-sm);
+  font-size: 16px; font-weight: 700; color: var(--navy-800);
+  transition: transform 0.16s ease, box-shadow 0.18s ease, border-color 0.16s ease;
+}
+.flow-dl:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--blue-500); }
+.flow-dl .lbl { flex: 1; text-align: center; }
+.flow-dl .ft {
+  flex-shrink: 0; font-size: 10.5px; font-weight: 800; color: #fff;
+  background: #c53030; padding: 3px 7px; border-radius: 5px; letter-spacing: 0.03em;
+}
+.flow-dl .ft.doc { background: var(--blue-600); }
+.flow-dl__ic { flex-shrink: 0; color: var(--blue-500); display: grid; place-items: center; }
+
+/* steps */
+.flow-steps { display: flex; align-items: stretch; }
+.step-card {
+  flex: 1;
+  position: relative;
+  background: #fff; border: 1px solid var(--line);
+  border-radius: var(--r-lg); box-shadow: var(--shadow-md);
+  padding: 30px 28px 32px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.step-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.step-num {
+  display: inline-grid; place-items: center;
+  min-width: 56px; height: 34px; padding: 0 14px;
+  background: var(--grad-teal); color: #fff;
+  font-size: 17px; font-weight: 800; font-style: italic; letter-spacing: 0.04em;
+  border-radius: 10px;
+  box-shadow: 0 6px 14px rgba(16,185,129,0.30);
+}
+.step-card__icon {
+  position: absolute; top: 26px; right: 26px;
+  width: 60px; height: 60px; border-radius: 50%;
+  background: var(--tint-blue); color: var(--blue-600);
+  display: grid; place-items: center;
+}
+.step-card__icon svg { width: 30px; height: 30px; }
+.step-card h3 { font-size: 24px; font-weight: 900; color: var(--ink-900); margin: 16px 0 14px; letter-spacing: 0.03em; }
+.step-card p { font-size: 14.5px; line-height: 1.8; color: var(--ink-700); }
+.step-card .sub {
+  margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--line);
+  font-size: 13.5px; color: var(--ink-500); line-height: 1.75;
+}
+.flow-arrow {
+  flex-shrink: 0; width: 64px;
+  display: grid; place-items: center; color: var(--blue-500);
+}
+.flow-arrow svg { width: 52px; height: 22px; }
+
+/* 提出書類 box */
+.submit-box {
+  margin-top: 44px;
+  background: #fff; border: 1px solid var(--line);
+  border-radius: var(--r-xl); box-shadow: var(--shadow-md);
+  padding: 40px 48px 36px;
+}
+.submit-head {
+  display: flex; align-items: center; justify-content: center; gap: 18px;
+  margin-bottom: 30px;
+}
+.submit-head__line { flex: 1; max-width: 230px; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--blue-300, #9cc0f5)); }
+.submit-head__line.r { background: linear-gradient(90deg, var(--blue-300, #9cc0f5), transparent); }
+.submit-head h3 {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-size: 23px; font-weight: 900; color: var(--navy-800); white-space: nowrap;
+}
+.submit-head h3 .ic { color: var(--blue-600); display: grid; place-items: center; }
+.submit-list {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px 56px;
+  max-width: 760px; margin: 0 auto;
+}
+.submit-list li { list-style: none; display: flex; align-items: center; gap: 14px; font-size: 17px; font-weight: 700; color: var(--ink-900); }
+.submit-list .n {
+  flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%;
+  background: var(--grad-fee); color: #fff;
+  display: grid; place-items: center; font-size: 14px; font-weight: 800;
+}
+.submit-notes {
+  max-width: 760px; margin: 26px auto 0; padding-top: 20px;
+  border-top: 1px dashed var(--line);
+  font-size: 14px; color: var(--ink-500); line-height: 1.9;
+}
+.submit-notes p { margin: 0; }
+
+@media (max-width: 860px) {
+  .flow-steps { flex-direction: column; }
+  .flow-arrow { width: auto; height: 46px; transform: rotate(90deg); }
+  .submit-box { padding: 32px 22px 28px; }
+  .submit-list { grid-template-columns: 1fr; gap: 12px; }
+  .submit-head__line { display: none; }
+}
+@media (max-width: 720px) {
+  /* セクション見出しの ｜ 区切りが折り返しで離れて見えるのを防ぐため、各句を block 化 */
+  .flow-sechead h2 { gap: 4px; font-size: clamp(20px, 5.8vw, 26px); flex-direction: column; }
+  .flow-sechead h2 .sep { display: none; }
+  /* ダウンロード pill：余白縮小 + DOC バッジが入っても自然に折り返すように */
+  .flow-dl { padding: 12px 18px; font-size: 14px; gap: 10px; }
+  .flow-dl .lbl { text-align: left; line-height: 1.45; }
+  .flow-arrow { height: 36px; }
+  .flow-arrow svg { width: 40px; height: 16px; }
+}
+</style>
+</head>
+<body>
+<div id="bg-slot"></div>
+<div class="page">
+  <div id="header-slot"></div>
+
+  <main class="flow-main" data-screen-label="申請の流れ">
+    <div class="flow-wrap">
+
+      <div class="flow-hero">
+        <span class="flow-pill">Flow</span>
+        <h1>申請の流れ</h1>
+      </div>
+
+      <!-- ===== 確認申請・計画変更 ===== -->
+      <section class="flow-block" data-screen-label="確認申請・計画変更の流れ">
+        <div class="flow-sechead">
+          <h2><span class="accent">確認申請・計画変更</span><span class="sep">｜</span><span>申請の流れ</span></h2>
+          <div class="flow-sechead__rule"></div>
+        </div>
+        <div class="flow-steps" id="steps1"></div>
+
+        <div class="submit-box">
+          <div class="submit-head">
+            <span class="submit-head__line"></span>
+            <h3><span class="ic" id="clip-ic"></span>【提出書類】</h3>
+            <span class="submit-head__line r"></span>
+          </div>
+          <ul class="submit-list" id="submit-list"></ul>
+          <div class="submit-notes">
+            <p>※1：千葉県以外の申請時は、消防署の必要書類等の確認をお願いします。</p>
+            <p>※2：ご用意頂く場合があります。</p>
+            <p>領収書をお持ち下さい。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== 中間・完了検査 ===== -->
+      <section class="flow-block" data-screen-label="中間・完了検査の流れ">
+        <div class="flow-sechead">
+          <h2><span class="accent">中間・完了検査</span><span class="sep">｜</span><span>検査の流れ</span></h2>
+          <div class="flow-sechead__rule"></div>
+        </div>
+        <div class="flow-dls" id="insp-dls"></div>
+        <div class="flow-steps" id="steps2"></div>
+      </section>
+
+    </div>
+  </main>
+
+  <div id="footer-slot"></div>
+</div>
+
+<script src="site.js"></script>
+<script>
+const FIC = {
+  doc: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M5 21V5a2 2 0 0 1 2-2h7l5 5v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2Z"/><path d="M8 13h8M8 17h5"/></svg>',
+  search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>',
+  cert: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M19 12V8l-5-5H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h5"/><circle cx="17.5" cy="16.5" r="3.5"/><path d="M15.5 19.3 15 23l2.5-1.5L20 23l-.5-3.7"/></svg>',
+  clip: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 4v1H9V4Z"/><path d="M9 11h6M9 15h4"/></svg>',
+};
+const ARROW = '<svg viewBox="0 0 52 22" fill="none"><line x1="2" y1="11" x2="36" y2="11" stroke="currentColor" stroke-width="2.6" stroke-dasharray="1.5 7" stroke-linecap="round"/><path d="M37 4l8 7-8 7" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+const STEPS1 = [
+  { n: "01", title: "申請受付", icon: "doc", desc: "事前にお電話でご予約ください。受付後、引受証と請求書を郵送します。", sub: "提出書類：申請書、概要書、工事届、チェックリスト、消防書類、委任状、都市計画図。" },
+  { n: "02", title: "審査", icon: "search", desc: "手数料は現金または振込、振込の場合は、振込日を記入しFAXしてください。" },
+  { n: "03", title: "確認済証交付", icon: "cert", desc: "ご入金確認後、確認済証を交付いたします。" },
+];
+const STEPS2 = [
+  { n: "01", title: "申請受付", icon: "clip", desc: "検査は事前予約制です。申請書は1週間前までにご提出ください。手数料は前日までにご入金ください。" },
+  { n: "02", title: "検査", icon: "search", desc: "中間・完了検査を実施します。（東京都は定められた様式に準拠します）" },
+  { n: "03", title: "検査済証交付", icon: "cert", desc: "ご入金確認後、検査済証を交付いたします。" },
+];
+const SUBMIT_DOCS = ["申請書正・副", "概要書", "工事届", "関係法令チェックリスト", "委任状", "都市計画図（※2）"];
+const INSP_DLS = [
+  { label: "東京都建築基準法施行細則様式一覧", url: "https://www.toshiseibi.metro.tokyo.lg.jp/kenchiku_kaihatsu/kenchiku_gyosei/gyosei/kijun/kn/k8", type: "doc" },
+  { label: "中間・完了検査時の提出書類及び提示書類一覧", url: "https://drive.google.com/file/d/1R1QHt1XPZzg086OfPusYpgCILVfu6sHF/view", type: "pdf" },
+  { label: "建築工事施工計画書等提出書類一覧（東京都の場合）", url: "https://drive.google.com/file/d/1WS7VEKPkTE1o5vdIQC0BdcgA-91zyOuA/view", type: "pdf" },
+];
+
+function renderSteps(el, steps) {
+  el.innerHTML = steps.map((s, i) => {
+    const card = `<div class="step-card">
+      <span class="step-card__icon">${FIC[s.icon]}</span>
+      <span class="step-num">${s.n}</span>
+      <h3>${s.title}</h3>
+      <p>${s.desc}</p>
+      ${s.sub ? `<div class="sub">${s.sub}</div>` : ""}
+    </div>`;
+    const arrow = i < steps.length - 1 ? `<div class="flow-arrow">${ARROW}</div>` : "";
+    return card + arrow;
+  }).join("");
+}
+renderSteps(document.getElementById("steps1"), STEPS1);
+renderSteps(document.getElementById("steps2"), STEPS2);
+
+document.getElementById("clip-ic").innerHTML = FIC.clip;
+
+document.getElementById("submit-list").innerHTML = SUBMIT_DOCS.map((d, i) =>
+  `<li><span class="n">${i + 1}</span><span>${d}</span></li>`).join("");
+
+document.getElementById("insp-dls").innerHTML = INSP_DLS.map(d => `
+  <a class="flow-dl" href="${d.url}"${d.url !== "#" ? ' target="_blank" rel="noopener"' : ""}>
+    <span class="lbl">${d.label}</span>
+    <span class="ft ${d.type}">${d.type === "pdf" ? "PDF" : "DOC"}</span>
+    <span class="flow-dl__ic">${FIC.doc}</span>
+  </a>`).join("");
+</script>
+</body>
+</html>

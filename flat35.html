@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>フラット35 適合証明手数料｜日本確認センター</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ===================== フラット35 page ===================== */
+:root { --coral: #d9482f; }
+.fl-main { padding: 58px 0 0; }
+.fl-wrap { width: min(1040px, 100% - 48px); margin-inline: auto; }
+
+.fl-hero { text-align: center; margin-bottom: 30px; }
+.fl-hero h1 { font-size: clamp(26px, 3.6vw, 42px); font-weight: 900; color: var(--navy-800); letter-spacing: 0.02em; }
+.fl-hero h1 .small { font-size: 0.62em; }
+.fl-hero__dl { margin-top: 18px; font-size: 15.5px; color: var(--ink-700); font-weight: 600; }
+.fl-print {
+  display: inline-flex; align-items: center; gap: 14px; margin-top: 16px;
+  padding: 15px 34px; background: #fff;
+  border: 1.6px solid var(--blue-200, #bcd6f7); border-radius: 999px;
+  box-shadow: var(--shadow-sm); font-size: 16px; font-weight: 800; color: var(--navy-800);
+  transition: transform 0.16s ease, box-shadow 0.18s ease, border-color 0.16s ease;
+}
+.fl-print:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--blue-500); }
+.fl-print svg { width: 20px; height: 20px; color: var(--blue-600); }
+
+/* section heading */
+.fl-sec { margin-top: 56px; }
+.fl-sechead { text-align: center; margin-bottom: 28px; }
+.fl-sechead__top { width: 26px; height: 3px; background: var(--blue-500); border-radius: 3px; margin: 0 auto 10px; }
+.fl-sechead h2 { font-size: clamp(26px, 3.4vw, 38px); font-weight: 900; color: var(--navy-800); letter-spacing: 0.03em; }
+.fl-sechead h2 .small { font-size: 0.6em; }
+.fl-sechead p { margin-top: 10px; font-size: 16px; color: var(--ink-600, #54647d); font-weight: 600; }
+.fl-sechead__rule { width: 64px; height: 3px; background: var(--blue-400); border-radius: 3px; margin: 12px auto 0; }
+
+/* accordion */
+.fl-acc { display: flex; flex-direction: column; gap: 18px; }
+.fl-acc-item { }
+.fl-acc-head {
+  display: flex; align-items: center; gap: 16px; width: 100%;
+  padding: 20px 24px; border: none; cursor: pointer;
+  background: linear-gradient(100deg, #2f6fe0, #4a7ff0); color: #fff;
+  border-radius: 14px; font-family: var(--font);
+  font-size: clamp(17px, 2vw, 21px); font-weight: 800; text-align: left; letter-spacing: 0.02em;
+  box-shadow: 0 8px 20px rgba(47,111,224,0.22);
+  position: relative;
+}
+.fl-acc-head::before { content: ""; position: absolute; left: 0; top: 14px; bottom: 14px; width: 5px; background: rgba(255,255,255,0.85); border-radius: 0 3px 3px 0; }
+.fl-acc-head .lbl { flex: 1; padding-left: 8px; }
+.fl-acc-toggle { width: 34px; height: 34px; flex-shrink: 0; border-radius: 50%; background: rgba(255,255,255,0.22); display: grid; place-items: center; }
+.fl-acc-toggle svg { width: 20px; height: 20px; transition: transform 0.25s ease; }
+.fl-acc-item.open .fl-acc-toggle svg { transform: rotate(180deg); }
+.fl-acc-item.open .fl-acc-head { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+.fl-acc-panel { display: none; }
+.fl-acc-item.open .fl-acc-panel {
+  display: block; background: #fff; border: 1px solid var(--blue-100); border-top: none;
+  border-radius: 0 0 14px 14px; padding: 26px 28px 28px;
+}
+
+/* tables */
+table.fl-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 15px; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.fl-table thead th { background: #eaf1fb; color: var(--navy-800); font-weight: 800; padding: 13px 16px; text-align: center; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.fl-table thead th:first-child { text-align: center; }
+.fl-table thead th:last-child { border-right: none; }
+.fl-table td { padding: 14px 16px; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); color: var(--ink-900); vertical-align: middle; }
+.fl-table td:last-child { border-right: none; }
+.fl-table tbody tr:last-child td { border-bottom: none; }
+.fl-table td.cat { text-align: left; font-weight: 600; line-height: 1.5; }
+.fl-table td.cat .sub { display: block; font-size: 12px; color: var(--ink-500); font-weight: 500; }
+.fl-table td.num { text-align: center; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.fl-table td.muted { color: var(--ink-300); }
+
+.fl-note { margin-top: 16px; font-size: 13.5px; line-height: 1.85; color: var(--ink-600, #54647d); white-space: pre-line; }
+.fl-note.red { color: var(--coral); font-weight: 600; }
+
+/* bottom link */
+.fl-link-sec { text-align: center; margin: 56px 0 20px; }
+.fl-link-sec p { font-size: 16px; color: var(--ink-700); font-weight: 600; margin-bottom: 18px; }
+.fl-link-sec .btn { padding: 16px 34px; font-size: 16px; }
+
+@media (max-width: 720px) {
+  /* タイトルの「（全て税込金額）」を改行して本タイトルが途中で折れないようにする */
+  .fl-hero h1 .small { display: block; font-size: 0.8em; margin-top: 4px; }
+  /* ダウンロード pill：余白とフォントを縮小、長い日付文字列が途中で折れないように */
+  .fl-print { padding: 12px 18px; font-size: 14.5px; gap: 10px; }
+  .fl-print svg { width: 18px; height: 18px; }
+
+  /* 横スクロールをやめ、行ごとのカードレイアウトに切替 */
+  .fl-acc-panel { padding: 16px 12px 18px; overflow-x: visible; }
+  .fl-table { display: block; border: none; border-radius: 0; min-width: 0; }
+  .fl-table thead { display: none; }
+  .fl-table tbody { display: block; }
+  .fl-table tr {
+    display: block; margin-bottom: 12px; padding: 0;
+    background: #fff; border: 1px solid var(--line); border-radius: 12px;
+    overflow: hidden;
+  }
+  .fl-table tr:last-child { margin-bottom: 0; }
+  .fl-table td { display: block; padding: 10px 14px; border: none; }
+  .fl-table td.cat {
+    background: #eaf1fb; color: var(--navy-800); font-weight: 800;
+    padding: 12px 14px; border-bottom: 1px solid var(--line); font-size: 14.5px;
+  }
+  .fl-table td.cat .sub { display: block; margin-top: 4px; font-size: 12px; color: var(--ink-500); font-weight: 500; }
+  .fl-table td.num {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    text-align: right; border-bottom: 1px solid var(--line);
+    padding: 10px 14px; font-size: 15px;
+  }
+  .fl-table td.num:last-child { border-bottom: none; }
+  .fl-table td.num::before {
+    content: attr(data-label);
+    font-size: 13px; font-weight: 700; color: var(--ink-500);
+    text-align: left;
+  }
+  .fl-acc-head { padding: 16px 18px; gap: 12px; }
+  .fl-acc-head .lbl { padding-left: 4px; }
+  .fl-acc-toggle { width: 28px; height: 28px; }
+  .fl-acc-toggle svg { width: 16px; height: 16px; }
+}
+</style>
+</head>
+<body>
+<div id="bg-slot"></div>
+<div class="page">
+  <div id="header-slot"></div>
+
+  <main class="fl-main" data-screen-label="フラット35">
+    <div class="fl-wrap">
+
+      <div class="fl-hero">
+        <h1>【フラット35】適合証明手数料<span class="small">（全て税込金額）</span></h1>
+        <div class="fl-hero__dl">ダウンロードはこちら ↓</div>
+        <a class="fl-print" href="https://drive.google.com/file/d/1XDDgnNkKR-M1KCF1L02tXOoxZ5C0DPp7/view" target="_blank" rel="noopener">フラット35適合証明 手数料規定 令和7年4月1日〜 <span id="print-ic"></span></a>
+      </div>
+
+      <!-- 料金プラン -->
+      <section class="fl-sec">
+        <div class="fl-sechead">
+          <div class="fl-sechead__top"></div>
+          <h2>料金プラン</h2>
+        </div>
+        <div class="fl-acc" id="acc-main"></div>
+      </section>
+
+      <!-- 詳細 -->
+      <section class="fl-sec">
+        <div class="fl-sechead">
+          <h2><span class="small">【フラット35】</span>料金プラン 詳細</h2>
+          <p>共同住宅・賃貸住宅・出張費</p>
+          <div class="fl-sechead__rule"></div>
+        </div>
+        <div class="fl-acc" id="acc-detail"></div>
+      </section>
+
+      <!-- bottom link -->
+      <section class="fl-link-sec">
+        <p>ずっと固定金利の安心【フラット35】のリンクはこちら ↓</p>
+        <a class="btn btn--teal" href="https://www.flat35.com/business/inspect/download/index.html" target="_blank" rel="noopener">フラット35適合証明関係 <span id="ext-ic"></span></a>
+      </section>
+
+    </div>
+  </main>
+
+  <div id="footer-slot"></div>
+</div>
+
+<script src="site.js"></script>
+<script>
+const FLIC = {
+  print: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8V4h10v4"/><rect x="4" y="8" width="16" height="9" rx="2"/><path d="M7 14h10v6H7z"/><path d="M16.5 11.5h0"/></svg>',
+  chev: '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>',
+  ext: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4 11 13"/><path d="M18 14v5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 19V8a1.5 1.5 0 0 1 1.5-1.5H10"/></svg>',
+};
+document.getElementById("print-ic").innerHTML = FLIC.print;
+document.getElementById("ext-ic").innerHTML = FLIC.ext;
+
+const M = "—";
+const ACC_MAIN = [
+  {
+    title: "新築・一戸建て住宅", open: true,
+    head: ["区分", "設計検査", "中間検査", "竣工検査"],
+    rows: [
+      ["単独（フラット35のみ）申請", "26,400円", "26,400円", "26,400円"],
+      ["確認申請との併願", "13,200円", "13,200円", "13,200円"],
+      ["竣工済特例", "13,200円", M, "13,200円"],
+    ],
+    notes: [{ text: "※【設計検査料金に加算】\nフラット35S・フラット35維持保全型 加算料金\n省エネルギー性（ZEH含む）、耐震性 22,000円\nバリアフリー性、耐久性・可変性 5,500円" }],
+  },
+];
+const ACC_DETAIL = [
+  {
+    title: "新築・共同住宅",
+    head: ["区分", "設計検査", "竣工検査"],
+    rows: [
+      ["単独（フラット35のみ）申請　2〜15戸", "66,000円", "66,000円"],
+      ["確認申請との併願　2〜15戸", "33,000円", "33,000円"],
+      ["単独（フラット35のみ）申請　16戸〜", "132,000円", "132,000円"],
+      ["確認申請との併願　16戸〜", "66,000円", "66,000円"],
+      ["登録マンション<span class='sub'>※上限は330,000円とします。</span>", "5,500円/戸 +11,000円", "11,000円/戸 +11,000円"],
+    ],
+    notes: [{ text: "※【設計検査料金に加算】\nフラット35S・フラット35維持保全型 加算料金\n省エネルギー性（ZEH含む）、耐震性 33,000円\nバリアフリー性、耐久性・可変性 11,000円" }],
+  },
+  {
+    title: "新築・賃貸住宅",
+    head: ["区分", "設計検査", "竣工検査"],
+    rows: [
+      ["単独（適合証明のみ）申請　1〜15戸", "66,000円", "66,000円"],
+      ["確認申請との併願　1〜15戸", "33,000円", "33,000円"],
+      ["単独（適合証明のみ）申請　16戸〜", "132,000円", "132,000円"],
+      ["確認申請との併願　16戸〜", "66,000円", "66,000円"],
+    ],
+    notes: [
+      { text: "※【設計検査料金に加算】省エネルギー性（ZEH基準・断熱構造基準含む）加算料金 55,000円" },
+      { text: "省エネ基準適合判定、BELS評価書、設計住宅性能評価、長期使用構造等確認、低炭素認定技術の審査等、当機関にて判定を行っている場合は、加算金額を0円とする。ただし、省エネ基準適合判定及び設計住宅性能評価は一定の等級を満たすものに限る。", red: true },
+    ],
+  },
+  {
+    title: "現場検査のための検査委員が出張する場合の出張費",
+    head: ["区分", "出張費"],
+    rows: [
+      ["千葉県<span class='sub'>千葉市、習志野市、船橋市、市川市、浦安市、松戸市、鎌ヶ谷市、八千代市、四街道市、市原市</span>", "0円"],
+      ["千葉県（上記以外）", "11,000円"],
+      ["東京都", "22,000円"],
+      ["茨城県、埼玉県、神奈川県", "33,000円"],
+      ["山梨県、栃木県、群馬県、長野県", "55,000円"],
+    ],
+    notes: [{ text: "※：建築基準法と併願申請の場合は出張費不要です。" }],
+  },
+];
+
+function renderAcc(containerId, list) {
+  document.getElementById(containerId).innerHTML = list.map((a, i) => {
+    const headCells = a.head.map((h, ci) => `<th>${h}</th>`).join("");
+    const rows = a.rows.map(r => {
+      const cells = r.map((c, ci) => {
+        if (ci === 0) return `<td class="cat">${c}</td>`;
+        const muted = c === M;
+        return `<td class="num${muted ? " muted" : ""}" data-label="${a.head[ci]}">${c}</td>`;
+      }).join("");
+      return `<tr>${cells}</tr>`;
+    }).join("");
+    const notes = (a.notes || []).map(n => `<div class="fl-note${n.red ? " red" : ""}">${n.text}</div>`).join("");
+    return `<div class="fl-acc-item${a.open ? " open" : ""}">
+      <button class="fl-acc-head" type="button" aria-expanded="${a.open ? "true" : "false"}">
+        <span class="lbl">${a.title}</span>
+        <span class="fl-acc-toggle">${FLIC.chev}</span>
+      </button>
+      <div class="fl-acc-panel">
+        <table class="fl-table"><thead><tr>${headCells}</tr></thead><tbody>${rows}</tbody></table>
+        ${notes}
+      </div>
+    </div>`;
+  }).join("");
+}
+renderAcc("acc-main", ACC_MAIN);
+renderAcc("acc-detail", ACC_DETAIL);
+
+document.querySelectorAll(".fl-acc-head").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const item = btn.closest(".fl-acc-item");
+    const open = item.classList.toggle("open");
+    btn.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>確認申請手数料｜日本確認センター</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ===================== 手数料 page ===================== */
+:root { --coral: #d9482f; --coral-bg: #fdeef0; }
+.fee-main { padding: 58px 0 0; }
+.fee-wrap { width: min(1080px, 100% - 48px); margin-inline: auto; }
+
+/* page hero */
+.fee-hero { text-align: center; margin-bottom: 54px; }
+.fee-hero h1 {
+  font-size: clamp(30px, 4vw, 46px); font-weight: 900;
+  color: var(--navy-800); letter-spacing: 0.05em;
+}
+.fee-hero p { margin-top: 12px; font-size: 16px; color: var(--ink-500); }
+.fee-hero__rule { width: 70px; height: 4px; background: var(--blue-500); border-radius: 4px; margin: 18px auto 0; }
+
+/* section heading */
+.fee-sec { margin-bottom: 56px; }
+.fee-sec__head {
+  display: flex; align-items: center; gap: 14px; margin-bottom: 26px;
+}
+.fee-sec__head .ic {
+  width: 44px; height: 44px; flex-shrink: 0; border-radius: 13px;
+  background: var(--tint-blue); color: var(--blue-600);
+  display: grid; place-items: center;
+}
+.fee-sec__head .ic svg { width: 24px; height: 24px; }
+.fee-sec__head h2 { font-size: clamp(22px, 2.6vw, 28px); font-weight: 800; color: var(--navy-800); letter-spacing: 0.02em; }
+
+/* download cards */
+.fee-dl-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px;
+}
+.fee-dl {
+  display: flex; align-items: center; gap: 16px;
+  padding: 22px 26px;
+  background: #fff;
+  border: 1.5px solid var(--blue-100);
+  border-radius: 999px;
+  box-shadow: var(--shadow-sm);
+  font-size: 17px; font-weight: 800; color: var(--navy-800);
+  transition: transform 0.18s ease, box-shadow 0.2s ease, border-color 0.18s ease;
+}
+.fee-dl:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--blue-400); }
+.fee-dl__ico {
+  width: 40px; height: 40px; flex-shrink: 0; border-radius: 11px;
+  background: var(--tint-blue); color: var(--blue-600);
+  display: grid; place-items: center;
+}
+.fee-dl__ico svg { width: 21px; height: 21px; }
+.fee-dl span.lbl { flex: 1; }
+.fee-dl .pdf-tag {
+  flex-shrink: 0; font-size: 11px; font-weight: 800; letter-spacing: 0.04em;
+  color: #fff; background: var(--coral); padding: 3px 9px; border-radius: 6px;
+}
+
+/* card */
+.fee-card {
+  background: #fff; border: 1px solid var(--line);
+  border-radius: var(--r-lg); box-shadow: var(--shadow-md);
+  padding: 30px 32px;
+}
+
+/* main fee table */
+.fee-table-scroll { overflow-x: auto; border-radius: 16px; }
+table.fee-table { width: 100%; border-collapse: separate; border-spacing: 0; min-width: 680px; font-size: 15px; }
+.fee-table thead th {
+  background: var(--grad-navy); color: #fff; font-weight: 800;
+  padding: 15px 14px; text-align: center; font-size: 15.5px;
+  white-space: nowrap;
+}
+.fee-table thead th:first-child { text-align: left; width: 40%; border-top-left-radius: 12px; }
+.fee-table thead th:last-child { border-top-right-radius: 12px; }
+.fee-table td {
+  padding: 13px 14px; border-bottom: 1px solid var(--line); vertical-align: middle;
+}
+.fee-table td.cat {
+  border-right: 1px solid var(--line);
+  font-weight: 700; color: var(--ink-900); line-height: 1.5;
+}
+.fee-table td.cat .note { display: block; font-size: 12.5px; font-weight: 500; color: var(--ink-500); margin-top: 3px; }
+.fee-table td.price {
+  text-align: center; font-weight: 700; color: var(--ink-900);
+  font-variant-numeric: tabular-nums; white-space: nowrap;
+  border-right: 1px solid var(--line);
+}
+.fee-table td.price:last-child { border-right: none; }
+.fee-table tr.hl td.price { background: #e9f2ff; color: var(--navy-700); }
+.fee-table td.price .mk { color: var(--coral); font-size: 11px; vertical-align: super; margin-left: 2px; font-weight: 800; }
+.fee-table td.muted { color: var(--ink-300); }
+.fee-table tbody tr:hover td.price { background: #dfeaff; }
+
+/* legend */
+.fee-legend { display: flex; flex-wrap: wrap; gap: 22px; margin-top: 18px; font-size: 13.5px; color: var(--ink-500); }
+.fee-legend span { display: inline-flex; align-items: center; gap: 8px; }
+.fee-legend .sw { width: 22px; height: 14px; border-radius: 4px; border: 1px solid var(--line); }
+.fee-legend .sw.std { background: #fff; }
+.fee-legend .sw.hl { background: #e9f2ff; }
+
+/* ※ surcharge box */
+.fee-marks {
+  margin-top: 22px;
+  background: var(--coral-bg);
+  border: 1px solid #f5cfca;
+  border-left: 5px solid var(--coral);
+  border-radius: 14px;
+  padding: 22px 26px;
+}
+.fee-marks li {
+  list-style: none; display: flex; gap: 10px; align-items: flex-start;
+  font-size: 14.5px; line-height: 1.7; color: #9a3826; font-weight: 600;
+}
+.fee-marks li + li { margin-top: 10px; }
+.fee-marks ul { margin: 0; padding: 0; }
+.fee-marks .mk { color: var(--coral); font-weight: 800; flex-shrink: 0; }
+
+/* supplementary notes */
+.fee-notes-list { margin: 0; padding: 0; display: grid; gap: 14px; }
+.fee-notes-list li {
+  list-style: none; display: flex; gap: 13px; align-items: flex-start;
+  font-size: 15px; line-height: 1.75; color: var(--ink-700);
+}
+.fee-notes-list li::before {
+  content: ""; flex-shrink: 0; margin-top: 9px;
+  width: 8px; height: 8px; border-radius: 50%; background: var(--blue-400);
+}
+
+/* accordion (blue gradient bar) */
+.fee-acc { display: flex; flex-direction: column; gap: 16px; }
+.fee-acc-item .fee-acc-head {
+  display: flex; align-items: center; gap: 16px; width: 100%;
+  padding: 20px 26px; border: none; cursor: pointer;
+  background: var(--grad-fee); color: #fff;
+  border-radius: 14px; font-family: var(--font);
+  font-size: 17px; font-weight: 800; text-align: left;
+  box-shadow: 0 8px 20px rgba(59,130,246,0.22);
+  transition: filter 0.18s ease, border-radius 0.2s ease;
+}
+.fee-acc-head .lbl { flex: 1; line-height: 1.45; }
+.fee-acc-head:hover { filter: brightness(1.04); }
+.fee-acc-item.open .fee-acc-head { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+.fee-acc-toggle { position: relative; width: 26px; height: 26px; flex-shrink: 0; }
+.fee-acc-toggle::before, .fee-acc-toggle::after {
+  content: ""; position: absolute; top: 50%; left: 50%; background: #fff; border-radius: 2px;
+}
+.fee-acc-toggle::before { width: 16px; height: 2.6px; transform: translate(-50%,-50%); }
+.fee-acc-toggle::after { width: 2.6px; height: 16px; transform: translate(-50%,-50%); transition: transform 0.25s ease, opacity 0.2s ease; }
+.fee-acc-item.open .fee-acc-toggle::after { transform: translate(-50%,-50%) scaleY(0); opacity: 0; }
+.fee-acc-panel { display: none; }
+.fee-acc-item.open .fee-acc-panel {
+  display: block;
+  border: 1px solid var(--blue-100); border-top: none;
+  border-radius: 0 0 14px 14px; padding: 24px 26px 26px; background: #fff;
+}
+.fee-acc-unit { text-align: right; font-size: 13px; color: var(--ink-500); margin-bottom: 12px; }
+
+/* simple 2-col tables (travel / karishiyou) */
+table.fee-simple { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 15px; }
+.fee-simple th {
+  background: var(--tint-blue); color: var(--navy-800); font-weight: 800;
+  padding: 13px 16px; text-align: left; border: 1px solid var(--blue-100);
+}
+.fee-simple th:last-child { text-align: right; width: 160px; }
+.fee-simple td { padding: 14px 16px; border: 1px solid var(--line); line-height: 1.6; color: var(--ink-700); }
+.fee-simple td.fee { text-align: right; font-weight: 800; color: var(--navy-700); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.fee-simple tr:nth-child(even) td { background: #fafcff; }
+
+/* 機関表 */
+table.org-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 15px; overflow: hidden; border-radius: 14px; }
+.org-table tr { }
+.org-table th {
+  width: 240px; text-align: left; vertical-align: top;
+  background: var(--blue-50); color: var(--navy-800); font-weight: 800;
+  padding: 18px 20px; border: 1px solid var(--blue-100); line-height: 1.5;
+}
+.org-table td {
+  padding: 18px 22px; border: 1px solid var(--line);
+  color: var(--ink-700); line-height: 1.7; white-space: pre-line;
+}
+
+@media (max-width: 720px) {
+  .fee-dl-grid { grid-template-columns: 1fr; }
+  .fee-card { padding: 22px 14px; }
+  .org-table, .org-table tbody, .org-table tr, .org-table th, .org-table td { display: block; width: auto; }
+  .org-table th { border-bottom: none; border-radius: 0; }
+  .org-table td { border-top: none; margin-bottom: 4px; word-break: break-word; }
+  .fee-acc-head { font-size: 15px; padding: 18px 18px; }
+
+  /* 確認申請手数料表 — 横スクロールを止め、tbody(グループ)ごとのカード表示に */
+  .fee-table-scroll { overflow-x: visible; border-radius: 0; }
+  table.fee-table { display: block; min-width: 0; border: none; }
+  .fee-table thead { display: none; }
+  .fee-table tbody.fee-group {
+    display: block;
+    margin-bottom: 14px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: #fff;
+    overflow: hidden;
+  }
+  .fee-table tbody.fee-group:last-child { margin-bottom: 0; }
+  .fee-table tr { display: block; border: none; }
+  .fee-table td { display: block; border: none; padding: 8px 14px; }
+  .fee-table td.cat {
+    background: #eef4ff; color: var(--navy-800);
+    padding: 12px 14px; border-bottom: 1px solid var(--line);
+    font-size: 14.5px; font-weight: 800; border-right: none;
+  }
+  .fee-table td.cat .note { display: block; font-size: 12px; color: var(--ink-500); font-weight: 500; margin-top: 4px; }
+  .fee-table td.price {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    padding: 9px 14px;
+    border-right: none;
+    text-align: right;
+    border-bottom: 1px solid var(--line);
+  }
+  .fee-table tbody.fee-group tr:last-child td.price:last-child,
+  .fee-table tr:last-child td.price { border-bottom: none; }
+  .fee-table td.price::before {
+    content: attr(data-label);
+    font-size: 13px; font-weight: 700; color: var(--ink-500);
+    text-align: left;
+  }
+  .fee-table tr.hl td.price { background: #f3f8ff; }
+
+  /* 出張費・仮使用認定 — 長い地域名が横スクロールせず折り返すよう調整 */
+  table.fee-simple { display: block; font-size: 14.5px; }
+  .fee-simple thead { display: none; }
+  .fee-simple tbody { display: block; }
+  .fee-simple tr {
+    display: block; margin-bottom: 10px;
+    border: 1px solid var(--blue-100); border-radius: 12px;
+    background: #fff; overflow: hidden;
+  }
+  .fee-simple tr:last-child { margin-bottom: 0; }
+  .fee-simple td {
+    display: block; border: none; padding: 12px 14px; line-height: 1.6;
+    word-break: break-word;
+  }
+  .fee-simple td.fee {
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid var(--line); background: #f7faff;
+    padding: 10px 14px; text-align: right;
+  }
+  .fee-simple td.fee::before {
+    content: attr(data-label);
+    font-size: 13px; font-weight: 700; color: var(--ink-500);
+    text-align: left;
+  }
+  .fee-simple tr:nth-child(even) td { background: #fff; }
+
+  /* fee-acc panel が窮屈にならないように */
+  .fee-acc-item.open .fee-acc-panel { padding: 18px 14px 22px; }
+}
+</style>
+</head>
+<body>
+<div id="bg-slot"></div>
+<div class="page">
+  <div id="header-slot"></div>
+
+  <main class="fee-main" data-screen-label="手数料">
+    <div class="fee-wrap">
+
+      <!-- HERO -->
+      <div class="fee-hero">
+        <h1>確認申請手数料</h1>
+        <p>各種申請・検査の手数料についてご案内します。</p>
+        <div class="fee-hero__rule"></div>
+      </div>
+
+      <!-- 手数料一覧 -->
+      <section class="fee-sec">
+        <div class="fee-sec__head"><span class="ic" id="dl-ic"></span><h2>手数料一覧</h2></div>
+        <div class="fee-dl-grid" id="dl-grid"></div>
+      </section>
+
+      <!-- 確認申請手数料表 -->
+      <section class="fee-sec">
+        <div class="fee-sec__head"><span class="ic" id="tbl-ic"></span><h2>確認申請・検査手数料表</h2></div>
+        <div class="fee-card">
+          <div class="fee-table-scroll">
+            <table class="fee-table">
+              <thead><tr><th>区分</th><th>確認申請</th><th>中間検査</th><th>完了検査</th></tr></thead>
+              <tbody id="fee-tbody"></tbody>
+            </table>
+          </div>
+          <div class="fee-legend">
+            <span><span class="sw std"></span>標準</span>
+            <span><span class="sw hl"></span>構造計算書添付物件<span class="mk" style="color:var(--coral);font-weight:800">※</span></span>
+            <span>（単位：円）</span>
+          </div>
+        </div>
+        <div class="fee-marks"><ul id="marks-list"></ul></div>
+      </section>
+
+      <!-- 補足事項 -->
+      <section class="fee-sec">
+        <div class="fee-sec__head"><span class="ic" id="note-ic"></span><h2>手数料に関する補足事項</h2></div>
+        <div class="fee-card"><ul class="fee-notes-list" id="notes-list"></ul></div>
+      </section>
+
+      <!-- accordions -->
+      <section class="fee-sec">
+        <div class="fee-acc" id="acc"></div>
+      </section>
+
+      <!-- 機関表 -->
+      <section class="fee-sec">
+        <div class="fee-sec__head"><span class="ic" id="org-ic"></span><h2>機関表</h2></div>
+        <div class="fee-card" style="padding:0;border:none;box-shadow:none;background:none">
+          <table class="org-table"><tbody id="org-tbody"></tbody></table>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <div id="footer-slot"></div>
+</div>
+
+<script src="site.js"></script>
+<script src="fees-data.js"></script>
+<script>
+const ICX = {
+  doc: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M5 21V5a2 2 0 0 1 2-2h7l5 5v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2Z"/><path d="M8 13h8M8 17h5"/></svg>',
+  table: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17M3.5 14.5h17M9 9.5v10M15 9.5v10"/></svg>',
+  info: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5h0"/></svg>',
+  org: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3.5" width="16" height="17" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>',
+};
+
+/* icons */
+document.getElementById("dl-ic").innerHTML = ICX.doc;
+document.getElementById("tbl-ic").innerHTML = ICX.table;
+document.getElementById("note-ic").innerHTML = ICX.info;
+document.getElementById("org-ic").innerHTML = ICX.org;
+
+/* download buttons */
+document.getElementById("dl-grid").innerHTML = FEE_DOWNLOADS.map(d => `
+  <a class="fee-dl" href="${d.url}"${d.url !== "#" ? ' target="_blank" rel="noopener"' : ""}>
+    <span class="fee-dl__ico">${IC.download}</span>
+    <span class="lbl">${d.label}</span>
+    ${d.pdf ? '<span class="pdf-tag">PDF</span>' : ""}
+  </a>`).join("");
+
+/* main fee table — モバイル時のカードレイアウトのため group ごとに tbody を分割 */
+const FEE_LABELS = ["確認申請", "中間検査", "完了検査"];
+document.getElementById("fee-tbody").outerHTML = FEE_TABLE.map(g => {
+  const cat = `<td class="cat" rowspan="${g.rows.length}">${g.cat}${g.note ? `<span class="note">${g.note}</span>` : ""}</td>`;
+  const rows = g.rows.map((r, ri) => {
+    const cells = r.v.map((v, ci) => {
+      const muted = v === "—";
+      const mk = (r.mark && !muted) ? '<span class="mk">※</span>' : "";
+      return `<td class="price${muted ? " muted" : ""}" data-label="${FEE_LABELS[ci]}">${v}${mk}</td>`;
+    }).join("");
+    return `<tr class="${r.hl ? "hl" : ""}">${ri === 0 ? cat : ""}${cells}</tr>`;
+  }).join("");
+  return `<tbody class="fee-group">${rows}</tbody>`;
+}).join("");
+
+/* ※ marks */
+document.getElementById("marks-list").innerHTML = FEE_MARKS.map(m =>
+  `<li><span class="mk">※</span><span>${m}</span></li>`).join("");
+
+/* notes */
+document.getElementById("notes-list").innerHTML = FEE_NOTES.map(n => `<li>${n}</li>`).join("");
+
+/* accordions */
+function simpleTable(rows, headLabel) {
+  const body = rows.map(r => {
+    const left = r.region !== undefined ? r.region : r.area;
+    return `<tr><td>${left}</td><td class="fee" data-label="${headLabel}">${r.fee}</td></tr>`;
+  }).join("");
+  return `<div class="fee-acc-unit">（単位：円・税込金額）</div>
+    <table class="fee-simple"><thead><tr><th>区分</th><th>${headLabel}</th></tr></thead><tbody>${body}</tbody></table>`;
+}
+const ACCS = [
+  { title: "中間・完了検査及び仮使用認定のための確認検査員等が出張する場合の出張費", html: simpleTable(FEE_TRAVEL, "出張費") },
+  { title: "仮使用認定手数料", html: simpleTable(FEE_KARISHIYOU, "手数料") },
+];
+document.getElementById("acc").innerHTML = ACCS.map((a, i) => `
+  <div class="fee-acc-item" data-i="${i}">
+    <button class="fee-acc-head" type="button" aria-expanded="false">
+      <span class="lbl">${a.title}</span>
+      <span class="fee-acc-toggle" aria-hidden="true"></span>
+    </button>
+    <div class="fee-acc-panel">${a.html}</div>
+  </div>`).join("");
+document.querySelectorAll(".fee-acc-head").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const item = btn.closest(".fee-acc-item");
+    const open = item.classList.toggle("open");
+    btn.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+});
+
+/* 機関表 */
+document.getElementById("org-tbody").innerHTML = FEE_ORG.map(([k, v]) =>
+  `<tr><th>${k}</th><td>${v}</td></tr>`).join("");
+</script>
+</body>
+</html>

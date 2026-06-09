@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>お知らせ詳細｜日本確認センター</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ===================== お知らせ詳細ページ ===================== */
+.nd-main { padding: 58px 0 0; }
+.nd-wrap { width: min(880px, 100% - 48px); margin-inline: auto; }
+
+.nd-breadcrumb {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 14.5px; font-weight: 700; color: var(--ink-500);
+  margin-bottom: 22px;
+  transition: color 0.16s ease, gap 0.16s ease;
+}
+.nd-breadcrumb:hover { color: var(--blue-600); gap: 12px; }
+.nd-breadcrumb svg { color: var(--blue-500); }
+
+.nd-card {
+  background: rgba(255,255,255,0.97);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-md);
+  padding: 48px 54px 52px;
+}
+
+.nd-meta {
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+.nd-date {
+  font-size: 16px; font-weight: 700; color: var(--ink-500);
+  font-variant-numeric: tabular-nums;
+}
+.nd-badge {
+  font-size: 13.5px; font-weight: 800; padding: 6px 16px;
+  border-radius: 999px; letter-spacing: 0.03em;
+}
+.nd-badge.重要     { background: #fdeef0; color: #d9482f; }
+.nd-badge.お知らせ { background: #e7f0ff; color: var(--blue-600); }
+.nd-badge.更新情報 { background: #e9eefb; color: #4f6ef0; }
+.nd-badge.採用     { background: #e3f6ee; color: var(--teal-600); }
+
+.nd-title {
+  font-size: clamp(24px, 3.4vw, 34px); font-weight: 900;
+  color: var(--navy-800); letter-spacing: 0.03em;
+  line-height: 1.5;
+}
+.nd-rule {
+  height: 3px; width: 64px; background: var(--blue-500);
+  border-radius: 3px; margin: 22px 0 30px;
+}
+
+.nd-body {
+  font-size: 16.5px; line-height: 1.95; color: var(--ink-700);
+  white-space: pre-wrap; word-break: break-word;
+}
+.nd-body:empty::before {
+  content: "本文はありません。";
+  color: var(--ink-500); font-style: italic;
+}
+
+.nd-back {
+  display: flex; justify-content: center; margin-top: 40px;
+}
+.nd-back .btn { padding: 16px 40px; font-size: 16px; }
+
+.nd-loading, .nd-notfound {
+  background: rgba(255,255,255,0.97);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-md);
+  padding: 80px 40px;
+  text-align: center;
+  color: var(--ink-500);
+  font-size: 16px;
+}
+.nd-notfound h2 {
+  font-size: 22px; color: var(--navy-800); margin-bottom: 12px;
+}
+.nd-notfound p { margin-bottom: 28px; }
+
+@media (max-width: 720px) {
+  .nd-card { padding: 32px 22px 36px; }
+}
+</style>
+</head>
+<body>
+<div id="bg-slot"></div>
+<div class="page">
+  <div id="header-slot"></div>
+
+  <main class="nd-main" data-screen-label="お知らせ詳細">
+    <div class="nd-wrap">
+
+      <a class="nd-breadcrumb" href="news.html">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        お知らせ一覧に戻る
+      </a>
+
+      <div id="nd-content">
+        <div class="nd-loading">読み込み中...</div>
+      </div>
+
+      <div class="nd-back">
+        <a class="btn btn--ghost" href="news.html" style="border:2px solid var(--blue-500); color: var(--blue-600);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+          お知らせ一覧に戻る
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <div id="footer-slot"></div>
+</div>
+
+<script src="site.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script src="news-data.js"></script>
+<script src="news-client.js"></script>
+<script>
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmt = s => String(s ?? "").replaceAll("-", ".").slice(0, 10);
+
+(async function () {
+  const root = document.getElementById("nd-content");
+  const params = new URLSearchParams(location.search);
+  const id = params.get("id");
+  if (!id) {
+    root.innerHTML = `
+      <div class="nd-notfound">
+        <h2>お知らせが指定されていません</h2>
+        <p>URL に id が含まれていません。一覧から選び直してください。</p>
+      </div>`;
+    return;
+  }
+
+  let item = null;
+  try { item = await NewsClient.fetchOneById(id); } catch (e) { console.error(e); }
+
+  if (!item) {
+    root.innerHTML = `
+      <div class="nd-notfound">
+        <h2>お知らせが見つかりません</h2>
+        <p>削除された、もしくは公開期限前の可能性があります。</p>
+      </div>`;
+    return;
+  }
+
+  document.title = `${item.title}｜お知らせ｜日本確認センター`;
+  root.innerHTML = `
+    <article class="nd-card">
+      <div class="nd-meta">
+        <span class="nd-date">${fmt(item.date)}</span>
+        <span class="nd-badge ${esc(item.cat)}">${esc(item.cat)}</span>
+      </div>
+      <h1 class="nd-title">${esc(item.title)}</h1>
+      <div class="nd-rule"></div>
+      <div class="nd-body">${esc(item.body || "")}</div>
+    </article>`;
+})();
+</script>
+</body>
+</html>

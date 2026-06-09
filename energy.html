@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>省エネ適合判定｜日本確認センター</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ===================== 省エネ適合判定 page ===================== */
+.en-main { padding: 58px 0 0; }
+.en-wrap { width: min(1040px, 100% - 48px); margin-inline: auto; }
+
+.en-hero { text-align: center; margin-bottom: 36px; }
+.en-hero h1 { font-size: clamp(32px, 4.6vw, 52px); font-weight: 900; color: var(--navy-800); letter-spacing: 0.06em; }
+.en-hero__rule { width: 70px; height: 4px; background: var(--blue-500); border-radius: 4px; margin: 16px auto 0; }
+
+/* main card */
+.en-card {
+  background: #fff; border: 1px solid var(--line);
+  border-radius: var(--r-xl); box-shadow: var(--shadow-md);
+  padding: 46px 48px 30px; overflow: hidden; margin-bottom: 60px;
+}
+.en-sechead { display: flex; align-items: center; justify-content: center; gap: 18px; margin-bottom: 24px; }
+.en-sechead span { font-size: clamp(20px, 2.4vw, 27px); font-weight: 900; color: var(--navy-800); letter-spacing: 0.03em; white-space: nowrap; }
+.en-sechead::before, .en-sechead::after { content: ""; width: 44px; height: 2.5px; background: var(--blue-500); }
+.en-biz { text-align: center; margin-bottom: 30px; }
+.en-biz__label { font-size: 17px; font-weight: 800; color: var(--ink-900); margin-bottom: 10px; }
+.en-biz__desc { font-size: 15.5px; color: var(--ink-700); line-height: 1.85; max-width: 760px; margin-inline: auto; }
+
+.en-prints { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; margin-bottom: 30px; }
+.en-print {
+  display: inline-flex; align-items: center; gap: 14px;
+  padding: 15px 30px; background: #fff;
+  border: 1.6px solid var(--blue-200, #bcd6f7); border-radius: 999px;
+  box-shadow: var(--shadow-sm); font-size: 16px; font-weight: 800; color: var(--navy-800);
+  transition: transform 0.16s ease, box-shadow 0.18s ease, border-color 0.16s ease;
+}
+.en-print:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--blue-500); }
+.en-print svg { width: 20px; height: 20px; color: var(--blue-600); }
+
+.en-record { display: flex; justify-content: center; margin-bottom: 30px; }
+.en-record a { display: inline-flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 800; color: var(--blue-600); transition: gap 0.16s ease; }
+.en-record a:hover { gap: 14px; }
+.en-record svg { color: var(--blue-600); }
+
+/* info table */
+table.en-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 15px; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.en-table th {
+  width: 360px; text-align: left; vertical-align: top;
+  background: #f3f8ff; color: var(--navy-800); font-weight: 800;
+  padding: 18px 22px; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); line-height: 1.55;
+}
+.en-table td {
+  padding: 18px 24px; border-bottom: 1px solid var(--line);
+  color: var(--ink-900); line-height: 1.85; white-space: pre-line; vertical-align: top;
+}
+.en-table tr:last-child th, .en-table tr:last-child td { border-bottom: none; }
+
+/* documents (住宅性能評価と同じレイアウト) */
+.en-docs__title { text-align: center; font-size: clamp(28px, 3.6vw, 42px); font-weight: 900; color: var(--navy-800); letter-spacing: 0.05em; }
+.en-docs__rule { width: 70px; height: 4px; background: var(--blue-500); border-radius: 4px; margin: 16px auto 36px; }
+.en-docs {
+  background: rgba(255,255,255,0.6); border: 1px solid var(--line);
+  border-radius: var(--r-xl); box-shadow: var(--shadow-md);
+  padding: 44px 48px 48px; margin-bottom: 30px;
+}
+.en-dl-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.en-dl {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 24px; background: #fff;
+  border: 1.6px solid var(--blue-200, #bcd6f7); border-radius: 999px;
+  box-shadow: var(--shadow-sm); font-size: 15px; font-weight: 700; color: var(--navy-800);
+  transition: transform 0.16s ease, box-shadow 0.18s ease, border-color 0.16s ease;
+}
+.en-dl:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--blue-500); }
+.en-dl .lbl { flex: 1; line-height: 1.4; }
+.en-dl svg { width: 20px; height: 20px; flex-shrink: 0; color: var(--blue-600); }
+
+@media (max-width: 860px) {
+  .en-dl-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 720px) {
+  .en-card { padding: 28px 16px 22px; }
+  .en-table, .en-table tbody, .en-table tr, .en-table th, .en-table td { display: block; width: auto; }
+  .en-table th { border-right: none; border-bottom: none; padding-bottom: 6px; }
+  .en-table td { padding-top: 4px; word-break: break-word; }
+  /* en-print pill：余白縮小で「令和7年4月1日〜」の末尾が途切れないように */
+  .en-prints { gap: 12px; }
+  .en-print { padding: 12px 18px; font-size: 14.5px; gap: 10px; }
+  .en-print svg { width: 18px; height: 18px; }
+  .en-docs { padding: 28px 16px 32px; }
+  .en-dl-grid { grid-template-columns: 1fr; }
+  .en-dl { padding: 14px 18px; font-size: 14px; }
+}
+</style>
+</head>
+<body>
+<div id="bg-slot"></div>
+<div class="page">
+  <div id="header-slot"></div>
+
+  <main class="en-main" data-screen-label="省エネ適合判定">
+    <div class="en-wrap">
+
+      <div class="en-hero">
+        <h1>省エネ適合判定</h1>
+        <div class="en-hero__rule"></div>
+      </div>
+
+      <section class="en-card">
+        <div class="en-sechead"><span>当機関の省エネ判定業務のご案内</span></div>
+        <div class="en-biz">
+          <div class="en-biz__label">【業務内容】</div>
+          <p class="en-biz__desc">建築物のエネルギー消費性能の向上等に関する法律に基づく建築物エネルギー消費性能適合判定</p>
+        </div>
+        <div class="en-prints" id="prints"></div>
+        <div class="en-record">
+          <a href="#"><span id="rec-ic"></span>判定実績はこちら <span id="rec-chev"></span></a>
+        </div>
+        <table class="en-table"><tbody id="info-body"></tbody></table>
+      </section>
+
+      <section class="en-docs-sec" data-screen-label="省エネ 書類ダウンロード">
+        <h2 class="en-docs__title">書類ダウンロード</h2>
+        <div class="en-docs__rule"></div>
+        <div class="en-docs">
+          <div class="en-dl-grid" id="doc-grid"></div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <div id="footer-slot"></div>
+</div>
+
+<script src="site.js"></script>
+<script>
+const NIC = {
+  print: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8V4h10v4"/><rect x="4" y="8" width="16" height="9" rx="2"/><path d="M7 14h10v6H7z"/><path d="M16.5 11.5h0"/></svg>',
+  dl: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>',
+  doc: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M5 21V5a2 2 0 0 1 2-2h7l5 5v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2Z"/><path d="M8 13h8M8 17h5"/></svg>',
+  chev: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>',
+};
+document.getElementById("rec-ic").innerHTML = NIC.doc;
+document.getElementById("rec-chev").innerHTML = NIC.chev;
+
+const PRINTS = [
+  { name: "業務規程 ver.08 令和7年4月1日〜",  url: "https://drive.google.com/file/d/1zhVsEvVZhz0icdww8Xv_jmJgNZQdd5pI/view" },
+  { name: "約款 ver.02 令和7年11月7日〜",     url: "https://drive.google.com/file/d/1JvwreTYlMhTBiv7mVwX3iLsZ0c_TGRsb/view" },
+  { name: "手数料規定 令和7年4月1日〜",       url: "https://drive.google.com/file/d/1XhggA7qCNzMPblJgDFvxYDQJP25afInM/view" },
+];
+document.getElementById("prints").innerHTML = PRINTS.map(p =>
+  `<a class="en-print" href="${p.url}" target="_blank" rel="noopener">${p.name} ${NIC.print}</a>`).join("");
+
+const INFO = [
+  ["登録を行っている判定員の人数", "6名"],
+  ["判定の業務を行う部門の専任の管理者の氏名", "市原　浩樹"],
+  ["登録を行った年月日", "平成30年4月1日"],
+  ["登録番号", "国土交通大臣第28号"],
+  ["登録有効期間", "令和4年4月1日から 令和9年3月31日まで"],
+  ["機関名称及び代表者名", "日本確認センター株式会社\n代表取締役 市原　浩樹"],
+  ["主たる事務所所在地", "千葉県船橋市山野町161番地1\nTEL　047(410)1266"],
+  ["判定を行う建築物の種類", "適合性判定の対象となるすべての建築物\n（法第38条第1項第1号の（1）から（6）までに定める建築物）"],
+  ["業務を行う区域", "日本全域"],
+];
+document.getElementById("info-body").innerHTML = INFO.map(([th, td]) =>
+  `<tr><th>${th}</th><td>${td}</td></tr>`).join("");
+
+const DOCS = [
+  { name: "適合判定申請書（計画書）07",     url: "https://drive.google.com/file/d/1e_foMVzrpEVRdljYjHa5vg9FhFXgbR_8/view" },
+  { name: "変更適合判定申請書 08",          url: "https://drive.google.com/file/d/1tNe4yxPOrf1837AmY03ACk50Hj7bE9bt/view" },
+  { name: "軽微変更該当証明申請書 07",      url: "https://drive.google.com/file/d/16DL_Fe1aIvjOxIgxWLxtl9aAO5nw5OrS/view" },
+  { name: "設計内容説明書 03",              url: "https://drive.google.com/file/d/1cCkkOhPhdiCwDAtRTfKcN4zPPPAxb0YR/view" },
+  { name: "軽微な変更説明書 04",            url: "https://drive.google.com/file/d/1vei08ZtHJFrqCx1zub73tlBJSR1p28S8/view" },
+  { name: "掲載依頼書 02",                  url: "https://drive.google.com/file/d/19kceIIXatWgLMIrK9a55nwDaNv25ulp6/view" },
+  { name: "宣言書（適合宣言）01",           url: "https://drive.google.com/file/d/1zDW8P_Z1DCLo_0RwTTGlMd7Nei5H3udw/view" },
+  { name: "工事監理報告書 04",              url: "https://drive.google.com/file/d/1O04CJSO_r-9VmJylIqBAG19W8KYozJPY/view" },
+  { name: "委任状 03",                      url: "https://drive.google.com/file/d/1SqDoO55kWavom1DVDSWwF_kJMTrqRH5r/view" },
+  { name: "再交付申請書 01",                url: "https://drive.google.com/file/d/1_dTo0Ngyrpjb39X_mUxvCMuWY6cQ8XST/view" },
+  { name: "取下届 03",                      url: "https://drive.google.com/file/d/1o5C0H4RsyN8sH69kpfyEIju9AMju_Plj/view" },
+  { name: "記載事項変更届",                 url: "#" },
+];
+document.getElementById("doc-grid").innerHTML = DOCS.map(d => {
+  const ext = d.url && d.url !== "#" ? ' target="_blank" rel="noopener"' : "";
+  return `<a class="en-dl" href="${d.url}"${ext}><span class="lbl">${d.name}</span>${NIC.dl}</a>`;
+}).join("");
+</script>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>プライバシーポリシー｜日本確認センター</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ===================== プライバシーポリシー page ===================== */
+.pp-hero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(120deg, #1b3a86 0%, #2b56b8 52%, #3f74e6 100%);
+  color: #fff;
+  padding: 72px 24px 64px;
+  text-align: center;
+}
+.pp-hero::before {
+  content: ""; position: absolute; inset: 0; opacity: 0.16;
+  background-image:
+    repeating-linear-gradient(30deg, rgba(255,255,255,0.5) 0 1px, transparent 1px 46px),
+    repeating-linear-gradient(-30deg, rgba(255,255,255,0.5) 0 1px, transparent 1px 46px);
+  pointer-events: none;
+}
+.pp-hero::after {
+  content: ""; position: absolute; right: -60px; top: -40px; width: 320px; height: 320px;
+  background: radial-gradient(circle, rgba(255,255,255,0.18), transparent 70%);
+  pointer-events: none;
+}
+.pp-hero__inner { position: relative; z-index: 1; }
+.pp-hero h1 {
+  color: #fff; font-size: clamp(44px, 7vw, 78px); font-weight: 900;
+  letter-spacing: 0.06em; line-height: 1;
+}
+.pp-hero p { margin-top: 14px; font-size: clamp(16px, 2vw, 21px); font-weight: 700; letter-spacing: 0.22em; color: rgba(255,255,255,0.95); }
+.pp-hero__rule { width: 64px; height: 3px; background: rgba(255,255,255,0.85); border-radius: 3px; margin: 18px auto 0; }
+
+.pp-main { padding: 54px 0 0; }
+.pp-wrap { width: min(900px, 100% - 48px); margin-inline: auto; }
+
+.pp-card {
+  background: #fff; border: 1px solid var(--line);
+  border-radius: var(--r-xl); box-shadow: var(--shadow-md);
+  padding: 44px 52px;
+  margin-bottom: 30px;
+}
+.pp-lead {
+  font-size: 15.5px; line-height: 1.95; color: var(--ink-700);
+  margin-bottom: 8px;
+}
+
+.pp-section { margin-top: 38px; }
+.pp-section:first-of-type { margin-top: 0; }
+.pp-section__head {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--blue-100);
+}
+.pp-section__num {
+  flex-shrink: 0;
+  display: grid; place-items: center;
+  width: 38px; height: 38px;
+  background: var(--grad-navy);
+  color: #fff;
+  font-size: 16px; font-weight: 800; font-style: italic;
+  border-radius: 10px;
+  letter-spacing: 0.02em;
+}
+.pp-section__title {
+  font-size: 19px; font-weight: 800; color: var(--navy-800);
+  letter-spacing: 0.03em;
+}
+.pp-section__body {
+  font-size: 15px; line-height: 1.95; color: var(--ink-700);
+  padding-left: 4px;
+}
+.pp-section__body p + p { margin-top: 10px; }
+.pp-section__body ol,
+.pp-section__body ul {
+  margin: 8px 0 0 0;
+  padding-left: 22px;
+}
+.pp-section__body li { margin-bottom: 6px; line-height: 1.85; }
+
+.pp-meta {
+  margin-top: 8px;
+  padding: 22px 28px;
+  background: var(--blue-50);
+  border-left: 4px solid var(--blue-500);
+  border-radius: 0 var(--r-md) var(--r-md) 0;
+}
+.pp-meta dl {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  row-gap: 8px; column-gap: 18px;
+  margin: 0;
+}
+.pp-meta dt { font-weight: 800; color: var(--blue-700, var(--navy-800)); font-size: 14.5px; }
+.pp-meta dd { margin: 0; color: var(--ink-900); font-size: 14.5px; }
+
+@media (max-width: 720px) {
+  .pp-card { padding: 28px 22px; }
+  .pp-section__head { gap: 10px; }
+  .pp-section__num { width: 32px; height: 32px; font-size: 14px; }
+  .pp-section__title { font-size: 17px; }
+  .pp-meta { padding: 18px 20px; }
+  .pp-meta dl { grid-template-columns: 1fr; row-gap: 4px; }
+  .pp-meta dd { padding-bottom: 8px; }
+  .pp-meta dd:last-child { padding-bottom: 0; }
+}
+</style>
+</head>
+<body>
+<div id="bg-slot"></div>
+<div class="page">
+  <div id="header-slot"></div>
+
+  <main data-screen-label="プライバシーポリシー">
+    <!-- HERO BAND -->
+    <section class="pp-hero">
+      <div class="pp-hero__inner">
+        <h1>Privacy Policy</h1>
+        <p>プライバシーポリシー</p>
+        <div class="pp-hero__rule"></div>
+      </div>
+    </section>
+
+    <div class="pp-main">
+      <div class="pp-wrap">
+
+        <section class="pp-card">
+          <p class="pp-lead">
+            日本確認センター株式会社（以下「当社」といいます。）は、お客様の個人情報を適切に取り扱うことが当社の社会的責務であると認識し、個人情報の保護に関する法律その他の関係法令を遵守するとともに、以下のプライバシーポリシーに基づき、個人情報の適切な取得・利用・管理に努めます。
+          </p>
+        </section>
+
+        <section class="pp-card">
+
+          <div class="pp-section">
+            <div class="pp-section__head">
+              <span class="pp-section__num">1</span>
+              <h2 class="pp-section__title">個人情報の定義</h2>
+            </div>
+            <div class="pp-section__body">
+              <p>本ポリシーにおいて「個人情報」とは、個人情報の保護に関する法律第2条第1項に定める個人情報、すなわち、生存する個人に関する情報であって、当該情報に含まれる氏名、生年月日その他の記述等により特定の個人を識別することができるもの（他の情報と容易に照合することができ、それにより特定の個人を識別することができることとなるものを含む。）をいいます。</p>
+            </div>
+          </div>
+
+          <div class="pp-section">
+            <div class="pp-section__head">
+              <span class="pp-section__num">2</span>
+              <h2 class="pp-section__title">個人情報の取得</h2>
+            </div>
+            <div class="pp-section__body">
+              <p>当社は、適法かつ公正な手段によって個人情報を取得いたします。お客様から個人情報をご提供いただく場合には、利用目的を明示し、必要な範囲内で取得します。</p>
+            </div>
+          </div>
+
+          <div class="pp-section">
+            <div class="pp-section__head">
+              <span class="pp-section__num">3</span>
+              <h2 class="pp-section__title">個人情報の利用目的</h2>
+            </div>
+            <div class="pp-section__body">
+              <p>当社は、取得した個人情報を以下の目的の範囲内で利用いたします。</p>
+              <ol>
+                <li>建築確認、住宅性能評価、省エネ適合判定、BELS、フラット35適合証明その他当社が提供する各種業務の遂行のため</li>
+                <li>お客様からのお問い合わせ、ご依頼への対応のため</li>
+                <li>当社業務に関する各種ご案内、情報提供のため</li>
+                <li>法令に基づく対応のため</li>
+                <li>その他、上記利用目的に付随する業務のため</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="pp-section">
+            <div class="pp-section__head">
+              <span class="pp-section__num">4</span>
+              <h2 class="pp-section__title">個人情報の第三者提供</h2>
+            </div>
+            <div class="pp-section__body">
+              <p>当社は、次に掲げる場合を除き、あらかじめお客様の同意を得ることなく、個人情報を第三者に提供することはありません。</p>
+              <ol>
+                <li>法令に基づく場合</li>
+                <li>人の生命、身体または財産の保護のために必要がある場合であって、お客様の同意を得ることが困難であるとき</li>
+                <li>公衆衛生の向上または児童の健全な育成の推進のために特に必要がある場合であって、お客様の同意を得ることが困難であるとき</li>
+                <li>国の機関もしくは地方公共団体またはその委託を受けた者が法令の定める事務を遂行することに対して協力する必要がある場合であって、お客様の同意を得ることにより当該事務の遂行に支障を及ぼすおそれがあるとき</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="pp-section">
+            <div class="pp-section__head">
+              <span class="pp-section__num">5</span>
+              <h2 class="pp-section__title">個人情報の管理</h2>
+            </div>
+            <div class="pp-section__body">
+              <p>当社は、個人情報の漏洩、滅失またはき損の防止その他個人情報の安全管理のため、必要かつ適切な措置を講じます。また、個人情報を取り扱う従業者および委託先に対し、必要かつ適切な監督を行います。</p>
+            </div>
+          </div>
+
+          <div class="pp-section">
+            <div class="pp-section__head">
+              <span class="pp-section__num">6</span>
+              <h2 class="pp-section__title">個人情報の開示・訂正・利用停止等</h2>
+            </div>
+            <div class="pp-section__body">
+              <p>お客様ご本人から、ご自身の個人情報について開示、訂正、追加、削除、利用停止または第三者提供の停止のご請求があった場合、当社は、ご本人であることを確認のうえ、法令に従い、合理的な期間および範囲で速やかに対応いたします。</p>
+            </div>
+          </div>
+
+          <div class="pp-section">
+            <div class="pp-section__head">
+              <span class="pp-section__num">7</span>
+              <h2 class="pp-section__title">法令・規範の遵守と見直し</h2>
+            </div>
+            <div class="pp-section__body">
+              <p>当社は、保有する個人情報に関し適用される法令、その他規範を遵守するとともに、本ポリシーの内容を適宜見直し、その改善に努めます。改定後のプライバシーポリシーは、当社ウェブサイトに掲載した時点から効力を生じるものとします。</p>
+            </div>
+          </div>
+
+          <div class="pp-section">
+            <div class="pp-section__head">
+              <span class="pp-section__num">8</span>
+              <h2 class="pp-section__title">お問い合わせ窓口</h2>
+            </div>
+            <div class="pp-section__body">
+              <p>個人情報の取扱いに関するお問い合わせ、ご相談、ご請求等につきましては、下記までご連絡ください。</p>
+              <div class="pp-meta">
+                <dl>
+                  <dt>会社名</dt><dd>日本確認センター株式会社</dd>
+                  <dt>所在地</dt><dd>〒273-0026 千葉県船橋市山野町161番地1</dd>
+                  <dt>TEL</dt><dd>047-410-1266</dd>
+                  <dt>FAX</dt><dd>047-410-1267</dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+
+          <div class="pp-section">
+            <div class="pp-meta">
+              <dl>
+                <dt>制定日</dt><dd>2026年6月9日</dd>
+                <dt>事業者名</dt><dd>日本確認センター株式会社</dd>
+              </dl>
+            </div>
+          </div>
+
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <div id="footer-slot"></div>
+</div>
+
+<script src="site.js"></script>
+</body>
+</html>

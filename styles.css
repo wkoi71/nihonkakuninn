@@ -1,0 +1,516 @@
+/* =========================================================================
+   日本確認センター — Shared stylesheet
+   Sections are kept clearly separated for the later Next.js migration:
+   [tokens] [base] [bg-illustration] [header] [buttons] [footer] [utilities]
+   ========================================================================= */
+
+/* ----------------------------- [tokens] ------------------------------- */
+:root {
+  /* Brand blues */
+  --navy-900: #14275f;
+  --navy-800: #1e3a8a;
+  --navy-700: #1d4ed8;
+  --blue-600: #2563eb;
+  --blue-500: #3b82f6;
+  --blue-400: #60a5fa;
+  --blue-100: #dbeafe;
+  --blue-50:  #eff6ff;
+
+  /* Accent teal/green */
+  --teal-600: #059669;
+  --teal-500: #10b981;
+  --teal-400: #34d399;
+  --teal-100: #d1fae5;
+
+  /* Accent purple (fee button / BELS) */
+  --violet-500: #7c5cdb;
+  --violet-100: #ede9fe;
+
+  /* Soft accent tints for service icons */
+  --tint-blue:   #e8f0ff;
+  --tint-green:  #e3f6ee;
+  --tint-leaf:   #eaf6e4;
+  --tint-violet: #ece9fb;
+  --tint-orange: #fdeede;
+
+  /* Neutrals */
+  --ink-900: #15233f;
+  --ink-700: #36465f;
+  --ink-500: #6b7a90;
+  --ink-300: #9aa7ba;
+  --line:    #e7edf5;
+  --paper:   #ffffff;
+
+  /* Page background wash */
+  --wash-top:    #f4f9ff;
+  --wash-mid:    #eaf3ff;
+  --wash-bottom: #ffffff;
+
+  /* Gradients */
+  --grad-navy:   linear-gradient(125deg, #16306f 0%, #1e3a8a 40%, #2f5fd0 100%);
+  --grad-fee:    linear-gradient(120deg, #3b82f6 0%, #4f6ef0 55%, #7c5cdb 100%);
+  --grad-teal:   linear-gradient(120deg, #10b981 0%, #2bbd8e 60%, #3fcf9a 100%);
+
+  /* Shadows */
+  --shadow-sm:  0 2px 10px rgba(30, 58, 138, 0.06);
+  --shadow-md:  0 10px 30px rgba(30, 58, 138, 0.10);
+  --shadow-lg:  0 22px 55px rgba(30, 58, 138, 0.16);
+  --shadow-btn: 0 14px 30px rgba(30, 58, 138, 0.28);
+
+  /* Radii */
+  --r-sm: 12px;
+  --r-md: 18px;
+  --r-lg: 24px;
+  --r-xl: 34px;
+
+  /* Layout */
+  --maxw: 1240px;
+  --header-h: 92px;
+
+  --font: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+}
+
+/* ------------------------------ [base] -------------------------------- */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+/* 横はみ出し防止 — position: sticky を壊さない overflow-x: clip を優先（旧ブラウザは hidden にフォールバック） */
+html, body { overflow-x: hidden; overflow-x: clip; }
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--ink-700);
+  background: linear-gradient(180deg, var(--wash-top) 0%, var(--wash-mid) 38%, var(--wash-bottom) 100%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  line-height: 1.7;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+h1, h2, h3, h4 { margin: 0; color: var(--ink-900); font-weight: 700; line-height: 1.35; }
+p { margin: 0; }
+
+.wrap { width: min(var(--maxw), 100% - 48px); margin-inline: auto; }
+
+/* ------------------------- [bg-illustration] -------------------------- */
+/* Faint cityscape + clouds + trees drawn as a fixed line-art layer.       */
+.cityscape {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.cityscape svg { position: absolute; }
+.cityscape .skyline {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  width: 100%; height: auto;
+}
+.page { position: relative; z-index: 1; }
+
+/* ----------------------------- [header] ------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: saturate(1.4) blur(14px);
+  border-bottom: 1px solid rgba(225, 234, 246, 0.9);
+}
+.site-header .wrap {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  width: min(1340px, 100% - 48px);
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  flex-shrink: 0;
+}
+.brand__logo { height: 42px; width: auto; display: block; }
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-inline: auto;
+}
+.main-nav a {
+  position: relative;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink-900);
+  padding: 6px 2px;
+  white-space: nowrap;
+  transition: color 0.18s ease;
+}
+.main-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -2px;
+  height: 2px;
+  background: var(--blue-500);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.22s ease;
+}
+.main-nav a:hover { color: var(--blue-600); }
+.main-nav a:hover::after { transform: scaleX(1); }
+
+.header-actions { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
+
+/* ---- mobile hamburger menu ---- */
+.mnav-btn {
+  display: none;
+  flex-shrink: 0;
+  width: 44px; height: 44px;
+  background: transparent; border: 1.5px solid var(--blue-100);
+  border-radius: 12px;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  transition: border-color 0.18s ease, background 0.18s ease;
+}
+.mnav-btn:hover { border-color: var(--blue-500); background: var(--blue-50); }
+.mnav-btn__bar {
+  display: block;
+  position: absolute;
+  left: 11px; right: 11px;
+  height: 2.4px; border-radius: 2px;
+  background: var(--navy-800);
+  transition: transform 0.22s ease, top 0.22s ease, opacity 0.18s ease;
+}
+.mnav-btn__bar:nth-child(1) { top: 14px; }
+.mnav-btn__bar:nth-child(2) { top: 21px; }
+.mnav-btn__bar:nth-child(3) { top: 28px; }
+.mnav-btn.is-open .mnav-btn__bar:nth-child(1) { top: 21px; transform: rotate(45deg); }
+.mnav-btn.is-open .mnav-btn__bar:nth-child(2) { opacity: 0; }
+.mnav-btn.is-open .mnav-btn__bar:nth-child(3) { top: 21px; transform: rotate(-45deg); }
+
+.mnav-backdrop {
+  position: fixed; inset: var(--header-h) 0 0 0;
+  background: rgba(15, 30, 70, 0.42);
+  backdrop-filter: blur(2px);
+  z-index: 90;
+  animation: mnav-fade 0.18s ease;
+}
+.mnav-backdrop[hidden] { display: none; }
+@keyframes mnav-fade { from { opacity: 0; } to { opacity: 1; } }
+
+.mnav {
+  position: fixed;
+  top: var(--header-h);
+  left: 0; right: 0;
+  max-height: calc(100dvh - var(--header-h));
+  overflow-y: auto;
+  background: #fff;
+  z-index: 95;
+  box-shadow: 0 18px 40px rgba(15, 30, 70, 0.18);
+  border-bottom: 1px solid var(--line);
+  animation: mnav-slide 0.22s ease;
+}
+.mnav[hidden] { display: none; }
+@keyframes mnav-slide {
+  from { transform: translateY(-8px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+.mnav__inner { padding: 18px 22px 24px; }
+.mnav__links { display: flex; flex-direction: column; }
+.mnav__link {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 6px;
+  font-size: 16px; font-weight: 700; color: var(--ink-900);
+  border-bottom: 1px solid var(--line);
+  transition: color 0.16s ease, padding-left 0.16s ease;
+}
+.mnav__link:last-child { /* spacing handled by mnav__actions */ }
+.mnav__link:hover { color: var(--blue-600); padding-left: 10px; }
+.mnav__chev { color: var(--blue-400); display: inline-flex; }
+.mnav__chev svg { width: 18px; height: 18px; }
+.mnav__actions {
+  display: flex; flex-direction: column; gap: 12px;
+  margin-top: 20px;
+}
+.mnav__cta {
+  width: 100%;
+  padding: 14px 18px;
+  font-size: 15.5px;
+  border-radius: 14px;
+}
+body.mnav-open { overflow: hidden; }
+
+/* ----------------------------- [buttons] ------------------------------ */
+.btn {
+  --bg: var(--blue-600);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: var(--font);
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  border-radius: 999px;
+  background: var(--bg);
+  color: #fff;
+  white-space: nowrap;
+  transition: transform 0.16s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+.btn svg { flex-shrink: 0; }
+.btn:hover { transform: translateY(-2px); filter: saturate(1.05); }
+
+.btn--header { padding: 13px 22px; font-size: 15.5px; box-shadow: 0 10px 22px rgba(30,58,138,0.20); }
+.btn--navy  { background: var(--grad-navy); }
+.btn--teal  { background: var(--grad-teal); box-shadow: 0 10px 22px rgba(16,185,129,0.28); }
+.btn--ghost {
+  background: transparent;
+  color: #fff;
+  border: 2px solid rgba(255,255,255,0.85);
+  box-shadow: none;
+  padding: 12px 26px;
+}
+.btn--ghost:hover { background: rgba(255,255,255,0.16); }
+
+/* ----------------------------- [footer] ------------------------------- */
+.site-footer {
+  position: relative;
+  z-index: 1;
+  margin-top: 40px;
+  background: transparent;        /* outer wrapper is invisible — only the inner rounded card shows */
+}
+.footer-topbar { display: none; }   /* removed (Google Map link deleted) */
+.footer-maplink {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--navy-800);
+  white-space: nowrap;
+  transition: color 0.18s ease, gap 0.18s ease;
+}
+.footer-maplink:hover { color: var(--blue-600); gap: 13px; }
+.footer-maplink svg { color: var(--blue-500); }
+
+.footer-card {
+  position: relative;
+  overflow: hidden;
+  background: transparent;        /* flat footer — no card frame */
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 40px 40px 24px;        /* keep content inside the rounded frame drawn by footer-card__bg */
+}
+.footer-card__bg {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  width: 100%;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+.footer-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(310px, 1.8fr) 1fr 1fr 1fr;
+  gap: 36px;
+}
+.footer-brand .brand__logo { height: 50px; }
+.footer-rule {
+  height: 2px;
+  background: linear-gradient(90deg, var(--navy-800), rgba(30,58,138,0.05));
+  border-radius: 2px;
+  margin: 22px 0 24px;
+  max-width: 420px;
+}
+.footer-info ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.footer-info li {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  list-style: none;
+  font-size: 15.5px;
+  line-height: 1.55;
+  white-space: nowrap;
+  color: var(--ink-700);
+}
+.footer-info .ic {
+  flex-shrink: 0;
+  color: var(--blue-600);
+  margin-top: 3px;
+}
+.footer-info b { color: var(--ink-900); font-weight: 700; }
+
+.footer-col__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--navy-800);
+  margin-bottom: 18px;
+}
+.footer-links { list-style: none; margin: 0; padding: 0; }
+.footer-links li { border-bottom: 1px solid rgba(150, 175, 210, 0.28); }
+.footer-links a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 4px;
+  font-size: 15.5px;
+  font-weight: 600;
+  color: var(--ink-700);
+  transition: color 0.18s ease, padding-left 0.18s ease;
+}
+.footer-links a:hover { color: var(--blue-600); padding-left: 8px; }
+.footer-links a svg { color: var(--blue-400); }
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;        /* © sits centered now that the right link is removed */
+  padding: 22px 4px 8px;
+  font-size: 14.5px;
+  color: var(--ink-500);
+}
+
+/* -------------------- [dv-modal: Drive プレビューモーダル] ----------------
+   Google Drive ファイルをサイト内モーダルでプレビュー表示。
+   site.js の mountDvModal() がリンクのクリックを横取りして開く。 */
+.dv-modal {
+  position: fixed; inset: 0; z-index: 1000;
+  display: flex; align-items: center; justify-content: center;
+  padding: 28px;
+  background: rgba(10, 22, 50, 0.62);
+  backdrop-filter: blur(4px);
+  animation: dv-fade-in 0.18s ease;
+}
+.dv-modal[hidden] { display: none; }
+@keyframes dv-fade-in { from { opacity: 0; } to { opacity: 1; } }
+.dv-modal__card {
+  position: relative;
+  width: min(1100px, 100%); height: min(880px, 92vh);
+  background: #fff; border-radius: 16px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+  display: flex; flex-direction: column; overflow: hidden;
+}
+.dv-modal__head {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 22px; border-bottom: 1px solid var(--line);
+  background: #fff;
+}
+.dv-modal__title {
+  flex: 1; margin: 0; font-size: 17px; font-weight: 800;
+  color: var(--navy-800); letter-spacing: 0.02em;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.dv-modal__actions { display: flex; align-items: center; gap: 8px; }
+.dv-modal__open, .dv-modal__dl {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 16px; border-radius: 999px;
+  font-size: 14px; font-weight: 700;
+  transition: background 0.16s ease, border-color 0.16s ease, transform 0.14s ease;
+}
+.dv-modal__open {
+  color: var(--blue-600);
+  border: 1.4px solid #bcd6f7;
+}
+.dv-modal__open:hover { background: var(--blue-50); border-color: var(--blue-500); }
+.dv-modal__dl {
+  color: #fff;
+  background: var(--blue-600);
+  border: 1.4px solid var(--blue-600);
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.22);
+}
+.dv-modal__dl:hover { background: #1d4ed8; border-color: #1d4ed8; transform: translateY(-1px); }
+.dv-modal__dl svg { width: 16px; height: 16px; }
+.dv-modal__close {
+  width: 40px; height: 40px; border: none; background: transparent;
+  font-size: 26px; line-height: 1; color: var(--ink-500); cursor: pointer;
+  border-radius: 10px; transition: background 0.14s ease, color 0.14s ease;
+}
+.dv-modal__close:hover { background: #f1f4f9; color: var(--ink-900); }
+.dv-modal__body { flex: 1; background: #f5f7fa; position: relative; }
+.dv-modal__body iframe {
+  width: 100%; height: 100%; border: 0; display: block;
+}
+.dv-modal__loading {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  color: var(--ink-500); font-size: 15px; font-weight: 600; pointer-events: none;
+}
+@media (max-width: 720px) {
+  .dv-modal { padding: 0; }
+  .dv-modal__card { height: 100vh; border-radius: 0; }
+  .dv-modal__head { padding: 12px 14px; gap: 8px; }
+  .dv-modal__title { font-size: 14px; }
+  .dv-modal__actions { gap: 6px; }
+  .dv-modal__open, .dv-modal__dl { padding: 6px 10px; font-size: 12.5px; }
+  .dv-modal__close { width: 34px; height: 34px; font-size: 22px; }
+}
+@media (max-width: 480px) {
+  /* 小画面ではタイトルとボタンの併存が破綻するためタイトルを非表示にし、
+     アクションをアイコン中心のコンパクト表示へ */
+  .dv-modal__title { display: none; }
+  .dv-modal__open { padding: 6px 9px; font-size: 12px; }
+  .dv-modal__dl { padding: 6px 9px; font-size: 12px; }
+  .dv-modal__dl svg { margin-right: 0; }
+}
+
+/* ---------------------------- [utilities] ----------------------------- */
+/* Content is always visible. (Scroll-reveal entrance animations were removed
+   because the sandboxed preview intermittently freezes the animation timeline,
+   which could leave sections blank. Re-add via a robust IO in production.) */
+.reveal { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+/* --------------------------- [responsive] ----------------------------- */
+@media (max-width: 1080px) {
+  .main-nav { gap: 20px; }
+  .main-nav a { font-size: 15px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .footer-brand { grid-column: 1 / -1; }
+}
+@media (max-width: 860px) {
+  :root { --header-h: 72px; }
+  .main-nav { display: none; }
+  .brand__logo { height: 32px; }
+  /* モバイルではヘッダー右の常駐ボタン群を隠し、ハンバーガーで代用 */
+  .header-actions { display: none; }
+  .mnav-btn { display: block; margin-left: auto; }   /* ヘッダー右端に押し出す */
+  .site-header .wrap { gap: 10px; width: min(1340px, 100% - 32px); }
+  .footer-card { padding: 40px 26px 34px; }
+}
+@media (max-width: 560px) {
+  .footer-grid { grid-template-columns: 1fr; }
+  /* footer info: nowrap が原因で見切れるため、折り返し可に */
+  .footer-info li { white-space: normal; }
+  /* フッターのロゴが画面幅を超えて見切れる対策 */
+  .footer-brand .brand__logo { height: 40px; max-width: 100%; }
+}
+
+/* モバイル時は日本語テキストの折り返し位置を自然な文節境界に
+   （対応ブラウザ：Chrome 119+ / Safari 17+。未対応では初期値=normal にフォールバック） */
+@media (max-width: 720px) {
+  h1, h2, h3, h4, p, a, button, li, span {
+    word-break: auto-phrase;
+  }
+}
+@media (max-width: 480px) {
+  .brand__logo { height: 28px; }
+  .site-header .wrap { width: min(1340px, 100% - 24px); }
+  .footer-card { padding: 32px 18px 24px; }
+}

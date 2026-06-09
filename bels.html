@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BELS（建築物省エネルギー性能表示制度）｜日本確認センター</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ===================== BELS page ===================== */
+.bl-main { padding: 58px 0 0; }
+.bl-wrap { width: min(1000px, 100% - 48px); margin-inline: auto; }
+
+.bl-hero { text-align: center; margin-bottom: 36px; }
+.bl-hero h1 { font-size: clamp(48px, 7vw, 80px); font-weight: 900; color: var(--navy-900); letter-spacing: 0.08em; line-height: 1; }
+.bl-hero__sub { font-size: clamp(18px, 2.4vw, 26px); font-weight: 800; color: var(--navy-800); margin-top: 12px; }
+.bl-hero__rule { width: 96px; height: 4px; background: var(--blue-500); border-radius: 4px; margin: 16px auto 0; }
+
+/* info table */
+.bl-card {
+  background: #fff; border: 1px solid var(--line);
+  border-radius: var(--r-xl); box-shadow: var(--shadow-md);
+  padding: 16px; overflow: hidden; margin-bottom: 54px;
+}
+table.bl-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 16px; }
+.bl-table th {
+  width: 280px; text-align: left; vertical-align: middle;
+  background: #f3f8ff; color: var(--navy-800); font-weight: 800;
+  padding: 22px 24px; border-bottom: 1px solid var(--line); line-height: 1.5;
+}
+.bl-table td {
+  padding: 22px 26px; border-bottom: 1px solid var(--line);
+  color: var(--ink-900); line-height: 1.85; white-space: pre-line; vertical-align: middle;
+}
+.bl-table tr:last-child th, .bl-table tr:last-child td { border-bottom: none; }
+
+/* documents */
+.bl-docs {
+  background: rgba(255,255,255,0.7); border: 1px solid var(--line);
+  border-radius: var(--r-xl); box-shadow: var(--shadow-md);
+  padding: 44px 48px 50px; margin-bottom: 30px;
+}
+.bl-docs__head { display: flex; align-items: center; justify-content: center; gap: 18px; margin-bottom: 8px; }
+.bl-docs__icon { width: 56px; height: 56px; flex-shrink: 0; border-radius: 50%; background: var(--tint-blue); color: var(--blue-600); display: grid; place-items: center; }
+.bl-docs__icon svg { width: 30px; height: 30px; }
+.bl-docs__head h2 { font-size: clamp(26px, 3.4vw, 38px); font-weight: 900; color: var(--navy-800); letter-spacing: 0.03em; }
+.bl-docs__rule { width: 70px; height: 4px; background: var(--blue-500); border-radius: 4px; margin: 0 auto 36px; }
+
+.bl-dl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.bl-dl {
+  display: flex; align-items: center; gap: 14px;
+  padding: 17px 28px; background: #fff;
+  border: 1.6px solid var(--blue-500); border-radius: 999px;
+  box-shadow: var(--shadow-sm); font-size: 16px; font-weight: 800; color: var(--navy-800);
+  transition: transform 0.16s ease, box-shadow 0.18s ease, background 0.16s ease;
+}
+.bl-dl:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); background: var(--blue-50); }
+.bl-dl .lbl { flex: 1; text-align: center; line-height: 1.4; }
+.bl-dl svg { width: 22px; height: 22px; flex-shrink: 0; color: var(--blue-600); }
+.bl-dl.solo { grid-column: 1 / -1; width: calc(50% - 9px); justify-self: center; }
+
+@media (max-width: 720px) {
+  .bl-card { padding: 8px; }
+  .bl-table, .bl-table tbody, .bl-table tr, .bl-table th, .bl-table td { display: block; width: auto; }
+  .bl-table th { border-bottom: none; padding-bottom: 6px; }
+  .bl-table td { padding-top: 4px; }
+  .bl-docs { padding: 28px 16px 32px; }
+  /* タイトルが「書類ダウンロー / ドはこちら」のように途中で折れるのを防ぎ、
+     アイコンを上に置いてタイトルを別行で全幅表示する */
+  .bl-docs__head { flex-direction: column; gap: 10px; margin-bottom: 6px; }
+  .bl-docs__icon { width: 48px; height: 48px; }
+  .bl-docs__icon svg { width: 26px; height: 26px; }
+  .bl-docs__head h2 { font-size: 22px; text-align: center; line-height: 1.4; }
+  .bl-dl-grid { grid-template-columns: 1fr; }
+  .bl-dl { padding: 14px 18px; font-size: 15px; }
+  .bl-dl.solo { grid-column: auto; width: auto; }
+}
+</style>
+</head>
+<body>
+<div id="bg-slot"></div>
+<div class="page">
+  <div id="header-slot"></div>
+
+  <main class="bl-main" data-screen-label="BELS">
+    <div class="bl-wrap">
+
+      <div class="bl-hero">
+        <h1>BELS</h1>
+        <div class="bl-hero__sub">（建築物省エネルギー性能表示制度）</div>
+        <div class="bl-hero__rule"></div>
+      </div>
+
+      <section class="bl-card">
+        <table class="bl-table"><tbody id="info-body"></tbody></table>
+      </section>
+
+      <section class="bl-docs" data-screen-label="BELS 書類ダウンロード">
+        <div class="bl-docs__head">
+          <span class="bl-docs__icon" id="head-icon"></span>
+          <h2>書類ダウンロードはこちら ↓</h2>
+        </div>
+        <div class="bl-docs__rule"></div>
+        <div class="bl-dl-grid" id="doc-grid"></div>
+      </section>
+
+    </div>
+  </main>
+
+  <div id="footer-slot"></div>
+</div>
+
+<script src="site.js"></script>
+<script>
+const BIC = {
+  fileDl: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M5 21V5a2 2 0 0 1 2-2h7l5 5v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2Z"/><path d="M12 11v6"/><path d="M9.5 14.5 12 17l2.5-2.5"/></svg>',
+};
+document.getElementById("head-icon").innerHTML = BIC.fileDl;
+
+const INFO = [
+  ["【申請対象住宅】", "住宅及び非住宅"],
+  ["【業務区域】", "茨城県・栃木県・群馬県・埼玉県・千葉県\n東京都（島しょ部を除く）・神奈川県・山梨県・長野県"],
+  ["【登録番号】", "088"],
+  ["【業務開始日】", "平成29年7月7日"],
+];
+document.getElementById("info-body").innerHTML = INFO.map(([th, td]) =>
+  `<tr><th>${th}</th><td>${td}</td></tr>`).join("");
+
+const DOCS = [
+  { name: "BELS評価申請書 令和7年12月1日〜",                  url: "https://drive.google.com/file/d/1izhudULMDNAlQGpAfUaaH3fA08o31t2Z/view" },
+  { name: "BELS変更評価申請書 令和7年12月1日〜",              url: "https://drive.google.com/file/d/1geVeOB5uaUDEaRgljXz87e-78AbiD3YS/view" },
+  { name: "設計内容説明書 令和7年4月1日〜",                   url: "https://drive.google.com/file/d/124J2h5ruMWNPNJidceSSYmp2f7tPe6n6/view" },
+  { name: "掲載依頼書 令和7年4月1日〜",                       url: "https://drive.google.com/file/d/1muZVbDky2Dhki_rGuDMwIM3FTh9hnpuS/view" },
+  { name: "委任状 令和3年4月1日〜",                           url: "https://drive.google.com/file/d/139jQ1nKjDEAi1l9C6mBUTJRPuS2ozxBy/view" },
+  { name: "再交付申請書 令和3年4月1日〜",                     url: "https://drive.google.com/file/d/1tn1V5j9nAZqkOFW2sNbh0X3uKkSnLPzd/view" },
+  { name: "取下届 令和6年4月1日〜",                           url: "https://drive.google.com/file/d/1IS2290IY18vWB-M-NTwPkHiuPA7bDJFF/view" },
+  { name: "BELS手数料規定 令和7年4月16日〜",                  url: "https://drive.google.com/file/d/1YQ7ohlXzIi2_9sQGG0sL_sbUe4vUHBiD/view" },
+  { name: "BELS約款 ver.05 令和7年4月1日〜",                  url: "https://drive.google.com/file/d/11zviu1VOh1ht_CdSRlLIfCs4yXhNCO8w/view" },
+  { name: "登録住宅型式性能認定等機関 認定等業務規程（参考書式）", url: "https://drive.google.com/file/d/1d1UPP-2svzMmSeFbc9PnnRUM-EeR-V7W/view" },
+  { name: "評価実績へのリンク",                                url: "#" },
+];
+document.getElementById("doc-grid").innerHTML = DOCS.map((d, i) => {
+  const isSolo = i === DOCS.length - 1 && DOCS.length % 2 === 1;
+  const ext = d.url && d.url !== "#" ? ' target="_blank" rel="noopener"' : "";
+  return `<a class="bl-dl${isSolo ? " solo" : ""}" href="${d.url}"${ext}><span class="lbl">${d.name}</span>${BIC.fileDl}</a>`;
+}).join("");
+</script>
+</body>
+</html>
