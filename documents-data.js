@@ -5,19 +5,18 @@
    - url:  ダウンロード／表示先（Google Drive など）
    - type: ファイル種別を明示。省略時は URL の拡張子から自動判定（無ければ "LINK"）
    ========================================================================= */
-const BASE = "http://www.jac.biz-web.jp/document";
 const DOC_GROUPS = [
   {
     label: "申請関係", icon: "clipDl", tint: "blue",
     items: [
       { name: "確認申請書（建築物）R8.4.1〜", type: "DOCX", url: "https://drive.google.com/file/d/1w88ZVh8GU2YwN6liJMhggjPljvPhVYDs/view" },
-      { name: "確認申請書 別紙", url: `${BASE}/appli/appli_kenchiku_bessi.doc` },
+      { name: "確認申請書 別紙", type: "DOC", url: "https://drive.google.com/file/d/1lW1EjawgYU65Y2Jojvc3xSqws47hkGTr/view" },
       { name: "確認申請書（工作物）", type: "DOCX", url: "https://drive.google.com/file/d/1OHWu7pBPj1GPu1dBSv0gwbePXk5JhLeu/view" },
       { name: "確認申請書（昇降機）", type: "DOC", url: "https://drive.google.com/file/d/1zJ6uyzsfJI6m5LJvBSTt833PBincf7Gs/view" },
-      { name: "計画通知書（建築物）R7.10.2〜", type: "DOCX", url: "https://drive.google.com/file/d/1_bMRKKEwT6lwV8pOf7qPdlQmNHZ1vGLE/view" },
+      { name: "計画通知書（建築物）R8.4.1〜", type: "DOCX", url: "https://drive.google.com/file/d/1KVXFfqsM45HIhZA3PtQzVDFirD8IvYhB/view" },
       { name: "計画通知書（工作物）", type: "DOCX", url: "https://drive.google.com/file/d/1TDn1bOB-10kPBgklcw_TpXBDWore0MSx/view" },
       { name: "計画通知書（昇降機）", type: "DOC", url: "https://drive.google.com/file/d/1Qfavj66wbwMNrzm5cTrZSeL-a_hwaAD8/view" },
-      { name: "概要書", type: "DOCX", url: "https://drive.google.com/file/d/1F-xodUcL9vWf1RJfxRE5qan6EvV9oj6t/view" },
+      { name: "概要書 R8.4.1〜", type: "DOCX", url: "https://drive.google.com/file/d/1oJw7bug3HFfbrbecAzZwFGzScWLZnajP/view" },
       { name: "築造計画概要書", type: "DOC", url: "https://drive.google.com/file/d/1N6EIYJPzl3HfUNmEDHRVDUKjQeK3M-mj/view" },
       { name: "工事届", type: "XLSX", url: "https://drive.google.com/file/d/1tFOCRMaNSm0DpSISFr8QWXus9_PIYY6U/view" },
       { name: "関係法令チェックリスト", type: "XLS", url: "https://drive.google.com/file/d/1Dp37D5L5Tgl6Q3cf3orqRK1ZEnVisCq0/view" },
@@ -52,7 +51,7 @@ const DOC_GROUPS = [
     label: "仮使用認定関係", icon: "lock", tint: "leaf",
     items: [
       { name: "仮使用申請書", type: "DOC", url: "https://drive.google.com/file/d/1-N86c9PbYxUazowi2-hQDrjfKWqqlJG4/view" },
-      { name: "仮使用申請書 別紙", url: `${BASE}/karishiyou/bessi.docx` },
+      { name: "仮使用申請書 別紙", type: "DOCX", url: "https://drive.google.com/file/d/1IX63vhj4vBQ3tp-R3js7q_rf_Z3Gl0KI/view" },
       { name: "仮使用申請書（計画通知用）", type: "DOC", url: "https://drive.google.com/file/d/1y_4OgtTsjKx5KajhkOKwptSp8QkJJFrR/view" },
       { name: "安全計画書", type: "XLSX", url: "https://drive.google.com/file/d/15a0QmCmVKoSXmRghhn9dTYlyUWBoVp_5/view" },
       { name: "安全（工事）計画書", type: "XLSX", url: "https://drive.google.com/file/d/1JZjUrmM77Ftj5UfdPZEHxL-GtEKquaPl/view" },
@@ -71,7 +70,7 @@ const DOC_GROUPS = [
       { name: "取下届", type: "XLSX", url: "https://drive.google.com/file/d/1x0EgLzzmsbx43Swl0nIu0iBQBKtbXSVn/view" },
       { name: "取止届", type: "XLSX", url: "https://drive.google.com/file/d/1-zGvsjdRkrVbt4SPJYi60D9U7BqqnHVc/view" },
       { name: "追加説明書（確認）", type: "DOC", url: "https://drive.google.com/file/d/1l2yMhXU_MZTa668UUUvDEhie67YyKkmM/view" },
-      { name: "追加説明書（完了）", url: `${BASE}/report/report_tuika_kanryo_201225.xlsx` },
+      { name: "追加説明書（完了）", type: "XLSX", url: "https://drive.google.com/file/d/1-EBcoSYMNefV8M-izGaUMT5oB1eqYlE_/view" },
       { name: "既存不適格調書", type: "XLS", url: "https://drive.google.com/file/d/1D-YnOoXcS6PXVOq72Aj2--bsEHy_h4qa/view" },
     ],
   },
