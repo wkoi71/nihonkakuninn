@@ -265,6 +265,7 @@ body.mnav-open { overflow: hidden; }
 .btn:hover { transform: translateY(-2px); filter: saturate(1.05); }
 
 .btn--header { padding: 13px 22px; font-size: 15.5px; box-shadow: 0 10px 22px rgba(30,58,138,0.20); }
+.btn--header .lbl-short { display: none; }
 .btn--navy  { background: var(--grad-navy); }
 .btn--teal  { background: var(--grad-teal); box-shadow: 0 10px 22px rgba(16,185,129,0.28); }
 .btn--ghost {
@@ -478,13 +479,27 @@ body.mnav-open { overflow: hidden; }
 }
 
 /* --------------------------- [responsive] ----------------------------- */
-@media (max-width: 1080px) {
-  .main-nav { gap: 20px; }
+/* タブレット横（〜1380px）：ロゴ・ナビ・CTAの余白と文字を段階的に詰めて
+   ヘッダー1行に収める（収まらない場合は次の段階でさらに圧縮） */
+@media (max-width: 1380px) {
+  .site-header .wrap { gap: 18px; }
+  .main-nav { gap: 18px; }
   .main-nav a { font-size: 15px; }
+  .btn--header { padding: 12px 16px; font-size: 14.5px; }
+  .brand__logo { height: 36px; }
+}
+/* タブレット横の狭め（〜1200px）：ダウンロードボタンを短縮ラベルに切替 */
+@media (max-width: 1200px) {
+  .btn--header .lbl-long { display: none; }
+  .btn--header .lbl-short { display: inline; }
+  .main-nav { gap: 14px; }
+  .main-nav a { font-size: 14.5px; }
+}
+@media (max-width: 1080px) {
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
   .footer-brand { grid-column: 1 / -1; }
 }
-@media (max-width: 860px) {
+@media (max-width: 1000px) {
   :root { --header-h: 72px; }
   .main-nav { display: none; }
   .brand__logo { height: 32px; }

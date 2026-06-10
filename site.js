@@ -53,7 +53,7 @@ function siteHeader() {
       </a>
       <nav class="main-nav">${links}</nav>
       <div class="header-actions">
-        <a class="btn btn--navy btn--header" href="/#docs">${IC.fileDl}<span class="lbl-long">申請書類ダウンロード</span></a>
+        <a class="btn btn--navy btn--header" href="/#docs">${IC.fileDl}<span class="lbl-long">申請書類ダウンロード</span><span class="lbl-short">申請書類</span></a>
         <a class="btn btn--teal btn--header" href="/contact">${IC.mail}<span>お問い合わせ</span></a>
       </div>
       <button class="mnav-btn" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-nav">
