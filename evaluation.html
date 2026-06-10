@@ -148,9 +148,9 @@ const EIC = {
 };
 
 const PRINTS = [
-  { name: "住宅性能評価業務規程", url: "http://www.jac.biz-web.jp/document/etc/20250401_seino_gyoumukitei_ver19.pdf" },
-  { name: "住宅性能評価業務約款", url: "http://www.jac.biz-web.jp/document/etc/seino_yakkan2.pdf" },
-  { name: "料金表印刷用",         url: "http://www.jac.biz-web.jp/charge/seino_08_20250401.pdf" },
+  { name: "住宅性能評価業務規程", url: "https://drive.google.com/file/d/1v6iTFGAywQsrFdphDPEVVQDJnhi3GkJL/view" },
+  { name: "住宅性能評価業務約款", url: "https://drive.google.com/file/d/1H-33_hashQoDPD7fw6iTjczmccNof_aa/view" },
+  { name: "料金表印刷用",         url: "https://drive.google.com/file/d/1e-Tus-8MitU6v1ZWzIn0BSLzemugdeIS/view" },
 ];
 document.getElementById("prints").innerHTML = PRINTS.map(p =>
   `<a class="ev-print" href="${p.url}" target="_blank" rel="noopener">${p.name} ${EIC.print}</a>`).join("");
