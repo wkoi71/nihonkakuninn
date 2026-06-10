@@ -230,6 +230,7 @@ function mountDvModal() {
   document.addEventListener("click", (e) => {
     const a = e.target.closest('a[href*="drive.google.com/file/d/"]');
     if (!a) return;
+    if (a.closest("#dv-modal")) return;                                   // モーダル内の自前リンクは横取りしない
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;   // 別タブ操作は尊重
     if (openModal(extractName(a), a.href)) e.preventDefault();
   });

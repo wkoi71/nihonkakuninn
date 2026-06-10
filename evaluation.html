@@ -147,7 +147,7 @@ const EIC = {
   dl: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>',
 };
 
-const PRINTS = ["住宅性能評価業務規程", "住宅性能評価　約款", "料金表印刷用"];
+const PRINTS = ["住宅性能評価業務規程", "住宅性能評価業務約款", "料金表印刷用"];
 document.getElementById("prints").innerHTML = PRINTS.map(p =>
   `<a class="ev-print" href="#">${p} ${EIC.print}</a>`).join("");
 
@@ -174,27 +174,27 @@ document.getElementById("info-body").innerHTML = INFO.map(r =>
 
 const DOC_GROUPS = [
   { label: "共同住宅申請書", items: [
-    { name: "天井高さ計算書",                                 url: "https://drive.google.com/file/d/1ZmM7Ws5ftI8G-zo45SVuvYEqBHBRWdZ7/view" },
-    { name: "設計内容変更申請書（共同住宅）",                 url: "https://drive.google.com/file/d/1_-AS2tE9Ky22JkcTTtlzlwEYacV2CoY5/view" },
-    { name: "完了通知書",                                     url: "https://drive.google.com/file/d/1AW-3rzUwUy1ennmREg4ygMR3JBJSbN43/view" },
-    { name: "共同住宅 申請書一式（令和7年4月10日版・ZIP）",   url: "https://drive.google.com/file/d/1VmQrTLUyM5QXPFLGmRysY_-gqoxPlHg5/view" },
-    { name: "共同住宅 申請書一式（令和8年4月1日版・ZIP）",    url: "https://drive.google.com/file/d/1gWQuIt8LVD0xK9cduB7HEemmmI82Ubxt/view" },
+    { name: "設計住宅性能評価申請書類（共同住宅）", url: "https://drive.google.com/file/d/1VmQrTLUyM5QXPFLGmRysY_-gqoxPlHg5/view" },
+    { name: "変更設計住宅性能評価申請書",           url: "https://drive.google.com/file/d/1_-AS2tE9Ky22JkcTTtlzlwEYacV2CoY5/view" },
+    { name: "建設住宅性能評価申請書類（共同住宅）", url: "https://drive.google.com/file/d/1gWQuIt8LVD0xK9cduB7HEemmmI82Ubxt/view" },
+    { name: "建設躯体間天井高さチェックシート",     url: "https://drive.google.com/file/d/1ZmM7Ws5ftI8G-zo45SVuvYEqBHBRWdZ7/view" },
+    { name: "完了通知書及び検査依頼書",             url: "https://drive.google.com/file/d/1AW-3rzUwUy1ennmREg4ygMR3JBJSbN43/view" },
   ]},
   { label: "戸建て住宅申請書", items: [
-    { name: "戸建住宅 申請書一式（令和7年4月10日版・ZIP）",   url: "https://drive.google.com/file/d/1cQ81sgWnZnvHTylDUJ2PCQs9mLXFWYAE/view" },
-    { name: "戸建住宅 申請書一式（令和8年4月1日版・ZIP）",    url: "https://drive.google.com/file/d/1P1PkYGltY0XCyi0BECa87HPd6UIAZOZj/view" },
-    { name: "申出書・検査関係書類",                           url: "https://drive.google.com/file/d/13heYcP2jjWgz3A58rFErF8MiCLcDPpgr/view" },
-    { name: "設計内容変更申請書（戸建住宅）令和4年10月1日〜", url: "https://drive.google.com/file/d/1saq6CPbmfwvKqIUdSFGhTOAt3m6-fMp9/view" },
+    { name: "設計住宅性能評価申請書類（戸建住宅）", url: "https://drive.google.com/file/d/1cQ81sgWnZnvHTylDUJ2PCQs9mLXFWYAE/view" },
+    { name: "変更設計住宅性能評価申請書",           url: "https://drive.google.com/file/d/1saq6CPbmfwvKqIUdSFGhTOAt3m6-fMp9/view" },
+    { name: "建設住宅性能評価申請書類（戸建住宅）", url: "https://drive.google.com/file/d/1P1PkYGltY0XCyi0BECa87HPd6UIAZOZj/view" },
+    { name: "検査依頼書（戸建用）",                 url: "https://drive.google.com/file/d/13heYcP2jjWgz3A58rFErF8MiCLcDPpgr/view" },
   ]},
   { label: "変更届", items: [
-    { name: "取下届 令和3年4月1日〜", url: "https://drive.google.com/file/d/19MVg4YTR0ispr52_jleB2S_5k_YaSDrK/view" },
-    { name: "名義変更届",            url: "https://drive.google.com/file/d/1_WwgkIoJnBrwEHnPn_eqb7hPWeSkTits/view" },
-    { name: "変更申告書",            url: "https://drive.google.com/file/d/16gBT9yQYuBt-ELlSYOyqI3Y4b5SWX2uf/view" },
+    { name: "変更申告書",     url: "https://drive.google.com/file/d/16gBT9yQYuBt-ELlSYOyqI3Y4b5SWX2uf/view" },
+    { name: "申請者等変更届", url: "https://drive.google.com/file/d/1_WwgkIoJnBrwEHnPn_eqb7hPWeSkTits/view" },
+    { name: "取下げ届",       url: "https://drive.google.com/file/d/19MVg4YTR0ispr52_jleB2S_5k_YaSDrK/view" },
   ]},
   { label: "長期確認申請書", items: [
-    { name: "軽微変更関係書類",            url: "https://drive.google.com/file/d/1fWUioFqbyzuYbojvcuvVLaGdVzCdwg2L/view" },
-    { name: "長期変更（計画変更）申請書",  url: "https://drive.google.com/file/d/1UvYiyYil40m2ZK1-isqonKeK0LLXl7mP/view" },
-    { name: "長期優良住宅 確認申請書",     url: "https://drive.google.com/file/d/1Pqi3YnPeKkE80Dn1TPatpAMOdsocAZZv/view" },
+    { name: "長期確認申請書",       url: "https://drive.google.com/file/d/1Pqi3YnPeKkE80Dn1TPatpAMOdsocAZZv/view" },
+    { name: "変更長期確認申請書",   url: "https://drive.google.com/file/d/1UvYiyYil40m2ZK1-isqonKeK0LLXl7mP/view" },
+    { name: "軽微変更該当証明申請書", url: "https://drive.google.com/file/d/1fWUioFqbyzuYbojvcuvVLaGdVzCdwg2L/view" },
   ]},
 ];
 document.getElementById("doc-groups").innerHTML = DOC_GROUPS.map(g => `

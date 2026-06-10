@@ -5,10 +5,10 @@
 
 /* 手数料一覧 download buttons */
 const FEE_DOWNLOADS = [
-  { label: "手数料規定（建築物等）令和7年6月16日〜", url: "https://drive.google.com/file/d/1NojUErKvHWUBA2whMcWkhvgD9g09LIan/view" },
-  { label: "日本確認センター株式会社 手数料規定", url: "https://drive.google.com/file/d/1J2G5l4r_bpMQvLaCK1fAIqV1WY7xdcKE/view" },
-  { label: "約款 ver.03", url: "https://drive.google.com/file/d/1GlawZ063srDlKu0M0a4hb3qerp6myhZ5/view" },
-  { label: "確認検査業務規程 ver.018", url: "https://drive.google.com/file/d/1rdTnXkgqCYmXSBcfKt8fTjn0aREUoep0/view" },
+  { label: "業務規程", url: "https://drive.google.com/file/d/1rdTnXkgqCYmXSBcfKt8fTjn0aREUoep0/view" },
+  { label: "業務約款", url: "https://drive.google.com/file/d/1GlawZ063srDlKu0M0a4hb3qerp6myhZ5/view" },
+  { label: "手数料規程", url: "https://drive.google.com/file/d/1NojUErKvHWUBA2whMcWkhvgD9g09LIan/view" },
+  { label: "手数料印刷用PDF", url: "https://drive.google.com/file/d/1J2G5l4r_bpMQvLaCK1fAIqV1WY7xdcKE/view" },
 ];
 
 /* 確認申請手数料表

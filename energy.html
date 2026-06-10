@@ -167,9 +167,9 @@ document.getElementById("rec-ic").innerHTML = NIC.doc;
 document.getElementById("rec-chev").innerHTML = NIC.chev;
 
 const PRINTS = [
-  { name: "業務規程 ver.08 令和7年4月1日〜",  url: "https://drive.google.com/file/d/1zhVsEvVZhz0icdww8Xv_jmJgNZQdd5pI/view" },
-  { name: "約款 ver.02 令和7年11月7日〜",     url: "https://drive.google.com/file/d/1JvwreTYlMhTBiv7mVwX3iLsZ0c_TGRsb/view" },
-  { name: "手数料規定 令和7年4月1日〜",       url: "https://drive.google.com/file/d/1XhggA7qCNzMPblJgDFvxYDQJP25afInM/view" },
+  { name: "省エネ判定業務規程", url: "https://drive.google.com/file/d/1zhVsEvVZhz0icdww8Xv_jmJgNZQdd5pI/view" },
+  { name: "省エネ判定業務約款", url: "https://drive.google.com/file/d/1JvwreTYlMhTBiv7mVwX3iLsZ0c_TGRsb/view" },
+  { name: "料金表印刷用",       url: "https://drive.google.com/file/d/1XhggA7qCNzMPblJgDFvxYDQJP25afInM/view" },
 ];
 document.getElementById("prints").innerHTML = PRINTS.map(p =>
   `<a class="en-print" href="${p.url}" target="_blank" rel="noopener">${p.name} ${NIC.print}</a>`).join("");
@@ -189,18 +189,18 @@ document.getElementById("info-body").innerHTML = INFO.map(([th, td]) =>
   `<tr><th>${th}</th><td>${td}</td></tr>`).join("");
 
 const DOCS = [
-  { name: "適合判定申請書（計画書）07",     url: "https://drive.google.com/file/d/1e_foMVzrpEVRdljYjHa5vg9FhFXgbR_8/view" },
-  { name: "変更適合判定申請書 08",          url: "https://drive.google.com/file/d/1tNe4yxPOrf1837AmY03ACk50Hj7bE9bt/view" },
-  { name: "軽微変更該当証明申請書 07",      url: "https://drive.google.com/file/d/16DL_Fe1aIvjOxIgxWLxtl9aAO5nw5OrS/view" },
-  { name: "設計内容説明書 03",              url: "https://drive.google.com/file/d/1cCkkOhPhdiCwDAtRTfKcN4zPPPAxb0YR/view" },
-  { name: "軽微な変更説明書 04",            url: "https://drive.google.com/file/d/1vei08ZtHJFrqCx1zub73tlBJSR1p28S8/view" },
-  { name: "掲載依頼書 02",                  url: "https://drive.google.com/file/d/19kceIIXatWgLMIrK9a55nwDaNv25ulp6/view" },
-  { name: "宣言書（適合宣言）01",           url: "https://drive.google.com/file/d/1zDW8P_Z1DCLo_0RwTTGlMd7Nei5H3udw/view" },
-  { name: "工事監理報告書 04",              url: "https://drive.google.com/file/d/1O04CJSO_r-9VmJylIqBAG19W8KYozJPY/view" },
-  { name: "委任状 03",                      url: "https://drive.google.com/file/d/1SqDoO55kWavom1DVDSWwF_kJMTrqRH5r/view" },
-  { name: "再交付申請書 01",                url: "https://drive.google.com/file/d/1_dTo0Ngyrpjb39X_mUxvCMuWY6cQ8XST/view" },
-  { name: "取下届 03",                      url: "https://drive.google.com/file/d/1o5C0H4RsyN8sH69kpfyEIju9AMju_Plj/view" },
-  { name: "記載事項変更届",                 url: "#" },
+  { name: "計画書",               url: "https://drive.google.com/file/d/1e_foMVzrpEVRdljYjHa5vg9FhFXgbR_8/view" },
+  { name: "変更計画書",           url: "https://drive.google.com/file/d/1tNe4yxPOrf1837AmY03ACk50Hj7bE9bt/view" },
+  { name: "軽微変更該当証明申請書", url: "https://drive.google.com/file/d/16DL_Fe1aIvjOxIgxWLxtl9aAO5nw5OrS/view" },
+  { name: "軽微な変更説明書",     url: "https://drive.google.com/file/d/1vei08ZtHJFrqCx1zub73tlBJSR1p28S8/view" },
+  { name: "設計内容説明書",       url: "https://drive.google.com/file/d/1cCkkOhPhdiCwDAtRTfKcN4zPPPAxb0YR/view" },
+  { name: "監理報告書",           url: "https://drive.google.com/file/d/1O04CJSO_r-9VmJylIqBAG19W8KYozJPY/view" },
+  { name: "宣言書",               url: "https://drive.google.com/file/d/1zDW8P_Z1DCLo_0RwTTGlMd7Nei5H3udw/view" },
+  { name: "記載事項変更届",       url: "#" },
+  { name: "取下げ届",             url: "https://drive.google.com/file/d/1o5C0H4RsyN8sH69kpfyEIju9AMju_Plj/view" },
+  { name: "再交付申請書",         url: "https://drive.google.com/file/d/1_dTo0Ngyrpjb39X_mUxvCMuWY6cQ8XST/view" },
+  { name: "委任状",               url: "https://drive.google.com/file/d/1SqDoO55kWavom1DVDSWwF_kJMTrqRH5r/view" },
+  { name: "掲載依頼書",           url: "https://drive.google.com/file/d/19kceIIXatWgLMIrK9a55nwDaNv25ulp6/view" },
 ];
 document.getElementById("doc-grid").innerHTML = DOCS.map(d => {
   const ext = d.url && d.url !== "#" ? ' target="_blank" rel="noopener"' : "";

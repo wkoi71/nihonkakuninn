@@ -147,17 +147,17 @@ document.getElementById("info-body").innerHTML = INFO.map(([th, td]) =>
   `<tr><th>${th}</th><td>${td}</td></tr>`).join("");
 
 const DOCS = [
-  { name: "BELS評価申請書 令和7年12月1日〜",                  url: "https://drive.google.com/file/d/1izhudULMDNAlQGpAfUaaH3fA08o31t2Z/view" },
-  { name: "BELS変更評価申請書 令和7年12月1日〜",              url: "https://drive.google.com/file/d/1geVeOB5uaUDEaRgljXz87e-78AbiD3YS/view" },
-  { name: "設計内容説明書 令和7年4月1日〜",                   url: "https://drive.google.com/file/d/124J2h5ruMWNPNJidceSSYmp2f7tPe6n6/view" },
-  { name: "掲載依頼書 令和7年4月1日〜",                       url: "https://drive.google.com/file/d/1muZVbDky2Dhki_rGuDMwIM3FTh9hnpuS/view" },
-  { name: "委任状 令和3年4月1日〜",                           url: "https://drive.google.com/file/d/139jQ1nKjDEAi1l9C6mBUTJRPuS2ozxBy/view" },
-  { name: "再交付申請書 令和3年4月1日〜",                     url: "https://drive.google.com/file/d/1tn1V5j9nAZqkOFW2sNbh0X3uKkSnLPzd/view" },
-  { name: "取下届 令和6年4月1日〜",                           url: "https://drive.google.com/file/d/1IS2290IY18vWB-M-NTwPkHiuPA7bDJFF/view" },
-  { name: "BELS手数料規定 令和7年4月16日〜",                  url: "https://drive.google.com/file/d/1YQ7ohlXzIi2_9sQGG0sL_sbUe4vUHBiD/view" },
-  { name: "BELS約款 ver.05 令和7年4月1日〜",                  url: "https://drive.google.com/file/d/11zviu1VOh1ht_CdSRlLIfCs4yXhNCO8w/view" },
-  { name: "登録住宅型式性能認定等機関 認定等業務規程（参考書式）", url: "https://drive.google.com/file/d/1d1UPP-2svzMmSeFbc9PnnRUM-EeR-V7W/view" },
-  { name: "評価実績へのリンク",                                url: "#" },
+  { name: "評価申請書R8.4.1〜",     url: "https://drive.google.com/file/d/1izhudULMDNAlQGpAfUaaH3fA08o31t2Z/view" },
+  { name: "変更評価申請書R8.4.1〜", url: "https://drive.google.com/file/d/1geVeOB5uaUDEaRgljXz87e-78AbiD3YS/view" },
+  { name: "設計内容説明書R8.4.1〜", url: "https://drive.google.com/file/d/124J2h5ruMWNPNJidceSSYmp2f7tPe6n6/view" },
+  { name: "評価物件掲載承諾書",     url: "https://drive.google.com/file/d/1muZVbDky2Dhki_rGuDMwIM3FTh9hnpuS/view" },
+  { name: "委任状",                 url: "https://drive.google.com/file/d/139jQ1nKjDEAi1l9C6mBUTJRPuS2ozxBy/view" },
+  { name: "再交付申請書",           url: "https://drive.google.com/file/d/1tn1V5j9nAZqkOFW2sNbh0X3uKkSnLPzd/view" },
+  { name: "取下げ届",               url: "https://drive.google.com/file/d/1IS2290IY18vWB-M-NTwPkHiuPA7bDJFF/view" },
+  { name: "BELS業務規程",           url: "https://drive.google.com/file/d/1d1UPP-2svzMmSeFbc9PnnRUM-EeR-V7W/view" },
+  { name: "BELS業務約款",           url: "https://drive.google.com/file/d/11zviu1VOh1ht_CdSRlLIfCs4yXhNCO8w/view" },
+  { name: "料金表",                 url: "https://drive.google.com/file/d/1YQ7ohlXzIi2_9sQGG0sL_sbUe4vUHBiD/view" },
+  { name: "評価実績へのリンク",     url: "#" },
 ];
 document.getElementById("doc-grid").innerHTML = DOCS.map((d, i) => {
   const isSolo = i === DOCS.length - 1 && DOCS.length % 2 === 1;
