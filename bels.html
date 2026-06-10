@@ -36,6 +36,18 @@
 .bl-hero__sub { font-size: clamp(18px, 2.4vw, 26px); font-weight: 800; color: var(--navy-800); margin-top: 12px; }
 .bl-hero__rule { width: 96px; height: 4px; background: var(--blue-500); border-radius: 4px; margin: 16px auto 0; }
 
+/* print buttons (住宅性能評価ページと同型) */
+.bl-prints { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; margin-bottom: 40px; }
+.bl-print {
+  display: inline-flex; align-items: center; gap: 14px;
+  padding: 15px 30px; background: #fff;
+  border: 1.6px solid var(--blue-200, #bcd6f7); border-radius: 999px;
+  box-shadow: var(--shadow-sm); font-size: 16px; font-weight: 800; color: var(--navy-800);
+  transition: transform 0.16s ease, box-shadow 0.18s ease, border-color 0.16s ease;
+}
+.bl-print:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--blue-500); }
+.bl-print svg { width: 20px; height: 20px; color: var(--blue-600); }
+
 /* info table */
 .bl-card {
   background: #fff; border: 1px solid var(--line);
@@ -111,6 +123,8 @@ table.bl-table { width: 100%; border-collapse: separate; border-spacing: 0; font
         <div class="bl-hero__rule"></div>
       </div>
 
+      <div class="bl-prints" id="prints"></div>
+
       <section class="bl-card">
         <table class="bl-table"><tbody id="info-body"></tbody></table>
       </section>
@@ -134,8 +148,18 @@ table.bl-table { width: 100%; border-collapse: separate; border-spacing: 0; font
 <script>
 const BIC = {
   fileDl: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M5 21V5a2 2 0 0 1 2-2h7l5 5v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2Z"/><path d="M12 11v6"/><path d="M9.5 14.5 12 17l2.5-2.5"/></svg>',
+  print: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8V4h10v4"/><rect x="4" y="8" width="16" height="9" rx="2"/><path d="M7 14h10v6H7z"/><path d="M16.5 11.5h0"/></svg>',
 };
 document.getElementById("head-icon").innerHTML = BIC.fileDl;
+
+const PRINTS = [
+  { name: "BELS業務規程",       url: "http://www.jac.biz-web.jp/document/etc/20260515_belskitei_ver08.pdf" },
+  { name: "BELS業務約款",       url: "http://www.jac.biz-web.jp/document/etc/20251031_belsyakkan_ver06.pdf" },
+  { name: "料金表",             url: "https://drive.google.com/file/d/1YQ7ohlXzIi2_9sQGG0sL_sbUe4vUHBiD/view" },
+  { name: "評価実績へのリンク", url: "https://www3.hyoukakyoukai.or.jp/cases/summary" },
+];
+document.getElementById("prints").innerHTML = PRINTS.map(p =>
+  `<a class="bl-print" href="${p.url}" target="_blank" rel="noopener">${p.name} ${BIC.print}</a>`).join("");
 
 const INFO = [
   ["【申請対象住宅】", "住宅及び非住宅"],
@@ -154,10 +178,6 @@ const DOCS = [
   { name: "委任状",                 url: "https://drive.google.com/file/d/139jQ1nKjDEAi1l9C6mBUTJRPuS2ozxBy/view" },
   { name: "再交付申請書",           url: "https://drive.google.com/file/d/1tn1V5j9nAZqkOFW2sNbh0X3uKkSnLPzd/view" },
   { name: "取下げ届",               url: "https://drive.google.com/file/d/1IS2290IY18vWB-M-NTwPkHiuPA7bDJFF/view" },
-  { name: "BELS業務規程",           url: "https://drive.google.com/file/d/1d1UPP-2svzMmSeFbc9PnnRUM-EeR-V7W/view" },
-  { name: "BELS業務約款",           url: "https://drive.google.com/file/d/11zviu1VOh1ht_CdSRlLIfCs4yXhNCO8w/view" },
-  { name: "料金表",                 url: "https://drive.google.com/file/d/1YQ7ohlXzIi2_9sQGG0sL_sbUe4vUHBiD/view" },
-  { name: "評価実績へのリンク",     url: "#" },
 ];
 document.getElementById("doc-grid").innerHTML = DOCS.map((d, i) => {
   const isSolo = i === DOCS.length - 1 && DOCS.length % 2 === 1;
