@@ -73,6 +73,7 @@
   background: #c53030; padding: 3px 7px; border-radius: 5px; letter-spacing: 0.03em;
 }
 .flow-dl .ft.doc { background: var(--blue-600); }
+.flow-dl .ft.link { background: #6b46c1; }
 .flow-dl__ic { flex-shrink: 0; color: var(--blue-500); display: grid; place-items: center; }
 
 /* steps */
@@ -235,13 +236,13 @@ const STEPS1 = [
   { n: "03", title: "確認済証交付", icon: "cert", desc: "ご入金確認後、確認済証を交付いたします。" },
 ];
 const STEPS2 = [
-  { n: "01", title: "申請受付", icon: "clip", desc: "検査は事前予約制です。申請書は1週間前までにご提出ください。手数料は前日までにご入金ください。" },
-  { n: "02", title: "検査", icon: "search", desc: "中間・完了検査を実施します。（東京都は定められた様式に準拠します）" },
-  { n: "03", title: "検査済証交付", icon: "cert", desc: "ご入金確認後、検査済証を交付いたします。" },
+  { n: "01", title: "申請受付", icon: "clip", desc: "・検査は、申請の前に電話で予約してください。<br>・申請書は、なるべく検査の1週間前までに到着させて下さい。<br>・受付後、引受証と請求書を郵送致します。<br>・手数料は、検査前日までにご入金願います。<br>・行政または他指定確認検査機関で確認申請を受けた場合は、副本の写しを添付してください。" },
+  { n: "02", title: "検査", icon: "search", desc: "" },
+  { n: "03", title: "検査済証交付", icon: "cert", desc: "" },
 ];
 const SUBMIT_DOCS = ["申請書正・副", "概要書", "工事届", "関係法令チェックリスト", "消防の書類（※1）", "委任状", "都市計画図（※2）"];
 const INSP_DLS = [
-  { label: "東京都建築基準法施行細則様式一覧", url: "https://www.toshiseibi.metro.tokyo.lg.jp/kenchiku_kaihatsu/kenchiku_gyosei/gyosei/kijun/kn/k8", type: "doc" },
+  { label: "東京都建築基準法施行細則様式一覧", url: "https://www.toshiseibi.metro.tokyo.lg.jp/kenchiku_kaihatsu/kenchiku_gyosei/gyosei/kijun/kn/k8", type: "link" },
   { label: "中間・完了検査時の提出書類及び提示書類一覧", url: "https://drive.google.com/file/d/1R1QHt1XPZzg086OfPusYpgCILVfu6sHF/view", type: "pdf" },
   { label: "建築工事施工計画書等提出書類一覧（東京都の場合）", url: "https://drive.google.com/file/d/1WS7VEKPkTE1o5vdIQC0BdcgA-91zyOuA/view", type: "pdf" },
 ];
@@ -270,7 +271,7 @@ document.getElementById("submit-list").innerHTML = SUBMIT_DOCS.map((d, i) =>
 document.getElementById("insp-dls").innerHTML = INSP_DLS.map(d => `
   <a class="flow-dl" href="${d.url}"${d.url !== "#" ? ' target="_blank" rel="noopener"' : ""}>
     <span class="lbl">${d.label}</span>
-    <span class="ft ${d.type}">${d.type === "pdf" ? "PDF" : "DOC"}</span>
+    <span class="ft ${d.type}">${d.type.toUpperCase()}</span>
     <span class="flow-dl__ic">${FIC.doc}</span>
   </a>`).join("");
 </script>

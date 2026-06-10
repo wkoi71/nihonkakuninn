@@ -147,12 +147,16 @@ const EIC = {
   dl: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>',
 };
 
-const PRINTS = ["住宅性能評価業務規程", "住宅性能評価業務約款", "料金表印刷用"];
+const PRINTS = [
+  { name: "住宅性能評価業務規程", url: "http://www.jac.biz-web.jp/document/etc/20250401_seino_gyoumukitei_ver19.pdf" },
+  { name: "住宅性能評価業務約款", url: "http://www.jac.biz-web.jp/document/etc/seino_yakkan2.pdf" },
+  { name: "料金表印刷用",         url: "http://www.jac.biz-web.jp/charge/seino_08_20250401.pdf" },
+];
 document.getElementById("prints").innerHTML = PRINTS.map(p =>
-  `<a class="ev-print" href="#">${p} ${EIC.print}</a>`).join("");
+  `<a class="ev-print" href="${p.url}" target="_blank" rel="noopener">${p.name} ${EIC.print}</a>`).join("");
 
 const INFO = [
-  { th: "これまでの評価実績", td: '<a href="#">ここをクリックしてください</a>' },
+  { th: "これまでの評価実績", td: '<a href="https://www.hyoukakyoukai.or.jp/teikyo_joho/jisseki.php" target="_blank" rel="noopener">ここをクリックしてください</a>' },
   { th: "登録をおこなっている評価員の人数", td: "11名" },
   { th: "評価の業務を行う部門専任の管理者の氏名", td: "市原　浩樹" },
   { th: "登録をおこなった年月日", td: "令和7年1月20日（更新）" },
