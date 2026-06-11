@@ -41,8 +41,26 @@ const NAV = [
   ["アクセス", "/company#access"],
   ["お知らせ", "/news"],
 ];
+/* 「サービス」ホバー時に展開するサブメニュー */
+const SERVICE_SUB = [
+  ["建築確認申請", "/flow"],
+  ["住宅性能評価", "/evaluation"],
+  ["省エネ適合判定", "/energy"],
+  ["BELS（ベルス）", "/bels"],
+  ["フラット35", "/flat35"],
+];
+const CARET = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>';
 function siteHeader() {
-  const links = NAV.map(([t, h]) => `<a href="${h}">${t}</a>`).join("");
+  const links = NAV.map(([t, h]) => {
+    if (t === "サービス") {
+      const sub = SERVICE_SUB.map(([st, sh]) => `<a href="${sh}">${st}</a>`).join("");
+      return `<div class="nav-item has-sub">
+        <a class="nav-item__link" href="${h}">${t}<span class="nav-caret">${CARET}</span></a>
+        <div class="nav-sub">${sub}</div>
+      </div>`;
+    }
+    return `<a href="${h}">${t}</a>`;
+  }).join("");
   /* モバイルパネル用：ナビ＋アクションをまとめて格納 */
   const mobileLinks = NAV.map(([t, h]) => `<a class="mnav__link" href="${h}">${t}<span class="mnav__chev">${IC.chevR}</span></a>`).join("");
   return `
