@@ -48,6 +48,12 @@
 .bl-print:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--blue-500); }
 .bl-print svg { width: 20px; height: 20px; color: var(--blue-600); }
 
+/* 評価実績リンク（省エネページの判定実績と同型の青文字リンク） */
+.bl-record { display: flex; justify-content: center; margin-bottom: 40px; }
+.bl-record a { display: inline-flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 800; color: var(--blue-600); transition: gap 0.16s ease; }
+.bl-record a:hover { gap: 14px; }
+.bl-record svg { width: 20px; height: 20px; color: var(--blue-600); }
+
 /* info table */
 .bl-card {
   background: #fff; border: 1px solid var(--line);
@@ -125,6 +131,10 @@ table.bl-table { width: 100%; border-collapse: separate; border-spacing: 0; font
 
       <div class="bl-prints" id="prints"></div>
 
+      <div class="bl-record">
+        <a href="https://www3.hyoukakyoukai.or.jp/cases/summary" target="_blank" rel="noopener">評価実績のリンクはこちら <span id="rec-chev"></span></a>
+      </div>
+
       <section class="bl-card">
         <table class="bl-table"><tbody id="info-body"></tbody></table>
       </section>
@@ -149,14 +159,15 @@ table.bl-table { width: 100%; border-collapse: separate; border-spacing: 0; font
 const BIC = {
   fileDl: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M5 21V5a2 2 0 0 1 2-2h7l5 5v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2Z"/><path d="M12 11v6"/><path d="M9.5 14.5 12 17l2.5-2.5"/></svg>',
   print: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8V4h10v4"/><rect x="4" y="8" width="16" height="9" rx="2"/><path d="M7 14h10v6H7z"/><path d="M16.5 11.5h0"/></svg>',
+  chev: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>',
 };
 document.getElementById("head-icon").innerHTML = BIC.fileDl;
+document.getElementById("rec-chev").innerHTML = BIC.chev;
 
 const PRINTS = [
-  { name: "BELS業務規程",       url: "https://drive.google.com/file/d/1bAP9QcGd5yFsCloEPSVHZ1JgrwbPFAFr/view" },
-  { name: "BELS業務約款",       url: "https://drive.google.com/file/d/1IRtmy6VjvypRBEDhzDpH1FO8mP6bOofl/view" },
-  { name: "料金表",             url: "https://drive.google.com/file/d/1YQ7ohlXzIi2_9sQGG0sL_sbUe4vUHBiD/view" },
-  { name: "評価実績へのリンク", url: "https://www3.hyoukakyoukai.or.jp/cases/summary" },
+  { name: "BELS業務規程", url: "https://drive.google.com/file/d/1bAP9QcGd5yFsCloEPSVHZ1JgrwbPFAFr/view" },
+  { name: "BELS業務約款", url: "https://drive.google.com/file/d/1IRtmy6VjvypRBEDhzDpH1FO8mP6bOofl/view" },
+  { name: "料金表",       url: "https://drive.google.com/file/d/1YQ7ohlXzIi2_9sQGG0sL_sbUe4vUHBiD/view" },
 ];
 document.getElementById("prints").innerHTML = PRINTS.map(p =>
   `<a class="bl-print" href="${p.url}" target="_blank" rel="noopener">${p.name} ${BIC.print}</a>`).join("");
