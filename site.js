@@ -150,7 +150,7 @@ function siteFooter() {
             </ul>
           </div>
           <div class="footer-col">
-            <div class="footer-col__head">${IC.mail}お問合せ</div>
+            <div class="footer-col__head">${IC.mail}お問い合わせ</div>
             <ul class="footer-links">
               <li><a href="/#docs">資料ダウンロード${IC.chevR}</a></li>
               <li><a href="/privacy">プライバシーポリシー${IC.chevR}</a></li>
