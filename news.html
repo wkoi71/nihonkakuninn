@@ -57,6 +57,8 @@
 .nw-filter[data-cat="更新情報"].active { background: var(--blue-600); border-color: var(--blue-600); color: #fff; }
 .nw-filter[data-cat="採用"] { color: var(--teal-600); border-color: #b9e6d3; }
 .nw-filter[data-cat="採用"].active { background: var(--teal-500); border-color: var(--teal-500); color: #fff; }
+.nw-filter[data-cat="過去のお知らせ"] { color: #5b6b82; border-color: #ccd5e0; }
+.nw-filter[data-cat="過去のお知らせ"].active { background: #5b6b82; border-color: #5b6b82; color: #fff; }
 
 .nw-sort {
   display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
@@ -80,6 +82,7 @@
 .nw-badge.お知らせ { background: #e7f0ff; color: var(--blue-600); }
 .nw-badge.更新情報 { background: #e9eefb; color: #4f6ef0; }
 .nw-badge.採用 { background: #e3f6ee; color: var(--teal-600); }
+.nw-badge.過去のお知らせ { background: #edf1f7; color: #5b6b82; }
 .nw-title { font-size: 16px; font-weight: 700; color: var(--ink-900); line-height: 1.55; }
 .nw-more { display: inline-flex; align-items: center; gap: 8px; font-size: 14.5px; font-weight: 700; color: var(--blue-600); white-space: nowrap; transition: gap 0.16s ease; }
 .nw-item:hover .nw-more { gap: 12px; }
@@ -148,7 +151,7 @@ const NIC = {
 };
 document.querySelectorAll("[data-ic]").forEach(el => { el.innerHTML = NIC[el.dataset.ic] || ""; });
 
-const CATS = ["すべて", "重要", "更新情報", "採用"];
+const CATS = ["すべて", "重要", "更新情報", "採用", "過去のお知らせ"];
 let activeCat = "すべて";
 let newest = true;
 let ALL = [];   // Supabase / フォールバックから取得した全件

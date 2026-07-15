@@ -16,10 +16,18 @@
     // フォールバック用に index ベースの合成 id を付与
     return (global.NEWS || []).map((n, i) => ({ ...n, id: n.id || `f${i}` }));
   }
+  function archiveList() {
+    // 過去のお知らせ（news-data.js の固定アーカイブ）
+    return (global.ARCHIVE_NEWS || []).map(n => ({ body: "", status: "published", ...n }));
+  }
   async function fetchPublishedNews(limit) {
+    // limit 指定（トップページのプレビュー）ではアーカイブを含めない
+    const withArchive = typeof limit !== "number";
     // Supabase 未設定 → サンプルデータを返す
     if (!sb) {
-      const list = fallbackList().sort((a, b) => String(b.date).localeCompare(String(a.date)));
+      let list = fallbackList();
+      if (withArchive) list = list.concat(archiveList());
+      list.sort((a, b) => String(b.date).localeCompare(String(a.date)));
       return typeof limit === "number" ? list.slice(0, limit) : list;
     }
     const nowIso = new Date().toISOString();
@@ -29,10 +37,17 @@
       .order("date", { ascending: false });
     if (typeof limit === "number") q = q.limit(limit);
     const { data, error } = await q;
-    if (error) { console.error("[news] fetch failed:", error); return []; }
-    return data || [];
+    if (error) { console.error("[news] fetch failed:", error); return withArchive ? archiveList() : []; }
+    let rows = data || [];
+    if (withArchive) {
+      rows = rows.concat(archiveList())
+        .sort((a, b) => String(b.date).localeCompare(String(a.date)));
+    }
+    return rows;
   }
   async function fetchOneById(id) {
+    const hit = archiveList().find(n => String(n.id) === String(id));
+    if (hit) return hit;
     if (!sb) {
       return fallbackList().find(n => String(n.id) === String(id)) || null;
     }
