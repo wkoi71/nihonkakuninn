@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>書類プレビュー検証（Office Online Viewer）｜日本確認センター</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif;
+    background: #f2f6fc; color: #1b2a4a; padding: 40px 20px; line-height: 1.6;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; }
+  h1 { font-size: 22px; margin-bottom: 6px; }
+  .sub { font-size: 14px; color: #5b6b82; margin-bottom: 28px; }
+  .card {
+    background: #fff; border: 1px solid #dde5f0; border-radius: 14px;
+    padding: 24px 28px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(27,42,74,0.06);
+  }
+  .card h2 { font-size: 17px; margin-bottom: 4px; }
+  .meta { font-size: 13px; color: #5b6b82; margin-bottom: 14px; }
+  .btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+  .btn {
+    display: inline-block; padding: 10px 22px; border-radius: 999px;
+    font-size: 14px; font-weight: 700; text-decoration: none; cursor: pointer;
+  }
+  .btn.viewer { background: #2b57d0; color: #fff; }
+  .btn.viewer:hover { background: #1e46b5; }
+  .btn.dl { background: #fff; color: #2b57d0; border: 1.6px solid #2b57d0; }
+  .btn.dl:hover { background: #eef3fd; }
+  .url {
+    font-family: Menlo, Consolas, monospace; font-size: 12px; color: #47566e;
+    background: #f5f8fd; border: 1px solid #e3eaf5; border-radius: 8px;
+    padding: 10px 12px; word-break: break-all;
+  }
+  .url .lbl { display: block; font-family: inherit; font-weight: 700; color: #8595ab; margin-bottom: 4px; font-size: 11px; }
+  .note { font-size: 13px; color: #5b6b82; }
+  .note li { margin-left: 1.4em; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>書類プレビュー検証（Office Online Viewer）</h1>
+  <p class="sub">Supabase Storage 上のファイルを Microsoft Office Online Viewer で表示する方式の検証ページです。検証用のため、サイト内からのリンクはありません（noindex 設定済み）。</p>
+
+  <div id="cards"></div>
+
+  <div class="card">
+    <h2>チェックポイント</h2>
+    <ul class="note">
+      <li>docx: Drive で「プレビューできませんでした」となっていたものが表示されるか</li>
+      <li>xls: 文字化け・意図しない太字など書式崩れがないか</li>
+      <li>「直接ダウンロード」で取得したファイルと Viewer の表示を比較する</li>
+      <li>公開 URL を直接開いてファイルが取得できない場合は、バケットが Public になっていない</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+const SUPABASE_PROJECT = "crrubvablxemhobvbgwq";
+const BUCKET = "documents-test";
+
+const TEST_FILES = [
+  { name: "確認申請書（工作物）", filename: "appli_kosaku_250401.docx", issue: "現在 Drive でプレビュー失敗するファイル（docx）" },
+  { name: "関係法令チェックリスト", filename: "appli_checkList.xls", issue: "現在 Drive で文字化け・書式崩れが発生するファイル（xls）" },
+];
+
+document.getElementById("cards").innerHTML = TEST_FILES.map(f => {
+  const fileUrl = `https://${SUPABASE_PROJECT}.supabase.co/storage/v1/object/public/${BUCKET}/${f.filename}`;
+  const viewerUrl = `https://view.officeapps.live.com/op/view.aspx?src=${encodeURIComponent(fileUrl)}`;
+  const downloadUrl = `${fileUrl}?download`;
+  return `
+  <div class="card">
+    <h2>${f.name}</h2>
+    <p class="meta">${f.filename} ── ${f.issue}</p>
+    <div class="btns">
+      <a class="btn viewer" href="${viewerUrl}" target="_blank" rel="noopener">Office Online Viewer で開く</a>
+      <a class="btn dl" href="${downloadUrl}">直接ダウンロード</a>
+    </div>
+    <div class="url"><span class="lbl">Supabase 公開 URL（デバッグ用）</span>${fileUrl}</div>
+  </div>`;
+}).join("");
+</script>
+</body>
+</html>
