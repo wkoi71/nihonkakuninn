@@ -192,7 +192,7 @@ table.fee-simple { width: 100%; border-collapse: separate; border-spacing: 0; fo
 .fee-simple td.fee { text-align: right; font-weight: 800; color: var(--navy-700); white-space: nowrap; font-variant-numeric: tabular-nums; }
 .fee-simple tr:nth-child(even) td { background: #fafcff; }
 
-/* 機関表 */
+/* 機関票 */
 table.org-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 15px; overflow: hidden; border-radius: 14px; }
 .org-table tr { }
 .org-table th {
@@ -332,9 +332,9 @@ table.org-table { width: 100%; border-collapse: separate; border-spacing: 0; fon
         <div class="fee-acc" id="acc"></div>
       </section>
 
-      <!-- 機関表 -->
+      <!-- 機関票 -->
       <section class="fee-sec">
-        <div class="fee-sec__head"><span class="ic" id="org-ic"></span><h2>機関表</h2></div>
+        <div class="fee-sec__head"><span class="ic" id="org-ic"></span><h2>機関票</h2></div>
         <div class="fee-card" style="padding:0;border:none;box-shadow:none;background:none">
           <table class="org-table"><tbody id="org-tbody"></tbody></table>
         </div>
@@ -421,7 +421,7 @@ document.querySelectorAll(".fee-acc-head").forEach(btn => {
   });
 });
 
-/* 機関表 */
+/* 機関票 */
 document.getElementById("org-tbody").innerHTML = FEE_ORG.map(([k, v]) =>
   `<tr><th>${k}</th><td>${v}</td></tr>`).join("");
 </script>
