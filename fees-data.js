@@ -7,8 +7,8 @@
 const FEE_DOWNLOADS = [
   { label: "業務規程", url: "https://drive.google.com/file/d/1rdTnXkgqCYmXSBcfKt8fTjn0aREUoep0/view" },
   { label: "業務約款", url: "https://drive.google.com/file/d/1GlawZ063srDlKu0M0a4hb3qerp6myhZ5/view" },
-  { label: "手数料規程", url: "https://drive.google.com/file/d/1NojUErKvHWUBA2whMcWkhvgD9g09LIan/view" },
-  { label: "手数料印刷用PDF", url: "https://drive.google.com/file/d/1J2G5l4r_bpMQvLaCK1fAIqV1WY7xdcKE/view" },
+  { label: "手数料規程", url: "https://drive.google.com/file/d/1J2G5l4r_bpMQvLaCK1fAIqV1WY7xdcKE/view" },
+  { label: "手数料印刷用PDF", url: "https://drive.google.com/file/d/1NojUErKvHWUBA2whMcWkhvgD9g09LIan/view" },
 ];
 
 /* 確認申請手数料表
