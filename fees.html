@@ -306,6 +306,7 @@ table.org-table { width: 100%; border-collapse: separate; border-spacing: 0; fon
       <section class="fee-sec">
         <div class="fee-sec__head"><span class="ic" id="tbl-ic"></span><h2>確認申請・検査手数料表</h2></div>
         <div class="fee-card">
+          <div class="fee-acc-unit">（単位：円：非課税）</div>
           <div class="fee-table-scroll">
             <table class="fee-table">
               <thead><tr><th>区分</th><th>確認申請</th><th>中間検査</th><th>完了検査</th></tr></thead>
@@ -315,7 +316,6 @@ table.org-table { width: 100%; border-collapse: separate; border-spacing: 0; fon
           <div class="fee-legend">
             <span><span class="sw std"></span>標準</span>
             <span><span class="sw hl"></span>構造計算書添付物件<span class="mk" style="color:var(--coral);font-weight:800">※</span></span>
-            <span>（単位：円）</span>
           </div>
         </div>
         <div class="fee-marks"><ul id="marks-list"></ul></div>
@@ -393,17 +393,17 @@ document.getElementById("marks-list").innerHTML = FEE_MARKS.map(m =>
 document.getElementById("notes-list").innerHTML = FEE_NOTES.map(n => `<li>${n}</li>`).join("");
 
 /* accordions */
-function simpleTable(rows, headLabel) {
+function simpleTable(rows, headLabel, unit) {
   const body = rows.map(r => {
     const left = r.region !== undefined ? r.region : r.area;
     return `<tr><td>${left}</td><td class="fee" data-label="${headLabel}">${r.fee}</td></tr>`;
   }).join("");
-  return `<div class="fee-acc-unit">（単位：円・税込金額）</div>
+  return `<div class="fee-acc-unit">${unit}</div>
     <table class="fee-simple"><thead><tr><th>区分</th><th>${headLabel}</th></tr></thead><tbody>${body}</tbody></table>`;
 }
 const ACCS = [
-  { title: "中間・完了検査及び仮使用認定のための確認検査員等が出張する場合の出張費", html: simpleTable(FEE_TRAVEL, "出張費") },
-  { title: "仮使用認定手数料", html: simpleTable(FEE_KARISHIYOU, "手数料") },
+  { title: "中間・完了検査及び仮使用認定のための確認検査員等が出張する場合の出張費", html: simpleTable(FEE_TRAVEL, "出張費", "（単位：円・税込金額）") },
+  { title: "仮使用認定手数料", html: simpleTable(FEE_KARISHIYOU, "手数料", "（単位：円：非課税）") },
 ];
 document.getElementById("acc").innerHTML = ACCS.map((a, i) => `
   <div class="fee-acc-item" data-i="${i}">
