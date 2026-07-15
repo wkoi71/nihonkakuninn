@@ -7,19 +7,19 @@
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
 <title>会社概要｜日本確認センター</title>
-<meta name="description" content="日本確認センター株式会社の会社概要・業務許可・業務内容・業務エリア・アクセス。">
+<meta name="description" content="日本確認センター株式会社の会社概要・業務認可等・業務内容・業務エリア・アクセス。">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="日本確認センター">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:title" content="会社概要｜日本確認センター">
-<meta property="og:description" content="日本確認センター株式会社の会社概要・業務許可・業務内容・業務エリア・アクセス。">
+<meta property="og:description" content="日本確認センター株式会社の会社概要・業務認可等・業務内容・業務エリア・アクセス。">
 <meta property="og:url" content="https://nihonkakuninn.vercel.app/company.html">
 <meta property="og:image" content="https://nihonkakuninn.vercel.app/assets/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="655">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="会社概要｜日本確認センター">
-<meta name="twitter:description" content="日本確認センター株式会社の会社概要・業務許可・業務内容・業務エリア・アクセス。">
+<meta name="twitter:description" content="日本確認センター株式会社の会社概要・業務認可等・業務内容・業務エリア・アクセス。">
 <meta name="twitter:image" content="https://nihonkakuninn.vercel.app/assets/og-image.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -93,7 +93,7 @@
   border-left: 1px solid var(--line);
 }
 
-/* 業務許可 list */
+/* 業務認可等 list */
 .co-perms { margin: 0; padding: 0; display: grid; gap: 18px; }
 .co-perms li {
   list-style: none; display: flex; align-items: flex-start; gap: 13px;
@@ -198,9 +198,9 @@
           <dl class="co-deflist" id="basic-list"></dl>
         </section>
 
-        <!-- 業務許可 -->
+        <!-- 業務認可等 -->
         <section class="co-card">
-          <div class="co-card__head"><span class="ic" id="ic-perm"></span><h2>業務許可</h2></div>
+          <div class="co-card__head"><span class="ic" id="ic-perm"></span><h2>業務認可等</h2></div>
           <ul class="co-perms" id="perm-list"></ul>
         </section>
 
@@ -305,9 +305,9 @@ const BIZ = [
   "建築確認・中間検査・完了検査・仮使用認定",
   "フラット35適合証明業務（住宅金融支援機構関係）",
   "住宅性能評価業務",
-  "特定住宅瑕疵担保保険会社の保険の取次ぎ、現場検査業務",
+  "特定住宅瑕疵担保保険会社の現場検査業務（株式会社住宅あんしん保証）",
   "省エネ適合判定業務",
-  "低炭素建築物新築等の計画に係る技術的審査",
+  "BELS評価業務",
 ];
 document.getElementById("biz-list").innerHTML = BIZ.map(b => `<li>${b}</li>`).join("");
 
