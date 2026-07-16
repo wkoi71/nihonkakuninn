@@ -27,32 +27,58 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <style>
-/* ===================== index page-specific ===================== */
-.page { min-height: 100vh; }
+/* =====================================================================
+   index page-specific — DESIGN B
+   「1画面完結」レイアウト：デスクトップではスクロールなしで
+   全セクション（CTA・サービス・お知らせ・申請書類・採用・フッター）が
+   ビューポート内に収まる。
+   ===================================================================== */
 
-/* ---- hero ---- */
-.hero { padding: 22px 0 0; }
-.hero__cta {
+/* ---- compact chrome ---- */
+:root { --header-h: 60px; }
+.site-header .brand__logo { height: 32px; }
+.main-nav a { font-size: 14px; }
+.btn--header { padding: 9px 16px; font-size: 13px; }
+
+/* ---- one-screen frame ---- */
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  min-height: 0;
+}
+.os-main {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   /* 大画面では余りを上下に均等配分 */
+  gap: 10px;
+  width: min(1280px, 100% - 36px);
+  margin-inline: auto;
+  padding: 12px 0 10px;
+}
+
+/* ---- hero CTA (compact) ---- */
+.os-cta {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 22px;
-  width: min(1080px, 100% - 48px);
-  margin-inline: auto;
+  gap: 10px;
 }
 .cta-card {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
-  min-height: 78px;
-  padding: 0 28px;
-  border-radius: var(--r-lg);
+  gap: 12px;
+  min-height: 50px;
+  padding: 0 20px;
+  border-radius: 14px;
   color: #fff;
-  font-size: clamp(18px, 2vw, 24px);
+  font-size: 16px;
   font-weight: 800;
   letter-spacing: 0.03em;
-  box-shadow: var(--shadow-btn);
+  box-shadow: 0 8px 20px rgba(30,58,138,0.22);
   overflow: hidden;
   transition: transform 0.18s ease, box-shadow 0.22s ease;
 }
@@ -62,192 +88,114 @@
   background: linear-gradient(120deg, rgba(255,255,255,0.22), transparent 42%);
   pointer-events: none;
 }
-.cta-card:hover { transform: translateY(-3px); box-shadow: 0 26px 52px rgba(30,58,138,0.34); }
+.cta-card:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(30,58,138,0.30); }
 .cta-card--navy { background: var(--grad-navy); }
 .cta-card--fee  { background: var(--grad-fee); }
 .cta-card__icon {
-  width: 44px; height: 44px;
+  width: 30px; height: 30px;
   display: grid; place-items: center;
   background: rgba(255,255,255,0.16);
-  border-radius: 12px;
+  border-radius: 9px;
   flex-shrink: 0;
 }
-.cta-card__icon svg { width: 24px; height: 24px; }
+.cta-card__icon svg { width: 18px; height: 18px; }
 .cta-card__trail { margin-left: auto; opacity: 0.92; display: grid; place-items: center; }
-.cta-card__trail svg { width: 24px; height: 24px; }
+.cta-card__trail svg { width: 18px; height: 18px; }
 
-/* ---- section heading ---- */
-.section { padding: 32px 0 0; }
-.sec-head {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 22px;
-  margin-bottom: 22px;
+/* ---- services (5 columns, compact) ---- */
+.os-services { display: flex; flex-direction: column; gap: 8px; }
+.os-h {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 14px; font-weight: 900; color: var(--navy-800);
+  letter-spacing: 0.06em;
 }
-.sec-head__line {
-  height: 2px; width: clamp(40px, 9vw, 120px);
+.os-h::before, .os-h.center::after {
+  content: ""; height: 2px; width: 28px; flex-shrink: 0;
   background: linear-gradient(90deg, transparent, var(--blue-400));
 }
-.sec-head__line.r { background: linear-gradient(90deg, var(--blue-400), transparent); }
-.sec-head h2 {
-  font-size: clamp(22px, 2.6vw, 30px);
-  font-weight: 900;
-  color: var(--navy-800);
-  letter-spacing: 0.05em;
-}
-
-/* ---- services grid ---- */
 .services {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  width: min(1180px, 100% - 48px);
-  margin-inline: auto;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
 }
 .svc-card {
-  position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 14px;
-  padding: 14px 46px 14px 18px;
+  text-align: center;
+  gap: 6px;
+  padding: 12px 10px 10px;
   background: var(--paper);
   border: 1px solid var(--line);
-  border-radius: var(--r-lg);
+  border-radius: 14px;
   box-shadow: var(--shadow-sm);
   transition: transform 0.2s ease, box-shadow 0.22s ease, border-color 0.2s ease;
-  overflow: hidden;
 }
-.svc-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: var(--blue-100); }
-/* bottom 2 cards centered */
-.svc-card.row2 { grid-column: span 1; }
-.services .row2:first-of-type { grid-column: 1 / 2; }
-.svc-icon {
-  width: 72px; height: 72px;
-  flex-shrink: 0;
-  display: grid; place-items: center;
-}
-.svc-icon svg { width: 72px; height: 72px; }
-.svc-body h3 { font-size: 21px; font-weight: 800; color: var(--ink-900); margin-bottom: 4px; letter-spacing: 0.02em; }
-.svc-body p { font-size: 13px; color: var(--ink-500); line-height: 1.55; }
-.svc-arrow {
-  position: absolute; right: 22px; top: 50%; transform: translateY(-50%);
-  color: var(--blue-500);
-  transition: right 0.2s ease;
-}
-.svc-card:hover .svc-arrow { right: 16px; }
+.svc-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--blue-100); }
+.svc-icon { width: 40px; height: 40px; display: grid; place-items: center; }
+.svc-icon svg { width: 40px; height: 40px; }
+.svc-body h3 { font-size: 14px; font-weight: 800; color: var(--ink-900); letter-spacing: 0.02em; margin-bottom: 2px; }
+.svc-body p { font-size: 10.5px; color: var(--ink-500); line-height: 1.45; }
 
-/* ---- recruitment banner ---- */
-.recruit {
-  position: relative;
-  margin: 130px auto 0;       /* leaves room above for the illustration's spill */
-  width: min(1180px, 100% - 48px);
-  border-radius: var(--r-xl);
-  background: linear-gradient(120deg, #16a47a 0%, #1cb98a 48%, #4fd3a6 100%);
-  overflow: visible;          /* allow the illustration to spill above the green frame */
-  box-shadow: 0 22px 50px rgba(16,185,129,0.26);
-  min-height: 240px;
+/* ---- bottom grid: news | docs ---- */
+.os-bottom {
+  flex: 1;
+  min-height: 0;
+  max-height: 560px;   /* 縦長モニタでカードが間延びしないよう上限 */
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 10px;
+}
+.os-card {
+  min-height: 0;
   display: flex;
-  align-items: center;
-}
-.recruit__sparkle {
-  position: absolute; inset: 0;
-  pointer-events: none;
-  opacity: 0.7;
-  border-radius: var(--r-xl);
-  overflow: hidden;
-}
-.recruit__body { position: relative; z-index: 2; padding: 40px 52px; max-width: 620px; color: #fff; }
-.recruit__title {
-  font-size: clamp(26px, 3.4vw, 38px);
-  font-weight: 900;
-  color: #fff;
-  letter-spacing: 0.04em;
-  margin-bottom: 12px;
-  display: flex; align-items: center; gap: 6px;
-}
-.recruit__title .spark { font-size: 0.7em; }
-.recruit__body p { font-size: 15px; line-height: 1.75; margin-bottom: 20px; color: rgba(255,255,255,0.96); }
-.recruit__art {
-  position: absolute;
-  right: 60px;
-  bottom: 0;                   /* illustration bottom flush with green frame's bottom edge */
-  width: 460px;                /* natural 4:3 aspect → height ~345px, spills ~105px above */
-  z-index: 3;
-  pointer-events: none;
-}
-.recruit__art img { width: 100%; height: auto; display: block; }
-
-@media (max-width: 980px) {
-  .services { grid-template-columns: repeat(2, 1fr); }
-  .services .row2:first-of-type { grid-column: auto; }
-  .recruit { margin-top: 90px; }
-  .recruit__art { display: none; }
-  .recruit__body { max-width: none; }
-}
-@media (max-width: 680px) {
-  .hero__cta { grid-template-columns: 1fr; gap: 18px; }
-  .services { grid-template-columns: 1fr; }
-  .cta-card { font-size: 20px; min-height: 88px; padding: 0 22px; }
-  .recruit__body { padding: 32px 24px; }
-}
-@media (max-width: 480px) {
-  .cta-card { font-size: 17px; padding: 0 18px; gap: 12px; }
-  .cta-card__icon { width: 38px; height: 38px; }
-  .recruit__body { padding: 28px 20px; }
-  .recruit__title { font-size: 26px; }
-}
-
-/* ===================== news preview (between recruit and docs) ===================== */
-.news-prev-section { padding: 90px 0 0; }
-.news-prev {
-  position: relative;
-  width: min(1180px, 100% - 48px);
-  margin-inline: auto;
+  flex-direction: column;
   background: rgba(255, 255, 255, 0.96);
   border: 1px solid rgba(219, 234, 254, 0.9);
-  border-radius: var(--r-xl);
-  box-shadow: var(--shadow-lg);
-  padding: 44px 56px 48px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  padding: 14px 16px 12px;
   overflow: hidden;
 }
-.news-prev__head {
-  display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap;
-  margin-bottom: 26px;
+.os-card__head {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 8px; flex-shrink: 0;
 }
-.news-prev__eyebrow {
-  font-size: 14px; font-weight: 800; letter-spacing: 0.22em;
-  color: var(--blue-600);
+.os-card__eyebrow {
+  font-size: 10.5px; font-weight: 800; letter-spacing: 0.2em;
+  color: var(--blue-600); text-transform: uppercase;
 }
-.news-prev__title {
-  font-size: clamp(26px, 3.2vw, 36px); font-weight: 900;
-  color: var(--navy-800); letter-spacing: 0.04em;
+.os-card__title { font-size: 16px; font-weight: 900; color: var(--navy-800); letter-spacing: 0.04em; }
+.os-card__more {
+  margin-left: auto;
+  font-size: 11.5px; font-weight: 700; color: var(--blue-600);
+  display: inline-flex; align-items: center; gap: 3px;
+  white-space: nowrap;
 }
-.news-prev__rule { height: 3px; width: 64px; background: var(--blue-500); border-radius: 3px; margin-bottom: 18px; }
+.os-card__more:hover { text-decoration: underline; }
+.os-card__more svg { width: 13px; height: 13px; }
 
-.news-prev__list { list-style: none; margin: 0; padding: 0; }
-.news-prev__item {
-  display: grid; grid-template-columns: 124px 110px 1fr;
-  align-items: center; gap: 22px;
-  padding: 20px 6px;
-  border-top: 1px solid var(--line);
-  transition: background 0.16s ease;
-}
+/* news list */
+.news-prev__list { list-style: none; margin: 0; padding: 0; flex: 1; min-height: 0; overflow-y: auto; }
+.news-prev__item { border-top: 1px solid var(--line); transition: background 0.16s ease; }
 .news-prev__item:last-child { border-bottom: 1px solid var(--line); }
 .news-prev__item:hover { background: var(--blue-50); }
 .news-prev__link {
-  display: contents;
+  display: grid;
+  grid-template-columns: 76px 72px 1fr;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 4px;
   color: inherit;
 }
-.news-prev__item:has(.news-prev__link) { cursor: pointer; }
 .news-prev__date {
-  font-size: 15px; font-weight: 700; color: var(--ink-500);
+  font-size: 12px; font-weight: 700; color: var(--ink-500);
   font-variant-numeric: tabular-nums;
 }
 .news-prev__badge {
   justify-self: start;
-  font-size: 12.5px; font-weight: 800;
-  padding: 5px 14px; border-radius: 999px;
+  font-size: 10px; font-weight: 800;
+  padding: 2px 9px; border-radius: 999px;
   white-space: nowrap; letter-spacing: 0.03em;
 }
 .news-prev__badge.重要     { background: #fdeef0; color: #d9482f; }
@@ -255,66 +203,60 @@
 .news-prev__badge.更新情報 { background: #e9eefb; color: #4f6ef0; }
 .news-prev__badge.採用     { background: #e3f6ee; color: var(--teal-600); }
 .news-prev__title-text {
-  font-size: 16px; font-weight: 700; color: var(--ink-900); line-height: 1.55;
+  font-size: 12.5px; font-weight: 700; color: var(--ink-900); line-height: 1.5;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
 }
+.news-prev__empty { padding: 12px 4px; font-size: 12.5px; color: var(--ink-500); }
 
-.news-prev__cta { display: flex; justify-content: center; margin-top: 32px; }
-.news-prev__cta .btn { padding: 16px 40px; font-size: 16px; }
+/* recruit strip (inside left column, under news) */
+.os-recruit {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: linear-gradient(120deg, #16a47a 0%, #1cb98a 48%, #4fd3a6 100%);
+  box-shadow: 0 8px 20px rgba(16,185,129,0.22);
+  color: #fff;
+}
+.os-recruit__title {
+  font-size: 14px; font-weight: 900; color: #fff; letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.os-recruit__text { flex: 1; font-size: 11px; line-height: 1.5; color: rgba(255,255,255,0.96); min-width: 0; }
+.os-recruit .btn {
+  padding: 7px 14px; font-size: 11.5px; flex-shrink: 0;
+  border-width: 1.5px;
+}
+.os-recruit .btn svg { width: 14px; height: 14px; }
 
-@media (max-width: 720px) {
-  .news-prev { padding: 32px 22px 36px; }
-  .news-prev__item {
-    grid-template-columns: 1fr auto;
-    row-gap: 8px; gap: 8px 14px;
-    padding: 18px 4px;
-  }
-  .news-prev__date  { grid-row: 1; grid-column: 1; }
-  .news-prev__badge { grid-row: 1; grid-column: 2; justify-self: end; }
-  .news-prev__title-text { grid-row: 2; grid-column: 1 / -1; }
-  .news-prev__cta .btn { width: 100%; }
+/* docs card */
+.doc-head__icon { width: 30px; height: 30px; flex-shrink: 0; display: grid; place-items: center; }
+.doc-head__icon svg { width: 30px; height: 30px; }
+.acc {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-right: 4px;
+  scrollbar-width: thin;
 }
-
-/* ===================== documents section (moved from documents.html) ===================== */
-.doc-section { padding: 90px 0 0; }
-.doc-card {
-  position: relative;
-  width: min(1180px, 100% - 48px);
-  margin-inline: auto;
-  background: rgba(255, 255, 255, 0.96);
-  border: 1px solid rgba(219, 234, 254, 0.9);
-  border-radius: var(--r-xl);
-  box-shadow: var(--shadow-lg);
-  padding: 52px 56px 64px;
-  overflow: hidden;
-}
-.doc-deco { position: absolute; left: 0; bottom: 0; width: 230px; pointer-events: none; opacity: 0.95; }
-.doc-head { display: flex; align-items: center; gap: 22px; margin-bottom: 38px; position: relative; z-index: 1; }
-.doc-head__icon {
-  width: 84px; height: 84px; flex-shrink: 0;
-  display: grid; place-items: center;
-}
-.doc-head__icon svg { width: 84px; height: 84px; }
-.doc-head h2 {
-  font-size: clamp(28px, 3.4vw, 40px); font-weight: 900;
-  color: var(--navy-800); letter-spacing: 0.02em;
-  margin-bottom: 10px;
-}
-.doc-head p { font-size: 17px; color: var(--ink-500); line-height: 1.6; }
-.doc-head__underline { height: 3px; width: 74px; background: var(--blue-500); border-radius: 3px; margin-top: 14px; }
-
-.acc { display: flex; flex-direction: column; gap: 16px; position: relative; z-index: 1; }
 .acc-item {
   border: 1px solid var(--line);
-  border-radius: var(--r-md);
+  border-radius: 10px;
   background: #fff;
   box-shadow: var(--shadow-sm);
   overflow: hidden;
-  scroll-margin-top: 110px;     /* keeps the title clear of the sticky header on open */
+  flex-shrink: 0;
 }
 .acc-head {
-  display: flex; align-items: center; gap: 20px;
+  display: flex; align-items: center; gap: 10px;
   width: 100%;
-  padding: 24px 28px;
+  padding: 8px 12px;
   background: none; border: none;
   cursor: pointer;
   font-family: var(--font);
@@ -322,79 +264,104 @@
   transition: background 0.18s ease;
 }
 .acc-head:hover { background: var(--blue-50); }
-.acc-ico {
-  width: 56px; height: 56px; flex-shrink: 0;
-  display: grid; place-items: center;
-}
-.acc-ico svg { width: 56px; height: 56px; }
-.acc-title { font-size: 22px; font-weight: 800; color: var(--ink-900); flex: 1; letter-spacing: 0.02em; }
-.acc-count { font-size: 15px; font-weight: 700; color: var(--blue-400); margin-right: 4px; white-space: nowrap; }
-.acc-toggle { width: 30px; height: 30px; flex-shrink: 0; position: relative; color: var(--blue-500); }
+.acc-ico { width: 26px; height: 26px; flex-shrink: 0; display: grid; place-items: center; }
+.acc-ico svg { width: 26px; height: 26px; }
+.acc-title { font-size: 13px; font-weight: 800; color: var(--ink-900); flex: 1; letter-spacing: 0.02em; }
+.acc-count { font-size: 11px; font-weight: 700; color: var(--blue-400); white-space: nowrap; }
+.acc-toggle { width: 18px; height: 18px; flex-shrink: 0; position: relative; color: var(--blue-500); }
 .acc-toggle::before, .acc-toggle::after {
   content: ""; position: absolute; background: currentColor; border-radius: 2px; top: 50%; left: 50%;
 }
-.acc-toggle::before { width: 17px; height: 2.6px; transform: translate(-50%, -50%); }
-.acc-toggle::after  { width: 2.6px; height: 17px; transform: translate(-50%, -50%); transition: transform 0.25s ease, opacity 0.2s ease; }
+.acc-toggle::before { width: 11px; height: 2px; transform: translate(-50%, -50%); }
+.acc-toggle::after  { width: 2px; height: 11px; transform: translate(-50%, -50%); transition: transform 0.25s ease, opacity 0.2s ease; }
 .acc-item.open .acc-toggle::after { transform: translate(-50%, -50%) scaleY(0); opacity: 0; }
 .acc-item.open .acc-head { background: var(--blue-50); }
 
-.acc-panel { display: none; padding: 6px 24px 26px; }
+.acc-panel { display: none; padding: 0 10px 10px; }
 .acc-item.open .acc-panel { display: block; }
 .doc-links { display: flex; flex-direction: column; }
 .doc-link {
-  display: flex; align-items: center; gap: 18px;
-  padding: 18px 18px;
-  border-radius: 12px;
+  display: flex; align-items: center; gap: 10px;
+  padding: 7px 8px;
+  border-radius: 8px;
   border-bottom: 1px solid var(--line);
-  transition: background 0.16s ease, padding-left 0.16s ease;
+  transition: background 0.16s ease;
 }
 .doc-link:last-child { border-bottom: none; }
-.doc-link:hover { background: var(--blue-50); padding-left: 24px; }
+.doc-link:hover { background: var(--blue-50); }
 .doc-link__ft {
-  flex-shrink: 0; min-width: 64px; text-align: center;
-  font-size: 14px; font-weight: 800; letter-spacing: 0.04em;
-  padding: 6px 10px; border-radius: 8px; color: #fff;
+  flex-shrink: 0; min-width: 44px; text-align: center;
+  font-size: 10px; font-weight: 800; letter-spacing: 0.04em;
+  padding: 3px 6px; border-radius: 6px; color: #fff;
 }
 .ft-docx, .ft-doc { background: #2b6cb0; }
 .ft-xlsx, .ft-xls { background: #2f855a; }
 .ft-pdf { background: #c53030; }
 .ft-link { background: #6b46c1; }
-.doc-link__name { flex: 1; font-size: 19px; font-weight: 600; color: var(--ink-700); line-height: 1.5; }
+.doc-link__name { flex: 1; font-size: 12px; font-weight: 600; color: var(--ink-700); line-height: 1.4; }
 .doc-link__dl { flex-shrink: 0; color: var(--blue-400); display: grid; place-items: center; }
-.doc-link__dl svg { width: 24px; height: 24px; }
+.doc-link__dl svg { width: 15px; height: 15px; }
 .doc-link:hover .doc-link__dl { color: var(--blue-600); }
 
-.doc-cta { display: flex; justify-content: flex-end; margin-top: 38px; position: relative; z-index: 1; }
-.doc-cta .btn { padding: 18px 34px; font-size: 18px; }
+#fee-cta {
+  margin-left: auto;
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 11.5px; font-weight: 700; color: var(--blue-600);
+  white-space: nowrap;
+}
+#fee-cta:hover { text-decoration: underline; }
+#fee-cta svg { width: 14px; height: 14px; }
 
+/* ---- slim footer ---- */
+.os-footer {
+  flex-shrink: 0;
+  border-top: 1px solid rgba(225, 234, 246, 0.9);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(8px);
+}
+.os-footer .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 7px 0;
+  font-size: 11.5px;
+  color: var(--ink-500);
+}
+.os-footer__info { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.os-footer__info b { color: var(--ink-700); font-weight: 700; }
+.os-footer__links { display: flex; align-items: center; gap: 14px; }
+.os-footer__links a { font-weight: 600; transition: color 0.16s ease; }
+.os-footer__links a:hover { color: var(--blue-600); }
+
+/* =====================================================================
+   responsive — 1画面固定はデスクトップのみ。
+   狭い画面・低い画面では通常スクロールにフォールバック。
+   ===================================================================== */
+@media (max-width: 960px), (max-height: 600px) {
+  .page { height: auto; min-height: 100dvh; }
+  .os-main { flex: none; }
+  .os-bottom { flex: none; grid-template-columns: 1fr; }
+  .news-prev__list { overflow-y: visible; }
+  .acc { overflow-y: visible; padding-right: 0; }
+}
+@media (max-width: 960px) {
+  .services { grid-template-columns: repeat(3, 1fr); }
+}
 @media (max-width: 640px) {
-  .doc-card { padding: 36px 18px 48px; }
-  /* 見出しは縦並び（アイコン上・テキスト下）にして
-     「申請書類ダウンロード一覧」の不自然な折り返しを防ぐ */
-  .doc-head { flex-direction: column; align-items: flex-start; gap: 10px; margin-bottom: 28px; }
-  .doc-head__icon { width: 52px; height: 52px; border-radius: 16px; }
-  .doc-head__icon svg { width: 52px; height: 52px; }
-  .doc-head h2 { font-size: 22px; line-height: 1.3; }
-  .doc-head p { font-size: 14.5px; }
-  .doc-head__underline { margin-top: 10px; }
-  /* アコーディオン見出し — 小画面ではアイコン・余白を引き締めて
-     タイトル文字が1文字ずつ縦に折り返さないようにする */
-  .acc-head { padding: 18px 14px; gap: 12px; }
-  .acc-ico { width: 40px; height: 40px; }
-  .acc-ico svg { width: 40px; height: 40px; }
-  .acc-title { font-size: 17px; }
-  .acc-count { font-size: 13px; margin-right: 0; }
-  .acc-toggle { width: 24px; height: 24px; }
-  .acc-panel { padding: 6px 12px 22px; }
-  .doc-link { padding: 14px 10px; gap: 12px; }
-  .doc-link:hover { padding-left: 14px; }
-  .doc-link__name { font-size: 15px; }
-  .doc-link__ft { min-width: 52px; font-size: 12px; padding: 5px 7px; }
-  .doc-deco { display: none; }
-  .doc-cta { justify-content: stretch; }
-  .doc-cta .btn { width: 100%; font-size: 14.5px; padding: 16px 14px; white-space: normal; }
-  /* News preview 内側余白 — doc-card と整合 */
-  .news-prev { padding: 28px 18px 32px; }
+  .os-cta { grid-template-columns: 1fr; gap: 8px; }
+  .cta-card { min-height: 46px; font-size: 14.5px; }
+  .services { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .svc-card:last-child { grid-column: 1 / -1; }
+  .os-recruit { flex-wrap: wrap; }
+  .os-recruit__text { flex-basis: 100%; order: 3; }
+  .news-prev__link { grid-template-columns: 68px 1fr; row-gap: 2px; }
+  .news-prev__title-text { grid-column: 1 / -1; }
+  .os-card__head { flex-wrap: wrap; }
+  #docs .os-card__title { flex: 1; }
+  #fee-cta { margin-left: 40px; flex-basis: 100%; justify-content: flex-start; }
+  .os-footer .wrap { justify-content: center; text-align: center; }
 }
 </style>
 </head>
@@ -403,150 +370,112 @@
 <div class="page">
   <div id="header-slot"></div>
 
-  <main data-screen-label="トップページ">
-    <!-- ============ HERO ============ -->
-    <section class="hero">
-      <div class="hero__cta reveal">
-        <a class="cta-card cta-card--navy" href="#docs">
-          <span class="cta-card__icon" data-ic="fileDl"></span>
-          <span>申請書類ダウンロード</span>
-          <span class="cta-card__trail" data-ic="download"></span>
-        </a>
-        <a class="cta-card cta-card--fee" href="/fees">
-          <span class="cta-card__icon" data-ic="calc"></span>
-          <span>手数料</span>
-          <span class="cta-card__trail" data-ic="chevR"></span>
-        </a>
-      </div>
-    </section>
+  <main class="os-main" data-screen-label="トップページ">
+    <!-- ============ HERO CTA ============ -->
+    <div class="os-cta">
+      <a class="cta-card cta-card--navy" href="#docs">
+        <span class="cta-card__icon" data-ic="fileDl"></span>
+        <span>申請書類ダウンロード</span>
+        <span class="cta-card__trail" data-ic="download"></span>
+      </a>
+      <a class="cta-card cta-card--fee" href="/fees">
+        <span class="cta-card__icon" data-ic="calc"></span>
+        <span>手数料</span>
+        <span class="cta-card__trail" data-ic="chevR"></span>
+      </a>
+    </div>
 
     <!-- ============ SERVICES ============ -->
-    <section class="section" id="services">
-      <div class="sec-head reveal">
-        <span class="sec-head__line"></span>
-        <h2>主要サービス</h2>
-        <span class="sec-head__line r"></span>
-      </div>
+    <section class="os-services" id="services">
+      <h2 class="os-h">主要サービス</h2>
       <div class="services">
-        <a class="svc-card reveal" href="/flow">
+        <a class="svc-card" href="/flow">
           <span class="svc-icon" data-svc="building"></span>
           <span class="svc-body">
             <h3>建築確認申請</h3>
-            <p>建築物の安全性を確保するための確認申請をサポートします。</p>
+            <p>建築物の安全性を確保するための確認申請をサポート。</p>
           </span>
-          <span class="svc-arrow" data-ic="chevR"></span>
         </a>
-        <a class="svc-card reveal" href="/evaluation">
+        <a class="svc-card" href="/evaluation">
           <span class="svc-icon" data-svc="house"></span>
           <span class="svc-body">
             <h3>住宅性能評価</h3>
             <p>住宅の性能を評価し、安心・安全な住まいづくりを支援。</p>
           </span>
-          <span class="svc-arrow" data-ic="chevR"></span>
         </a>
-        <a class="svc-card reveal" href="/energy">
+        <a class="svc-card" href="/energy">
           <span class="svc-icon" data-svc="leaf"></span>
           <span class="svc-body">
             <h3>省エネ適合判定</h3>
-            <p>省エネルギー基準への適合をスムーズにサポートします。</p>
+            <p>省エネルギー基準への適合をスムーズにサポート。</p>
           </span>
-          <span class="svc-arrow" data-ic="chevR"></span>
         </a>
-        <a class="svc-card row2 reveal" href="/bels">
+        <a class="svc-card" href="/bels">
           <span class="svc-icon" data-svc="bels"></span>
           <span class="svc-body">
             <h3>BELS</h3>
-            <p>建築物の省エネ性能を評価・表示するBELSの取得をサポートします。</p>
+            <p>省エネ性能を評価・表示するBELSの取得をサポート。</p>
           </span>
-          <span class="svc-arrow" data-ic="chevR"></span>
         </a>
-        <a class="svc-card row2 reveal" href="/flat35">
+        <a class="svc-card" href="/flat35">
           <span class="svc-icon" data-svc="flat35"></span>
           <span class="svc-body">
             <h3>フラット35</h3>
-            <p>フラット35の適合証明取得をサポートします。</p>
+            <p>フラット35の適合証明取得をサポート。</p>
           </span>
-          <span class="svc-arrow" data-ic="chevR"></span>
         </a>
       </div>
     </section>
 
-    <!-- ============ RECRUITMENT ============ -->
-    <section class="section" id="recruit-sec" style="padding-top:0">
-      <div class="recruit reveal">
-        <svg class="recruit__sparkle" viewBox="0 0 1180 280" fill="none" aria-hidden="true">
-          <g fill="#ffffff" opacity="0.5">
-            <circle cx="120" cy="60" r="2.5"/><circle cx="320" cy="40" r="2"/><circle cx="540" cy="70" r="2.5"/>
-            <circle cx="760" cy="46" r="2"/><circle cx="980" cy="90" r="2.5"/><circle cx="240" cy="210" r="2"/>
-            <circle cx="660" cy="220" r="2.5"/><circle cx="900" cy="200" r="2"/>
-          </g>
-        </svg>
-        <div class="recruit__body">
-          <h2 class="recruit__title">人材募集中<span class="spark">！！✦</span></h2>
-          <p>現在、私たちは現場検査員と確認検査補助員を募集しています。<br>ご興味ある方はお問い合わせからご連絡ください。</p>
-          <a class="btn btn--ghost" href="/contact">お問い合わせはこちら <span data-ic="chevR" style="display:inline-flex"></span></a>
-        </div>
-        <div class="recruit__art">
-          <img src="assets/people.png" alt="作業着の男女イラスト">
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ NEWS PREVIEW ============ -->
-    <section class="news-prev-section" id="news-prev" data-screen-label="お知らせ">
-      <div class="news-prev reveal">
-        <div class="news-prev__head">
-          <span class="news-prev__eyebrow">News</span>
-          <h2 class="news-prev__title">お知らせ</h2>
-        </div>
-        <div class="news-prev__rule"></div>
-        <ul class="news-prev__list" id="news-prev-list"></ul>
-        <div class="news-prev__cta">
-          <a class="btn btn--teal" href="/news">お知らせ一覧を見る <span data-ic="chevR" style="display:inline-flex"></span></a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ DOCUMENTS DOWNLOAD ============ -->
-    <section class="doc-section" id="docs" data-screen-label="申請書類ダウンロード">
-      <div class="doc-card reveal">
-        <!-- decorative folder illustration -->
-        <svg class="doc-deco" viewBox="0 0 220 170" fill="none" aria-hidden="true">
-          <g transform="translate(28 44)">
-            <rect x="22" y="6" width="92" height="74" rx="6" fill="#fff" stroke="#cfe0f5" stroke-width="2"/>
-            <path d="M34 22h60M34 34h60M34 46h44" stroke="#dbeafe" stroke-width="3" stroke-linecap="round"/>
-            <path d="M4 36c0-4 3-7 7-7h34l10 10h62c4 0 7 3 7 7v40c0 4-3 7-7 7H11c-4 0-7-3-7-7V36Z" fill="#cfe2fb"/>
-            <path d="M4 44h133v36c0 4-3 7-7 7H11c-4 0-7-3-7-7V44Z" fill="#bcd6f7"/>
-            <circle cx="70" cy="104" r="15" fill="#3b82f6"/>
-            <path d="M70 97v13M64 104l6 6 6-6" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-          </g>
-          <g fill="#cfe8d2" stroke="#aed4b3" stroke-width="1.4">
-            <path d="M16 150c-6-4-8-12-3-18 4 8 9 9 12 14-3 2-6 3-9 4Z"/>
-            <path d="M30 158c4-6 12-7 17-3-7 3-8 7-13 9-2-2-3-4-4-6Z"/>
-          </g>
-        </svg>
-
-        <div class="doc-head">
-          <span class="doc-head__icon" id="head-icon"></span>
-          <div>
-            <h2>申請書類ダウンロード一覧</h2>
-            <p>各種申請に必要な書類をダウンロードいただけます。</p>
-            <div class="doc-head__underline"></div>
+    <!-- ============ NEWS ＋ RECRUIT ｜ DOCUMENTS ============ -->
+    <div class="os-bottom">
+      <div style="display:flex; flex-direction:column; min-height:0;">
+        <section class="os-card" id="news-prev" data-screen-label="お知らせ" style="flex:1;">
+          <div class="os-card__head">
+            <span class="os-card__eyebrow">News</span>
+            <h2 class="os-card__title">お知らせ</h2>
+            <a class="os-card__more" href="/news">一覧を見る <span data-ic="chevR" style="display:inline-flex"></span></a>
           </div>
-        </div>
+          <ul class="news-prev__list" id="news-prev-list"></ul>
+        </section>
 
-        <div class="acc" id="acc"></div>
-
-        <div class="doc-cta">
-          <a class="btn btn--teal" href="/fees" id="fee-cta"></a>
-        </div>
+        <!-- recruit strip -->
+        <section class="os-recruit" id="recruit-sec">
+          <span class="os-recruit__title">人材募集中！！✦</span>
+          <p class="os-recruit__text">現場検査員と確認検査補助員を募集しています。ご興味ある方はお問い合わせください。</p>
+          <a class="btn btn--ghost" href="/contact">お問い合わせ <span data-ic="chevR" style="display:inline-flex"></span></a>
+        </section>
       </div>
-    </section>
+
+      <section class="os-card" id="docs" data-screen-label="申請書類ダウンロード">
+        <div class="os-card__head">
+          <span class="doc-head__icon" id="head-icon"></span>
+          <h2 class="os-card__title">申請書類ダウンロード</h2>
+          <a href="/fees" id="fee-cta"></a>
+        </div>
+        <div class="acc" id="acc"></div>
+      </section>
+    </div>
   </main>
 
-  <div id="footer-slot"></div>
+  <footer class="os-footer">
+    <div class="wrap">
+      <div class="os-footer__info">
+        <span><b>TEL</b> 047-410-1266</span>
+        <span><b>FAX</b> 047-410-1267</span>
+        <span><b>営業時間</b> 10:00 - 17:00（12:00 - 13:00を除く／土日祝・お盆・年末年始休）</span>
+      </div>
+      <div class="os-footer__links">
+        <a href="/company">会社概要</a>
+        <a href="/company#access">アクセス</a>
+        <a href="/privacy">プライバシーポリシー</a>
+        <span>© 日本確認センター</span>
+      </div>
+    </div>
+  </footer>
 </div>
 
+<!-- design-b: 共通フッターは使わない（#footer-slot 非設置でスリムフッターを直接記述） -->
 <script src="site.js"></script>
 <script src="documents-data.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -693,15 +622,6 @@ const GROUP_ICON = {
     <rect x="38" y="46" width="8" height="10" fill="#1e3a8a"/>
   </svg>`,
 };
-/* No coloured circle behind icons anymore — leave TINT for back-compat but unused */
-const TINT = {
-  blue:   { bg: "transparent", fg: "" },
-  teal:   { bg: "transparent", fg: "" },
-  green:  { bg: "transparent", fg: "" },
-  leaf:   { bg: "transparent", fg: "" },
-  violet: { bg: "transparent", fg: "" },
-  sky:    { bg: "transparent", fg: "" },
-};
 function fileType(url, explicitType) {
   if (explicitType) return String(explicitType).toUpperCase();
   const m = url.toLowerCase().match(/\.(docx|doc|xlsx|xls|pdf)(?:$|\?)/);
@@ -720,7 +640,7 @@ function renderDocs() {
   const headIcon = document.getElementById("head-icon");
   if (headIcon) headIcon.innerHTML = DOC_HEAD_ICON;
   const feeCta = document.getElementById("fee-cta");
-  if (feeCta) feeCta.innerHTML = IC.fileDl + "<span>申請手数料についてはこちら →</span>";
+  if (feeCta) feeCta.innerHTML = IC.fileDl + "<span>申請手数料はこちら →</span>";
   const acc = document.getElementById("acc");
   if (!acc || typeof DOC_GROUPS === "undefined") return;
   acc.innerHTML = DOC_GROUPS.map((g, gi) => {
@@ -748,10 +668,12 @@ function renderDocs() {
       const willOpen = !item.classList.contains("open");
       item.classList.toggle("open", willOpen);
       btn.setAttribute("aria-expanded", willOpen ? "true" : "false");
-      /* On open, bring the title to the top of the viewport so the
-         expanded list appears BELOW the title rather than off-screen. */
+      /* 開いたら「申請書類」カード内のスクロールでカテゴリ見出しを上端へ
+         （ページ全体はスクロールさせない） */
       if (willOpen) {
-        requestAnimationFrame(() => item.scrollIntoView({ behavior: "smooth", block: "start" }));
+        requestAnimationFrame(() => {
+          acc.scrollTo({ top: item.offsetTop - acc.offsetTop, behavior: "smooth" });
+        });
       }
     });
   });
@@ -767,7 +689,7 @@ renderDocs();
   let items = [];
   try { items = await NewsClient.fetchPublishedNews(3); } catch (e) { console.error(e); }
   if (!items.length) {
-    list.innerHTML = `<li class="news-prev__item"><span class="news-prev__title-text" style="grid-column:1/-1;color:var(--ink-500)">現在お知らせはありません。</span></li>`;
+    list.innerHTML = `<li class="news-prev__item"><span class="news-prev__empty">現在お知らせはありません。</span></li>`;
     return;
   }
   list.innerHTML = items.map(n => `
